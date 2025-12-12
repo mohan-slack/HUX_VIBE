@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { FAQ_KNOWLEDGE_BASE } from '../constants';
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 export const generateResponse = async (userMessage: string, history: {role: string, parts: {text: string}[]}[]): Promise<string> => {
   try {
