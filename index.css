@@ -1,0 +1,10 @@
+/* Mobile Corner Cuts for Sections */
+@media (max-width: 768px) {
+  .mobile-corner-cut {
+    clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
+  }
+  
+  .mobile-corner-cut-subtle {
+    clip-path: polygon(4px 0%, 100% 0%, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0% 100%, 0% 4px);
+  }
+}
