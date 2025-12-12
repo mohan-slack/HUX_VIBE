@@ -1,10 +1,17 @@
 import { GoogleGenAI } from "@google/genai";
 import { FAQ_KNOWLEDGE_BASE } from '../constants';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const apiKey = process.env.GEMINI_API_KEY;
+if (!apiKey || apiKey === 'PLACEHOLDER_API_KEY') {
+  console.warn('AI service not configured');
+}
+const ai = apiKey && apiKey !== 'PLACEHOLDER_API_KEY' ? new GoogleGenAI({ apiKey }) : null;
 
 export const generateResponse = async (userMessage: string, history: {role: string, parts: {text: string}[]}[]): Promise<string> => {
   try {
+    if (!ai) {
+      return "AI assistant is temporarily unavailable. Please contact support for assistance.";
+    }
     const chat = ai.chats.create({
       model: "gemini-2.5-flash",
       config: {
