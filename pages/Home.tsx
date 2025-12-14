@@ -8,6 +8,7 @@ import { MasonryGrid } from '../components/MasonryGrid';
 import AnimatedSections from '../components/AnimatedSections';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ARTryOn } from '../components/ARTryOn';
+import { PreLaunchBanner } from '../components/PreLaunchBanner';
 
 const ExpandableSpecsItem = ({ title, items }: { title: string, items: string[] }) => {
   const [expanded, setExpanded] = useState(false);
@@ -323,6 +324,7 @@ export const Home = () => {
          onMouseUp={handleMouseUp}
          onTouchEnd={handleMouseUp}>
       
+      <PreLaunchBanner />
       <ARTryOn isOpen={isAROpen} onClose={() => setIsAROpen(false)} productColor={arColor} />
 
       {/* 1. HERO SECTION - ANIMATED SECTIONS (GSAP) */}
@@ -660,7 +662,7 @@ export const Home = () => {
                      <span className="text-lg text-neutral-400 line-through">₹22,999</span>
                   </div>
                   <div className="flex gap-4 pt-6">
-                     <Button onClick={() => { addToCart('Tarnish Grey', 8); navigate('/bag'); }} className="bg-hux-turquoise text-white hover:bg-hux-turquoiseLight px-8 py-3 rounded-xl font-bold">
+                     <Button onClick={() => { addToCart(HUX_PRODUCT, 'Tarnish Grey', 8); navigate('/bag'); }} className="bg-hux-turquoise text-white hover:bg-hux-turquoiseLight px-8 py-3 rounded-xl font-bold">
                         Quick Add
                      </Button>
                      <Button 
@@ -741,7 +743,7 @@ export const Home = () => {
                      <span className="text-lg text-neutral-400 line-through">₹22,999</span>
                   </div>
                   <div className="flex gap-4 pt-6">
-                     <Button onClick={() => { addToCart('Sterling Gold', 8); navigate('/bag'); }} className="bg-hux-turquoise text-white hover:bg-hux-turquoiseLight px-8 py-3 rounded-xl font-bold">
+                     <Button onClick={() => { addToCart(HUX_PRODUCT, 'Sterling Gold', 8); navigate('/bag'); }} className="bg-hux-turquoise text-white hover:bg-hux-turquoiseLight px-8 py-3 rounded-xl font-bold">
                         Quick Add
                      </Button>
                      <Button 

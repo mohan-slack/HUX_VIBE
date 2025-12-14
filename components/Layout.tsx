@@ -35,13 +35,25 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Left Links */}
         <div className="hidden md:flex items-center gap-8 text-sm font-bold tracking-wide text-neutral-500 font-display uppercase">
+          <button onClick={() => handleNavigation('/prelaunch')} className="hover:text-white transition-colors bg-gradient-to-r from-hux-turquoise to-hux-gold px-3 py-1 rounded-full text-white font-bold border border-white/20">Pre-Launch</button>
           <button onClick={() => handleNavigation('/', 'collection')} className="hover:text-hux-turquoise transition-colors">Collection</button>
           <button onClick={() => handleNavigation('/', 'ecosystem')} className="hover:text-hux-turquoise transition-colors">Ecosystem</button>
         </div>
 
         {/* Centered Logo */}
-        <button onClick={() => handleNavigation('/')} className="absolute left-1/2 -translate-x-1/2 hover:opacity-80 transition-opacity">
-          <img src="/images/logo.png" alt="HUX" className="h-8" />
+        <button onClick={() => { handleNavigation('/'); window.dispatchEvent(new Event('logo-clicked')); }} className="absolute left-1/2 -translate-x-1/2 hover:opacity-80 transition-all duration-300">
+          <div className="relative flex items-center justify-center overflow-hidden">
+            {/* Sound Wave Half Circles */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="sound-wave-left-1"></div>
+              <div className="sound-wave-left-2"></div>
+              <div className="sound-wave-left-3"></div>
+              <div className="sound-wave-right-1"></div>
+              <div className="sound-wave-right-2"></div>
+              <div className="sound-wave-right-3"></div>
+            </div>
+            <img src="/images/logo.png" alt="HUX" className="h-8 logo-glow relative z-10" />
+          </div>
         </button>
 
         {/* Right Links */}
@@ -74,6 +86,7 @@ export const Navbar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 mt-2 glass rounded-2xl p-6 flex flex-col gap-4 shadow-xl animate-slideUp">
+          <button onClick={() => handleNavigation('/prelaunch')} className="text-lg font-display font-bold bg-gradient-to-r from-hux-turquoise to-hux-gold px-3 py-1 rounded-full text-white border border-white/20 text-left">Pre-Launch</button>
           <button onClick={() => handleNavigation('/', 'collection')} className="text-lg font-display font-medium text-hux-dark text-left">Collection</button>
           <button onClick={() => handleNavigation('/about')} className="text-lg font-display font-medium text-hux-dark text-left">Vision</button>
           <button onClick={() => handleNavigation('/track')} className="text-lg font-display font-medium text-hux-dark text-left">Track Order</button>

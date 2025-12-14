@@ -8,7 +8,7 @@ interface ShopContextType {
   cart: CartItem[];
   isCartOpen: boolean;
   setIsCartOpen: (isOpen: boolean) => void;
-  addToCart: (color: string, size: number) => void;
+  addToCart: (product: Product, color: string, size: number, quantity?: number) => void;
   removeFromCart: (index: number) => void;
   updateQuantity: (index: number, delta: number) => void;
   updateSize: (index: number, newSize: number) => void;
@@ -32,18 +32,18 @@ export const ShopProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     localStorage.setItem('hux_cart', JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (color: string, size: number) => {
-    const existingIndex = cart.findIndex(item => item.color === color && item.size === size);
+  const addToCart = (product: Product, color: string, size: number, quantity: number = 1) => {
+    const existingIndex = cart.findIndex(item => item.product.id === product.id && item.color === color && item.size === size);
     if (existingIndex > -1) {
       const newCart = [...cart];
-      newCart[existingIndex].quantity += 1;
+      newCart[existingIndex].quantity += quantity;
       setCart(newCart);
     } else {
       setCart(prev => [...prev, {
-        product: HUX_PRODUCT,
+        product,
         color: color as any,
         size: size as any,
-        quantity: 1
+        quantity
       }]);
     }
     setIsCartOpen(true);
@@ -82,6 +82,54 @@ export const ShopProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   // 5️⃣ RAZORPAY FRONTEND PAYMENT FLOW (Part 1: Create Order)
   const placeRazorpayOrder = async (address: Address, email: string) => {
+    // Check if this is a pre-launch booking FIRST
+    const isPreLaunchBooking = cart.some(item => item.product.id === 'prelaunch-hux-ring');
+    
+    if (isPreLaunchBooking) {
+      console.log("Processing pre-launch booking through edge function...");
+      // Convert pre-launch cart to use regular product ID for edge function
+      const modifiedCart = cart.map(item => ({
+        ...item,
+        product: {
+          ...item.product,
+          id: 1 // Use regular product ID that exists in database
+        }
+      }));
+      
+      // Call edge function with modified cart (same as regular orders)
+      const { data, error } = await supabase.functions.invoke('hux-pay', {
+        body: { 
+          action: 'create_order', 
+          cart: modifiedCart, 
+          address, 
+          email 
+        }
+      });
+      
+      if (error) {
+        console.error("Edge Function Error:", error);
+        throw new Error(data?.error || "Payment server unavailable. Please try again.");
+      }
+      
+      if (data?.error) {
+        console.error("Edge function returned error:", data.error);
+        throw new Error(data.error);
+      }
+      
+      if (!data?.razorpayOrderId) {
+        console.error("Invalid response data:", data);
+        throw new Error("Invalid Razorpay order session. Please refresh and retry.");
+      }
+      
+      // Update order status to indicate pre-launch
+      await supabase
+        .from('orders')
+        .update({ status: 'Pre-Launch Booking' })
+        .eq('id', data.orderId);
+      
+      return data;
+    }
+
     console.log("Calling hux-pay edge function...");
     console.log("Cart:", cart);
     console.log("Address:", address);
@@ -119,6 +167,42 @@ export const ShopProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   // 5️⃣ RAZORPAY FRONTEND PAYMENT FLOW (Part 2: Verify)
   const verifyPayment = async (response: any) => {
     try {
+      // Check if this is a pre-launch booking
+      const isPreLaunchBooking = cart.some(item => item.product.id === 'prelaunch-hux-ring');
+      
+      if (isPreLaunchBooking) {
+        // For pre-launch, find the order by razorpay_order_id and create payment record
+        console.log('Looking for order with razorpay_order_id:', response.razorpay_order_id);
+        
+        const { data: order, error: orderError } = await supabase
+          .from('orders')
+          .select('id, tracking_number')
+          .eq('razorpay_order_id', response.razorpay_order_id)
+          .single();
+        
+        console.log('Order query result:', { order, orderError });
+        
+        if (order) {
+          // Create payment record
+          await supabase.from('payments').insert({
+            order_id: order.id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            amount: cart.reduce((acc, item) => acc + (item.product.price * item.quantity), 0),
+            status: 'success'
+          });
+          
+          clearCart();
+          localStorage.removeItem('prelaunchBooking');
+          console.log('Order found:', order);
+          return order.tracking_number || order.id;
+        } else {
+          clearCart();
+          localStorage.removeItem('prelaunchBooking');
+          return `PRELAUNCH-${Date.now()}`;
+        }
+      }
+
       const { data, error } = await supabase.functions.invoke('hux-pay', {
         body: {
           action: 'verify_payment',
@@ -134,7 +218,7 @@ export const ShopProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         // Double Check: Read back the order to ensure it exists and is updated
         const { data: orderCheck, error: readError } = await supabase
             .from('orders')
-            .select('status, id')
+            .select('status, id, tracking_number')
             .eq('id', data.orderId)
             .single();
             
@@ -142,7 +226,7 @@ export const ShopProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         console.log("Payment Verified. Order Status:", orderCheck?.status);
 
         clearCart();
-        return data.orderId;
+        return orderCheck?.tracking_number || data.orderId;
       } else {
         throw new Error('Payment verification failed');
       }

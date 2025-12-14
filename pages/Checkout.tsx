@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useShop } from '../context/ShopContext';
 import { Address } from '../types';
 import { Button } from '../components/Button';
@@ -34,9 +34,27 @@ export const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState<'UPI' | 'Card' | 'COD'>('UPI');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [includeSizingKit, setIncludeSizingKit] = useState(false);
+  
+  // Check if this is a pre-launch booking
+  const isPreLaunchBooking = cart.some(item => item.product.id === 'prelaunch-hux-ring');
+  const prelaunchBookingData = isPreLaunchBooking ? JSON.parse(localStorage.getItem('prelaunchBooking') || '{}') : null;
 
   const subtotal = cart.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
   const total = subtotal;
+  
+  // Pre-populate form if pre-launch booking data exists
+  useEffect(() => {
+    const bookingData = JSON.parse(localStorage.getItem('prelaunchBooking') || '{}');
+    if (bookingData.firstName) {
+      setFirstName(bookingData.firstName || '');
+      setLastName(bookingData.lastName || '');
+      setAddress(prev => ({
+        ...prev,
+        email: bookingData.email || '',
+        phone: bookingData.phone?.replace(/\D/g, '') || ''
+      }));
+    }
+  }, []);
 
   const handleAddressSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,7 +86,10 @@ export const Checkout = () => {
     try {
       const fullAddr = { ...address, fullName: `${firstName} ${lastName}` };
       
-      // 1. Create Order (Real Only)
+      // Store address for pre-launch tracking
+      localStorage.setItem('checkoutAddress', JSON.stringify(fullAddr));
+      
+      // 1. Create Order (works for both regular and pre-launch)
       const orderData = await placeRazorpayOrder(fullAddr, address.email);
       
       // 2. Load SDK
@@ -80,6 +101,8 @@ export const Checkout = () => {
       }
 
       // 3. Open Razorpay with selected payment method
+      console.log('Razorpay order data:', orderData);
+      
       const options: any = {
         key: orderData.key,
         amount: orderData.amount,
@@ -123,12 +146,22 @@ export const Checkout = () => {
 
       const rzp = new (window as any).Razorpay(options);
       rzp.on('payment.failed', function (response: any){
-        setErrorMessage(response.error.description);
+        console.error('Razorpay payment failed:', response);
+        setErrorMessage(response.error?.description || 'Payment failed. Please try again.');
         setLoading(false);
       });
-      rzp.open();
+      
+      // Add error handling for Razorpay initialization
+      try {
+        rzp.open();
+      } catch (rzpError: any) {
+        console.error('Razorpay open error:', rzpError);
+        setErrorMessage('Unable to open payment gateway. Please refresh and try again.');
+        setLoading(false);
+      }
     } catch (error: any) {
       console.error(error);
+      // Handle errors normally
       setErrorMessage(error.message || "Error initiating payment. Please try again.");
       setLoading(false);
     }
@@ -215,7 +248,14 @@ export const Checkout = () => {
                         <input required type="text" placeholder="First Name" className="w-full bg-white/80 border border-neutral-200 rounded-xl pl-12 pr-4 py-4 text-neutral-900 placeholder:text-neutral-400 focus:border-hux-turquoise outline-none transition-all hover:border-neutral-300 shadow-sm" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                       </div>
                       <div className="group relative">
-                        <input required type="text" placeholder="Last Name" className="w-full bg-white/80 border border-neutral-200 rounded-xl px-4 py-4 text-neutral-900 placeholder:text-neutral-400 focus:border-hux-turquoise outline-none transition-all hover:border-neutral-300 shadow-sm" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                        <input 
+                          required 
+                          type="text" 
+                          placeholder="Last Name" 
+                          className="w-full bg-white/80 border border-neutral-200 rounded-xl px-4 py-4 text-neutral-900 placeholder:text-neutral-400 focus:border-hux-turquoise outline-none transition-all hover:border-neutral-300 shadow-sm" 
+                          value={lastName} 
+                          onChange={(e) => setLastName(e.target.value)}
+                        />
                       </div>
                   </div>
 
@@ -347,7 +387,7 @@ export const Checkout = () => {
                <div className="flex flex-col-reverse sm:flex-row sm:justify-between items-center gap-6 pt-6">
                   <button type="button" onClick={() => setStep(1)} className="text-hux-turquoise text-sm flex items-center gap-1 hover:text-neutral-900 transition-colors font-semibold"><ChevronLeft size={14} /> Back to Shipping</button>
                   <Button onClick={handlePayment} disabled={loading} className="w-full sm:w-auto bg-neutral-900 text-white hover:bg-neutral-800 px-10 py-4 rounded-xl font-bold text-sm shadow-lg">
-                    {loading ? 'Processing...' : `Pay ₹${total.toLocaleString()}`}
+                    {loading ? 'Processing...' : isPreLaunchBooking ? `Book Now - ₹${total.toLocaleString()}` : `Pay ₹${total.toLocaleString()}`}
                   </Button>
                </div>
             </div>
@@ -360,7 +400,31 @@ export const Checkout = () => {
               {/* Decorative top gradient */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-hux-turquoise to-transparent opacity-50"></div>
 
-              <h3 className="text-xl font-bold text-neutral-900 mb-6">ORDER DETAILS</h3>
+              <h3 className="text-xl font-bold text-neutral-900 mb-6">{isPreLaunchBooking ? 'PRE-LAUNCH BOOKING' : 'ORDER DETAILS'}</h3>
+              
+              {isPreLaunchBooking && (
+                <div className="bg-gradient-to-r from-hux-turquoise/10 to-hux-gold/10 rounded-xl p-4 mb-6 border border-hux-turquoise/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-2 h-2 bg-hux-turquoise rounded-full animate-pulse"></div>
+                    <span className="text-sm font-semibold text-hux-turquoise">PRE-LAUNCH SPECIAL</span>
+                  </div>
+                  <p className="text-xs text-hux-dark/70 mb-2">You're booking the first batch of HUX Smart Rings</p>
+                  <div className="text-xs space-y-1">
+                    <div className="flex justify-between">
+                      <span>Booking Amount (Now):</span>
+                      <span className="font-semibold">₹2,000</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Remaining (At Shipping):</span>
+                      <span className="font-semibold">₹8,000</span>
+                    </div>
+                    <div className="flex justify-between text-green-600">
+                      <span>Total Savings:</span>
+                      <span className="font-semibold">₹7,999</span>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Cart Items Details */}
               <div className="space-y-4 mb-6 pb-6 border-b border-neutral-200">
@@ -370,13 +434,13 @@ export const Checkout = () => {
                     <p className="text-sm text-neutral-600">Color: {item.color}</p>
                     <p className="text-sm text-neutral-600">Size: {item.size}</p>
                     <div className="flex justify-between items-center mt-2">
-                      <span className="text-sm text-neutral-600">MRP:</span>
+                      <span className="text-sm text-neutral-600">{isPreLaunchBooking ? 'Booking Amount:' : 'MRP:'}</span>
                       <span className="font-semibold text-neutral-900">₹{(item.product.price * item.quantity).toLocaleString()}</span>
                     </div>
                   </div>
                 ))}
                 
-                {includeSizingKit && (
+                {(includeSizingKit || isPreLaunchBooking) && (
                   <div className="flex justify-between items-center pt-3 border-t border-neutral-200">
                     <span className="text-sm text-neutral-700">Physical Sizing Kit</span>
                     <span className="text-sm font-semibold text-green-600">Free</span>
@@ -414,9 +478,22 @@ export const Checkout = () => {
               </div>
 
               <div className="flex justify-between items-center mb-6">
-                <span className="text-lg font-bold text-neutral-900">Total</span>
+                <span className="text-lg font-bold text-neutral-900">{isPreLaunchBooking ? 'Booking Amount' : 'Total'}</span>
                 <span className="text-2xl font-bold text-neutral-900">₹{total.toLocaleString()}</span>
               </div>
+              
+              {isPreLaunchBooking && (
+                <div className="bg-hux-turquoise/5 rounded-xl p-4 mb-4">
+                  <h4 className="text-sm font-semibold text-hux-dark mb-2">What happens next?</h4>
+                  <ul className="text-xs text-hux-dark/70 space-y-1">
+                    <li>• Confirmation email with booking details</li>
+                    <li>• Free sizing kit shipped within 3 days</li>
+                    <li>• Production updates every 10-15 days</li>
+                    <li>• Final payment request after 60 working days</li>
+                    <li>• Delivery within 7 days of final payment</li>
+                  </ul>
+                </div>
+              )}
            </div>
            
            <div className="mt-6 text-center text-xs text-neutral-600 flex items-center justify-center gap-2">

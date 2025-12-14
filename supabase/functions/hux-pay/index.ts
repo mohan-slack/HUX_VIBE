@@ -52,13 +52,24 @@ serve(async (req) => {
       const orderItems: any[] = []
 
       for (const item of cart) {
-        const { data: product, error } = await supabase
-          .from("products")
-          .select("*")
-          .eq("id", item.product.id)
-          .single()
+        let product
+        
+        // Handle pre-launch products
+        if (item.product.id === 'prelaunch-hux-ring') {
+          product = {
+            id: 'prelaunch-hux-ring',
+            price_inr: item.product.price
+          }
+        } else {
+          const { data: dbProduct, error } = await supabase
+            .from("products")
+            .select("*")
+            .eq("id", item.product.id)
+            .single()
 
-        if (error || !product) throw new Error("Product not found")
+          if (error || !dbProduct) throw new Error("Product not found")
+          product = dbProduct
+        }
 
         total += product.price_inr * item.quantity
 
@@ -105,7 +116,10 @@ serve(async (req) => {
         throw new Error("Razorpay order creation failed → " + rawText)
       }
 
-      // ✅ INSERT ORDER
+      // ✅ Generate tracking number first
+      const { data: trackingNum } = await supabase.rpc('generate_tracking_number')
+      
+      // ✅ INSERT ORDER with tracking number
       const { data: orderData, error: orderError } = await supabase
         .from("orders")
         .insert({
@@ -113,7 +127,8 @@ serve(async (req) => {
           status: "Pending",
           shipping_address: address,
           guest_email: email,
-          razorpay_order_id: razorpayData.id
+          razorpay_order_id: razorpayData.id,
+          tracking_number: trackingNum
         })
         .select()
         .single()

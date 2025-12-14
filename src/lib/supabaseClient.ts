@@ -1,12 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
+import { getSecureConfig } from '../../security';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const config = getSecureConfig();
 
-if (!supabaseUrl || !supabaseKey) {
-  console.warn('Database configuration missing');
-}
-
-export const supabase = supabaseUrl && supabaseKey 
-  ? createClient(supabaseUrl, supabaseKey)
-  : null;
+export const supabase = createClient(config.supabaseUrl, config.supabaseAnonKey);

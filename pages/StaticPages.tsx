@@ -49,11 +49,23 @@ export const TrackOrder = () => {
     setLoading(true);
     setStatus(null);
     
-    const { data, error } = await supabase
+    // Try database lookup by tracking number first, then by UUID
+    let { data, error } = await supabase
       .from('orders')
-      .select('status, total_amount, created_at, shipping_address')
-      .eq('id', orderId)
+      .select('status, total_amount, created_at, shipping_address, tracking_number')
+      .eq('tracking_number', orderId)
       .single();
+    
+    // If not found by tracking number, try UUID
+    if (error) {
+      const result = await supabase
+        .from('orders')
+        .select('status, total_amount, created_at, shipping_address, tracking_number')
+        .eq('id', orderId)
+        .single();
+      data = result.data;
+      error = result.error;
+    }
 
     if (error) {
       setStatus({ error: "Order not found. Please check your ID." });
@@ -80,10 +92,10 @@ export const TrackOrder = () => {
           <form onSubmit={handleTrack} className="space-y-4">
             <input 
               type="text" 
-              placeholder="Enter Order ID (e.g. 123e4567-e89b...)" 
+              placeholder="Enter Tracking Number (e.g. HUX12345)" 
               className="w-full bg-white/80 border border-neutral-200 p-4 rounded-xl focus:border-hux-turquoise outline-none transition-all shadow-sm text-neutral-900"
               value={orderId}
-              onChange={(e) => setOrderId(e.target.value)}
+              onChange={(e) => setOrderId(e.target.value.toUpperCase())}
             />
             <Button variant="primary" fullWidth type="submit" disabled={loading}>
               {loading ? 'Locating...' : 'Track Status'}

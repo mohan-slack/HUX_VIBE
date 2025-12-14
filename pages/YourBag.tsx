@@ -113,7 +113,7 @@ export const YourBag = () => {
                       <h4 className="text-sm font-semibold text-neutral-700 mb-3">SELECT YOUR RING SIZE</h4>
                       
                       {/* Circular Size Buttons */}
-                      <div className="flex gap-2 mb-4 overflow-x-auto">
+                      <div className="grid grid-cols-4 gap-2 mb-4 sm:flex sm:overflow-x-auto">
                         {SIZES.map((size) => (
                           <button
                             key={size}

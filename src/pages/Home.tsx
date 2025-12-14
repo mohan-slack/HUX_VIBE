@@ -485,7 +485,7 @@ export const Home = () => {
                       <p className="text-hux-turquoise font-medium mb-6">{item.price}</p>
                       
                       <div className="opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                         <Button variant="outline" onClick={() => addToCart(item.color as any, 9)}>Quick Add</Button>
+                         <Button variant="outline" onClick={() => addToCart(HUX_PRODUCT, item.color as any, 9)}>Quick Add</Button>
                       </div>
                   </div>
                </div>

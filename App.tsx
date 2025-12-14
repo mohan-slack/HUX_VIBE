@@ -9,6 +9,7 @@ import { About, TrackOrder, Policies } from './pages/StaticPages';
 import { TermsAndConditions } from './pages/TermsAndConditions';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { PreOrderTermsAndConditions } from './pages/preOrderTermsAndConditions';
+import PreLaunch from './pages/PreLaunch';
 import { ShopProvider } from './context/ShopContext';
 import { ConciergeAI } from './components/ConciergeAI';
 
@@ -20,6 +21,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/prelaunch" element={<PreLaunch />} />
             <Route path="/bag" element={<YourBag />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/success/:id" element={<OrderSuccess />} />

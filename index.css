@@ -8,3 +8,71 @@
     clip-path: polygon(4px 0%, 100% 0%, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0% 100%, 0% 4px);
   }
 }
+
+/* Hide scrollbar for mobile size selector */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Dark mode logo glow effect */
+@media (prefers-color-scheme: dark) {
+  .logo-glow {
+    filter: drop-shadow(0 0 8px rgba(2, 179, 217, 0.6)) 
+            drop-shadow(0 0 16px rgba(2, 179, 217, 0.4)) 
+            drop-shadow(0 0 24px rgba(2, 179, 217, 0.2)) 
+            brightness(1.2);
+  }
+}
+
+/* Sound Wave Half Circles */
+.sound-wave-left-1, .sound-wave-left-2, .sound-wave-left-3,
+.sound-wave-right-1, .sound-wave-right-2, .sound-wave-right-3 {
+  position: absolute;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: soundWaveHalf 3s ease-out infinite;
+}
+
+.sound-wave-left-1, .sound-wave-left-2, .sound-wave-left-3 {
+  clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%);
+}
+
+.sound-wave-right-1, .sound-wave-right-2, .sound-wave-right-3 {
+  clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
+}
+
+.sound-wave-left-1, .sound-wave-right-1 {
+  width: 60px;
+  height: 60px;
+  animation-delay: 0s;
+}
+
+.sound-wave-left-2, .sound-wave-right-2 {
+  width: 80px;
+  height: 80px;
+  animation-delay: 0.5s;
+}
+
+.sound-wave-left-3, .sound-wave-right-3 {
+  width: 100px;
+  height: 100px;
+  animation-delay: 1s;
+}
+
+@keyframes soundWaveHalf {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
