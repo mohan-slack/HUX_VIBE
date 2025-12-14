@@ -70,18 +70,25 @@ const PreLaunch: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-hux-ivory to-white selection:bg-hux-turquoise selection:text-white">
+    <div className="min-h-screen bg-hux-ivory selection:bg-hux-turquoise selection:text-white">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-16 px-4 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-hux-turquoise/5 to-hux-gold/5"></div>
+      <section className="relative pt-20 pb-16 px-4 md:px-6 text-center overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-32 h-32 md:w-64 md:h-64 bg-gradient-to-r from-hux-turquoise/10 to-hux-gold/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 md:w-96 md:h-96 bg-gradient-to-l from-hux-gold/10 to-hux-turquoise/10 rounded-full blur-3xl animate-pulse delay-1000" />
+        </div>
         <div className="relative max-w-4xl mx-auto">
+          <div className="glass mobile-corner-cut p-6 md:p-12 lg:p-16">
           <div className="mb-6">
             <img src="/images/logo.png" alt="HUX" className="h-16 mx-auto mb-4" />
-            <h1 className="text-5xl md:text-7xl font-bold text-hux-dark mb-4">
-              Smart Ring
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-hux-dark mb-6">
+              Intelligence.
+              <span className="block bg-gradient-to-r from-hux-turquoise to-hux-gold bg-clip-text text-transparent">
+                Pre-Launch.
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl text-hux-dark/70 mb-8">
-              Premium Health Tracking. Invisible Intelligence.
+            <p className="text-lg md:text-xl lg:text-2xl text-neutral-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+              Premium Health Tracking. Invisible Intelligence. Available for pre-order now.
             </p>
           </div>
           
@@ -101,19 +108,20 @@ const PreLaunch: React.FC = () => {
             </p>
           </div>
 
-          {/* Countdown Timer */}
-          <div className="flex justify-center gap-4 text-center">
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 min-w-[80px]">
-              <div className="text-2xl font-bold text-hux-turquoise">{timeLeft.days}</div>
-              <div className="text-xs text-hux-dark/60">DAYS</div>
-            </div>
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 min-w-[80px]">
-              <div className="text-2xl font-bold text-hux-turquoise">{timeLeft.hours}</div>
-              <div className="text-xs text-hux-dark/60">HOURS</div>
-            </div>
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 min-w-[80px]">
-              <div className="text-2xl font-bold text-hux-turquoise">{timeLeft.minutes}</div>
-              <div className="text-xs text-hux-dark/60">MINS</div>
+            {/* Countdown Timer */}
+            <div className="flex justify-center gap-4 text-center">
+              <div className="glass rounded-lg p-4 min-w-[80px]">
+                <div className="text-2xl font-bold text-hux-turquoise">{timeLeft.days}</div>
+                <div className="text-xs text-hux-dark/60">DAYS</div>
+              </div>
+              <div className="glass rounded-lg p-4 min-w-[80px]">
+                <div className="text-2xl font-bold text-hux-turquoise">{timeLeft.hours}</div>
+                <div className="text-xs text-hux-dark/60">HOURS</div>
+              </div>
+              <div className="glass rounded-lg p-4 min-w-[80px]">
+                <div className="text-2xl font-bold text-hux-turquoise">{timeLeft.minutes}</div>
+                <div className="text-xs text-hux-dark/60">MINS</div>
+              </div>
             </div>
           </div>
         </div>

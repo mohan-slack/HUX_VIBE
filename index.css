@@ -76,3 +76,55 @@
     opacity: 0;
   }
 }
+
+/* Vision Page Image Effects */
+.image-3d {
+  transform: perspective(1000px) rotateY(15deg) rotateX(5deg);
+  transition: transform 0.5s ease;
+}
+
+.image-3d:hover {
+  transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.05);
+}
+
+.image-glass-overlay {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.image-glass-overlay:hover {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(2, 179, 217, 0.3);
+  box-shadow: 0 8px 32px rgba(2, 179, 217, 0.1);
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Glow Effect */
+.glow-effect {
+  box-shadow: 0 0 20px rgba(2, 179, 217, 0.3),
+              0 0 40px rgba(2, 179, 217, 0.2),
+              0 0 60px rgba(2, 179, 217, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-effect:hover {
+  box-shadow: 0 0 30px rgba(2, 179, 217, 0.5),
+              0 0 60px rgba(2, 179, 217, 0.3),
+              0 0 90px rgba(2, 179, 217, 0.2);
+}

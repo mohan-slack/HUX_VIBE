@@ -10,6 +10,7 @@ import { TermsAndConditions } from './pages/TermsAndConditions';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { PreOrderTermsAndConditions } from './pages/preOrderTermsAndConditions';
 import PreLaunch from './pages/PreLaunch';
+import Vision from './pages/Vision';
 import { ShopProvider } from './context/ShopContext';
 import { ConciergeAI } from './components/ConciergeAI';
 
@@ -26,6 +27,7 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/success/:id" element={<OrderSuccess />} />
             <Route path="/about" element={<About />} />
+            <Route path="/vision" element={<Vision />} />
             <Route path="/track" element={<TrackOrder />} />
             <Route path="/policies" element={<Policies />} />
             <Route path="/terms-and-conditions" element={<TermsAndConditions />} />

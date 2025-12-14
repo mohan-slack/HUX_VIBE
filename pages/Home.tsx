@@ -104,6 +104,8 @@ export const Home = () => {
   // --- GALLERY STATE ---
   const [activeGallery, setActiveGallery] = useState(0);
   const [dockImageIndex, setDockImageIndex] = useState(0);
+  const [tarnishImageIndex, setTarnishImageIndex] = useState(0);
+  const [goldImageIndex, setGoldImageIndex] = useState(0);
 
   // Auto-rotate dock images
   useEffect(() => {
@@ -111,6 +113,20 @@ export const Home = () => {
       setDockImageIndex(prev => (prev + 1) % 4);
     }, 2000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Auto-rotate collection images
+  useEffect(() => {
+    const tarnishInterval = setInterval(() => {
+      setTarnishImageIndex(prev => (prev + 1) % 3);
+    }, 3000);
+    const goldInterval = setInterval(() => {
+      setGoldImageIndex(prev => (prev + 1) % 3);
+    }, 3000);
+    return () => {
+      clearInterval(tarnishInterval);
+      clearInterval(goldInterval);
+    };
   }, []);
 
   // --- 360 VIEW STATE ---
@@ -335,11 +351,11 @@ export const Home = () => {
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
           <div className="order-2 lg:order-1 space-y-8">
-            <h2 className="text-5xl font-display font-bold text-hux-dark leading-tight">
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-hux-dark leading-tight">
               360° of <br/>
               <span className="text-hux-turquoise">Perfection</span>
             </h2>
-            <p className="text-xl text-neutral-500 font-light leading-relaxed">
+            <p className="text-lg md:text-xl text-neutral-500 font-light leading-relaxed">
               Experience the HUX Smart Ring from every angle. Crafted from aerospace-grade titanium, it features a seamless, button-free design that feels as good as it looks.
             </p>
             <div className="flex gap-4">
@@ -409,8 +425,8 @@ export const Home = () => {
       <section className="py-16 md:py-24 bg-neutral-100 relative overflow-hidden mobile-corner-cut">
         <div className="text-center mb-12 md:mb-16 px-6">
           <h2 className="text-sm font-bold text-hux-turquoise uppercase tracking-widest mb-4">Capabilities</h2>
-          <h3 className="text-4xl md:text-6xl font-display font-bold text-hux-dark mb-4">The Ring of Life.</h3>
-          <p className="text-xl text-neutral-500 max-w-2xl mx-auto">Click to explore the technology woven into your lifestyle.</p>
+          <h3 className="text-3xl md:text-5xl font-display font-bold text-hux-dark mb-4">The Ring of Life.</h3>
+          <p className="text-lg md:text-xl text-neutral-500 max-w-2xl mx-auto">Click to explore the technology woven into your lifestyle.</p>
         </div>
 
         {/* Desktop: Horizontal scroll layout */}
@@ -641,7 +657,7 @@ export const Home = () => {
       <section id="collection" className="py-24 max-w-7xl mx-auto px-6 mobile-corner-cut-subtle">
          <div className="text-center mb-20 space-y-4">
             <h2 className="text-sm font-bold text-hux-turquoise uppercase tracking-widest">The Collection</h2>
-            <h3 className="text-4xl md:text-5xl font-display font-bold text-hux-dark">Design That Disappears</h3>
+            <h3 className="text-3xl md:text-4xl font-display font-bold text-hux-dark">Design That Disappears</h3>
          </div>
 
          <div className="space-y-32">
@@ -652,8 +668,8 @@ export const Home = () => {
                   <div className="inline-block px-4 py-1.5 bg-neutral-100 rounded-full">
                      <span className="text-xs font-bold text-neutral-600 uppercase tracking-wider">Titanium Alloy</span>
                   </div>
-                  <h4 className="text-4xl md:text-5xl font-display font-bold text-hux-dark">Tarnish Grey</h4>
-                  <p className="text-lg text-neutral-600 leading-relaxed">
+                  <h4 className="text-3xl md:text-4xl font-display font-bold text-hux-dark">Tarnish Grey</h4>
+                  <p className="text-base md:text-lg text-neutral-600 leading-relaxed">
                      Engineered for those who value subtlety. The Tarnish Grey finish blends seamlessly with your style, 
                      offering premium durability with a matte, industrial aesthetic.
                   </p>
@@ -677,26 +693,41 @@ export const Home = () => {
 
                {/* Image Grid */}
                <div className="grid grid-cols-2 gap-4">
-                  <div className="col-span-2 aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
-                     <img 
-                        src="/images/productImages/tarnishImages/tarnish01.png" 
-                        alt="Tarnish Grey Main"
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                     />
+                  <div className="col-span-2 aspect-[4/3] rounded-2xl overflow-hidden shadow-xl cursor-pointer relative" onClick={() => setTarnishImageIndex((tarnishImageIndex + 1) % 3)}>
+                     {[1, 2, 3].map((num, idx) => (
+                        <img 
+                           key={num}
+                           src={`/images/productImages/tarnishImages/tarnish0${num}.png`}
+                           alt={`Tarnish Grey ${num}`}
+                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
+                              idx === tarnishImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
+                           }`}
+                        />
+                     ))}
                   </div>
-                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg">
-                     <img 
-                        src="/images/productImages/tarnishImages/tarnish02.png" 
-                        alt="Tarnish Grey Detail 1"
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                     />
+                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => setTarnishImageIndex((tarnishImageIndex + 1) % 3)}>
+                     {[1, 2, 3].map((num, idx) => (
+                        <img 
+                           key={num}
+                           src={`/images/productImages/tarnishImages/tarnish0${num}.png`}
+                           alt={`Tarnish Grey ${num}`}
+                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
+                              idx === ((tarnishImageIndex + 1) % 3) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
+                           }`}
+                        />
+                     ))}
                   </div>
-                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg">
-                     <img 
-                        src="/images/productImages/tarnishImages/tarnish03.png" 
-                        alt="Tarnish Grey Detail 2"
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                     />
+                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => setTarnishImageIndex((tarnishImageIndex + 1) % 3)}>
+                     {[1, 2, 3].map((num, idx) => (
+                        <img 
+                           key={num}
+                           src={`/images/productImages/tarnishImages/tarnish0${num}.png`}
+                           alt={`Tarnish Grey ${num}`}
+                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
+                              idx === ((tarnishImageIndex + 2) % 3) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
+                           }`}
+                        />
+                     ))}
                   </div>
                </div>
             </div>
@@ -705,26 +736,41 @@ export const Home = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                {/* Image Grid */}
                <div className="grid grid-cols-2 gap-4 order-2 lg:order-1">
-                  <div className="col-span-2 aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
-                     <img 
-                        src="/images/productImages/goldImages/gold01.png" 
-                        alt="Sterling Gold Main"
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                     />
+                  <div className="col-span-2 aspect-[4/3] rounded-2xl overflow-hidden shadow-xl cursor-pointer relative" onClick={() => setGoldImageIndex((goldImageIndex + 1) % 3)}>
+                     {[1, 2, 3].map((num, idx) => (
+                        <img 
+                           key={num}
+                           src={`/images/productImages/goldImages/gold0${num}.png`}
+                           alt={`Sterling Gold ${num}`}
+                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
+                              idx === goldImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
+                           }`}
+                        />
+                     ))}
                   </div>
-                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg">
-                     <img 
-                        src="/images/productImages/goldImages/gold02.png" 
-                        alt="Sterling Gold Detail 1"
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                     />
+                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => setGoldImageIndex((goldImageIndex + 1) % 3)}>
+                     {[1, 2, 3].map((num, idx) => (
+                        <img 
+                           key={num}
+                           src={`/images/productImages/goldImages/gold0${num}.png`}
+                           alt={`Sterling Gold ${num}`}
+                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
+                              idx === ((goldImageIndex + 1) % 3) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
+                           }`}
+                        />
+                     ))}
                   </div>
-                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg">
-                     <img 
-                        src="/images/productImages/goldImages/gold03.png" 
-                        alt="Sterling Gold Detail 2"
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                     />
+                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => setGoldImageIndex((goldImageIndex + 1) % 3)}>
+                     {[1, 2, 3].map((num, idx) => (
+                        <img 
+                           key={num}
+                           src={`/images/productImages/goldImages/gold0${num}.png`}
+                           alt={`Sterling Gold ${num}`}
+                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
+                              idx === ((goldImageIndex + 2) % 3) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
+                           }`}
+                        />
+                     ))}
                   </div>
                </div>
 
@@ -733,8 +779,8 @@ export const Home = () => {
                   <div className="inline-block px-4 py-1.5 bg-yellow-50 rounded-full">
                      <span className="text-xs font-bold text-yellow-700 uppercase tracking-wider">Premium Finish</span>
                   </div>
-                  <h4 className="text-4xl md:text-5xl font-display font-bold text-hux-dark">Sterling Gold</h4>
-                  <p className="text-lg text-neutral-600 leading-relaxed">
+                  <h4 className="text-3xl md:text-4xl font-display font-bold text-hux-dark">Sterling Gold</h4>
+                  <p className="text-base md:text-lg text-neutral-600 leading-relaxed">
                      A statement of refined elegance. The Sterling Gold variant combines luxury with cutting-edge technology, 
                      perfect for those who appreciate timeless sophistication.
                   </p>
@@ -811,7 +857,7 @@ export const Home = () => {
           <div className="space-y-8">
              <div className="space-y-4">
                <h2 className="text-sm font-bold text-hux-turquoise uppercase tracking-widest">Power - Charging Dock</h2>
-               <h3 className="text-4xl md:text-5xl font-display font-bold">Infinite Power. <br/>Zero Friction.</h3>
+               <h3 className="text-3xl md:text-4xl font-display font-bold">Infinite Power. <br/>Zero Friction.</h3>
                <p className="text-neutral-400 text-lg leading-relaxed">
                  A charging experience as seamless as the ring itself. The magnetic dock aligns perfectly every time, providing a full week of power in just 45 minutes.
                </p>
@@ -871,7 +917,7 @@ export const Home = () => {
                
                {/* Left: Text Accordion */}
                <div className="w-full lg:w-1/2 space-y-2">
-                  <h2 className="text-5xl font-display font-bold text-hux-dark mb-12">Total Body<br/>Intelligence</h2>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-hux-dark mb-12">Total Body<br/>Intelligence</h2>
                   {ecosystemItems.map((item, idx) => (
                     <div 
                       key={idx}
@@ -1318,14 +1364,14 @@ export const Home = () => {
       </footer>
 
       {/* STICKY ADD TO CART BAR */}
-      <div className={`fixed bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-lg border-t border-neutral-200 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] transform transition-transform duration-500 z-40 flex items-center justify-between lg:justify-center gap-6 ${showStickyBar ? 'translate-y-0' : 'translate-y-full'}`}>
-         <div className="hidden lg:block text-hux-dark text-left">
-            <span className="font-display font-bold text-lg block">HUX Smart Ring</span>
+      <div className={`fixed bottom-0 left-0 right-0 p-3 bg-white/90 backdrop-blur-lg border-t border-neutral-200 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] transform transition-transform duration-500 z-40 flex items-center justify-between lg:justify-center gap-4 ${showStickyBar ? 'translate-y-0' : 'translate-y-full'}`}>
+         <div className="text-hux-dark text-left">
+            <span className="font-display font-bold text-sm md:text-lg block">HUX Smart Ring</span>
             <span className="text-xs text-neutral-500">The Future of Wellness</span>
          </div>
-         <div className="flex items-center gap-4 w-full lg:w-auto justify-between lg:justify-start">
-            <span className="font-bold text-hux-dark text-lg">₹12,999</span>
-            <Button variant="primary" onClick={() => scrollToSection('collection')} className="shadow-lg shadow-hux-turquoise/20 px-8 py-2.5 text-sm">
+         <div className="flex items-center gap-3 w-auto justify-start">
+            <span className="font-bold text-hux-dark text-sm md:text-lg">₹12,999</span>
+            <Button variant="primary" onClick={() => scrollToSection('collection')} className="shadow-lg shadow-hux-turquoise/20 px-6 py-2 text-xs md:text-sm">
               Add to Cart
             </Button>
          </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingBag, Menu, X, ArrowRight, Instagram, Twitter, Facebook, ChevronDown, ChevronUp } from 'lucide-react';
+import { ShoppingBag, Menu, X, ArrowRight, Instagram, Twitter, Facebook, ChevronDown, ChevronUp, ShoppingCart, Package } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useShop } from '../context/ShopContext';
 
@@ -34,7 +34,7 @@ export const Navbar = () => {
     <nav className="fixed top-4 left-4 right-4 z-50 rounded-2xl glass transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Left Links */}
-        <div className="hidden md:flex items-center gap-8 text-sm font-bold tracking-wide text-neutral-500 font-display uppercase">
+        <div className="hidden md:flex items-center gap-8 text-sm font-bold tracking-wide text-hux-dark font-display uppercase">
           <button onClick={() => handleNavigation('/prelaunch')} className="hover:text-white transition-colors bg-gradient-to-r from-hux-turquoise to-hux-gold px-3 py-1 rounded-full text-white font-bold border border-white/20">Pre-Launch</button>
           <button onClick={() => handleNavigation('/', 'collection')} className="hover:text-hux-turquoise transition-colors">Collection</button>
           <button onClick={() => handleNavigation('/', 'ecosystem')} className="hover:text-hux-turquoise transition-colors">Ecosystem</button>
@@ -57,17 +57,17 @@ export const Navbar = () => {
         </button>
 
         {/* Right Links */}
-        <div className="hidden md:flex items-center gap-8 text-sm font-bold tracking-wide text-neutral-500 font-display uppercase ml-auto">
-          <button onClick={() => handleNavigation('/about')} className="hover:text-hux-turquoise transition-colors">Vision</button>
+        <div className="hidden md:flex items-center gap-8 text-sm font-bold tracking-wide text-hux-dark font-display uppercase ml-auto">
+          <button onClick={() => handleNavigation('/vision')} className="hover:text-hux-turquoise transition-colors">Vision</button>
           <button onClick={() => handleNavigation('/track')} className="hover:text-hux-turquoise transition-colors">Support</button>
         </div>
 
-        <div className="flex items-center gap-6 md:ml-0">
+        <div className="flex items-center gap-6 md:ml-8">
           <button 
             onClick={() => navigate('/bag')}
-            className="relative p-2 text-hux-dark hover:text-hux-turquoise transition-colors"
+            className="relative p-2 text-hux-turquoise hover:text-hux-gold transition-colors"
           >
-            <ShoppingBag size={22} />
+            <ShoppingCart size={26} />
             {cartCount > 0 && (
               <span className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-hux-turquoise to-hux-turquoiseLight text-white text-[10px] font-bold flex items-center justify-center rounded-full shadow-sm">
                 {cartCount}
@@ -88,7 +88,7 @@ export const Navbar = () => {
         <div className="md:hidden absolute top-full left-0 right-0 mt-2 glass rounded-2xl p-6 flex flex-col gap-4 shadow-xl animate-slideUp">
           <button onClick={() => handleNavigation('/prelaunch')} className="text-lg font-display font-bold bg-gradient-to-r from-hux-turquoise to-hux-gold px-3 py-1 rounded-full text-white border border-white/20 text-left">Pre-Launch</button>
           <button onClick={() => handleNavigation('/', 'collection')} className="text-lg font-display font-medium text-hux-dark text-left">Collection</button>
-          <button onClick={() => handleNavigation('/about')} className="text-lg font-display font-medium text-hux-dark text-left">Vision</button>
+          <button onClick={() => handleNavigation('/vision')} className="text-lg font-display font-medium text-hux-dark text-left">Vision</button>
           <button onClick={() => handleNavigation('/track')} className="text-lg font-display font-medium text-hux-dark text-left">Track Order</button>
         </div>
       )}
@@ -141,7 +141,7 @@ export const Footer = () => {
             <h4 className="text-hux-dark font-bold font-display uppercase tracking-wider text-xs mb-6">Explore</h4>
             <ul className="space-y-3 text-neutral-500 text-sm">
               <li><button onClick={() => handleNavigation('/', 'collection')} className="hover:text-hux-turquoise transition-colors">Smart Ring</button></li>
-              <li><button onClick={() => handleNavigation('/about')} className="hover:text-hux-turquoise transition-colors">Technology</button></li>
+              <li><button onClick={() => handleNavigation('/vision')} className="hover:text-hux-turquoise transition-colors">Technology</button></li>
               <li><button onClick={() => handleNavigation('/track')} className="hover:text-hux-turquoise transition-colors">Order Status</button></li>
             </ul>
           </div>
