@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://hux.co.in/</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://hux.co.in/images/heroSection/hero-01.png</image:loc>
+      <image:title>HUX Smart Ring - Premium Health Monitoring</image:title>
+      <image:caption>Experience the future of health monitoring with HUX Smart Ring</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://hux.co.in/images/productImages/goldImages/gold01.png</image:loc>
+      <image:title>HUX Smart Ring Sterling Gold</image:title>
+      <image:caption>Premium Sterling Gold variant with 18K gold coating</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://hux.co.in/images/productImages/tarnishImages/tarnish01.png</image:loc>
+      <image:title>HUX Smart Ring Tarnish Grey</image:title>
+      <image:caption>Sleek Tarnish Grey variant with titanium finish</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Product Pages -->
+  <url>
+    <loc>https://hux.co.in/bag</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hux.co.in/checkout</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Company Pages -->
+  <url>
+    <loc>https://hux.co.in/about</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hux.co.in/vision</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Support Pages -->
+  <url>
+    <loc>https://hux.co.in/track</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://hux.co.in/policies</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://hux.co.in/terms-and-conditions</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://hux.co.in/privacy-policy</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://hux.co.in/preorder-terms</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Influencer Program -->
+  <url>
+    <loc>https://hux.co.in/influencers</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://hux.co.in/influencer-signup</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://hux.co.in/influencer-terms</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Pre-launch Page -->
+  <url>
+    <loc>https://hux.co.in/prelaunch</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

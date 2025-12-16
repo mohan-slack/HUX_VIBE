@@ -1,0 +1,118 @@
+{
+  "name": "HUX Smart Ring - Premium Health Monitoring",
+  "short_name": "HUX Ring",
+  "description": "Experience the future of health monitoring with HUX Smart Ring. Premium titanium design with advanced biometric sensors.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fdfbf6",
+  "theme_color": "#02b3d9",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["health", "fitness", "lifestyle", "shopping"],
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Shop HUX Ring",
+      "short_name": "Shop",
+      "description": "Browse and purchase HUX Smart Ring",
+      "url": "/#collection",
+      "icons": [
+        {
+          "src": "/icons/shortcut-shop.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Track Order",
+      "short_name": "Track",
+      "description": "Track your HUX Ring order",
+      "url": "/track",
+      "icons": [
+        {
+          "src": "/icons/shortcut-track.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Virtual Try-On",
+      "short_name": "Try-On",
+      "description": "Try HUX Ring virtually with AR",
+      "url": "/#collection",
+      "icons": [
+        {
+          "src": "/icons/shortcut-ar.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/screenshots/desktop-home.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "HUX Smart Ring Homepage"
+    },
+    {
+      "src": "/images/screenshots/mobile-home.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "HUX Smart Ring Mobile View"
+    }
+  ]
+}

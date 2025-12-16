@@ -1,5 +1,56 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronRight, ChevronLeft, Plus, Play, Moon, Activity, Zap, Star, ArrowRight, Heart, Brain, Box, Rotate3d, Move, Fingerprint, ShieldAlert, Wind, Bell, TrendingUp, Cpu, Battery, Wifi, Droplets, PackageOpen, Ruler, Palette, CheckCircle, ShoppingBag, Smartphone, Magnet, Cable, Sparkles, ScanFace, Instagram, Facebook, Twitter, Youtube, Linkedin, Building2, Users, Headphones, FileText, Shield, HelpCircle, BookOpen, Package, Phone } from 'lucide-react';
+
+// SEO Meta Tags Component
+const SEOHead = () => {
+  useEffect(() => {
+    // Update page title
+    document.title = 'HUX Smart Ring - Premium Health Monitoring Wearable | Intelligence Worn';
+    
+    // Update meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Experience the future of health monitoring with HUX Smart Ring. Premium titanium design with advanced biometric sensors, 7-day battery, 5ATM waterproof. Track sleep, heart rate, stress & more.');
+    }
+    
+    // Update Open Graph tags
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+      ogTitle.setAttribute('content', 'HUX Smart Ring - Premium Health Monitoring Wearable');
+    }
+    
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) {
+      ogDescription.setAttribute('content', 'Experience the future of health monitoring with HUX Smart Ring. Premium titanium design with advanced biometric sensors, 7-day battery, 5ATM waterproof.');
+    }
+    
+    // Add breadcrumb structured data
+    const breadcrumbScript = document.createElement('script');
+    breadcrumbScript.type = 'application/ld+json';
+    breadcrumbScript.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://hux.co.in"
+        }
+      ]
+    });
+    document.head.appendChild(breadcrumbScript);
+    
+    return () => {
+      // Cleanup
+      if (document.head.contains(breadcrumbScript)) {
+        document.head.removeChild(breadcrumbScript);
+      }
+    };
+  }, []);
+  
+  return null;
+};
 import { Button } from '../components/Button';
 import { useShop } from '../context/ShopContext';
 import { HUX_PRODUCT } from '../constants';
@@ -37,6 +88,58 @@ export const Home = () => {
   const navigate = useNavigate();
   const [isAROpen, setIsAROpen] = useState(false);
   const [arColor, setArColor] = useState('Sterling Gold');
+  
+  // SEO optimization
+  useEffect(() => {
+    // Add FAQ structured data
+    const faqScript = document.createElement('script');
+    faqScript.type = 'application/ld+json';
+    faqScript.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is HUX Smart Ring?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "HUX Smart Ring is a premium health monitoring wearable with advanced biometric sensors, 7-day battery life, and 5ATM waterproof rating. It tracks sleep, heart rate, stress, and more."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does the battery last?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "HUX Smart Ring has a 7-day battery life with normal usage. It charges quickly with the included magnetic charging dock."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is HUX Smart Ring waterproof?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, HUX Smart Ring has a 5ATM waterproof rating, making it suitable for swimming and water activities up to 50 meters depth."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What health metrics does it track?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "HUX Smart Ring tracks heart rate, SpO2 (blood oxygen), body temperature, sleep stages, stress levels, activity, and provides gesture control features."
+          }
+        }
+      ]
+    });
+    document.head.appendChild(faqScript);
+    
+    return () => {
+      if (document.head.contains(faqScript)) {
+        document.head.removeChild(faqScript);
+      }
+    };
+  }, []);
 
   // --- HASH SCROLL LOGIC ---
   useEffect(() => {
@@ -112,7 +215,7 @@ export const Home = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setDockImageIndex(prev => (prev + 1) % 4);
-    }, 2000);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
@@ -341,18 +444,20 @@ export const Home = () => {
          onMouseUp={handleMouseUp}
          onTouchEnd={handleMouseUp}>
       
+      <SEOHead />
       <PreLaunchBanner />
       <ARTryOn isOpen={isAROpen} onClose={() => setIsAROpen(false)} productColor={arColor} />
 
       {/* 1. HERO SECTION - ANIMATED SECTIONS (GSAP) */}
-      <AnimatedSections sections={heroSections} />
+      <main role="main">
+        <AnimatedSections sections={heroSections} />
 
       {/* 2. 360 STUDIO SECTION */}
-      <section className="py-24 bg-white overflow-hidden relative mobile-corner-cut">
+      <section className="py-24 bg-white overflow-hidden relative mobile-corner-cut" aria-labelledby="studio-heading">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
           <div className="order-2 lg:order-1 space-y-8">
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-hux-dark leading-tight">
+            <h2 id="studio-heading" className="text-4xl md:text-5xl font-display font-bold text-hux-dark leading-tight">
               360° of <br/>
               <span className="text-hux-turquoise">Perfection</span>
             </h2>
@@ -423,10 +528,10 @@ export const Home = () => {
       </section>
 
       {/* 3. FULL-SCREEN EXPANDABLE CAPABILITIES CARDS */}
-      <section className="py-16 md:py-24 bg-neutral-100 relative overflow-hidden mobile-corner-cut">
+      <section className="py-16 md:py-24 bg-neutral-100 relative overflow-hidden mobile-corner-cut" aria-labelledby="capabilities-heading">
         <div className="text-center mb-12 md:mb-16 px-6">
           <h2 className="text-sm font-bold text-hux-turquoise uppercase tracking-widest mb-4">Capabilities</h2>
-          <h3 className="text-3xl md:text-5xl font-display font-bold text-hux-dark mb-4">The Ring of Life.</h3>
+          <h3 id="capabilities-heading" className="text-3xl md:text-5xl font-display font-bold text-hux-dark mb-4">The Ring of Life.</h3>
           <p className="text-lg md:text-xl text-neutral-500 max-w-2xl mx-auto">Click to explore the technology woven into your lifestyle.</p>
         </div>
 
@@ -655,10 +760,10 @@ export const Home = () => {
       </section>
 
       {/* 4. RING COLLECTION GRID - TRANSPARENT GLASS CARDS */}
-      <section id="collection" className="py-24 max-w-7xl mx-auto px-6 mobile-corner-cut-subtle">
+      <section id="collection" className="py-24 max-w-7xl mx-auto px-6 mobile-corner-cut-subtle" aria-labelledby="collection-heading">
          <div className="text-center mb-20 space-y-4">
             <h2 className="text-sm font-bold text-hux-turquoise uppercase tracking-widest">The Collection</h2>
-            <h3 className="text-3xl md:text-4xl font-display font-bold text-hux-dark">Design That Disappears</h3>
+            <h3 id="collection-heading" className="text-3xl md:text-4xl font-display font-bold text-hux-dark">Design That Disappears</h3>
          </div>
 
          <div className="space-y-32">
@@ -703,7 +808,7 @@ export const Home = () => {
                         <img 
                            key={num}
                            src={`/images/productImages/goldImages/gold0${num}.png`}
-                           alt={`Sterling Gold ${num}`}
+                           alt={`HUX Smart Ring Sterling Gold variant - Premium 18K gold coating with titanium core, view ${num}`}
                            className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
                               idx === goldImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
                            }`}
@@ -746,7 +851,7 @@ export const Home = () => {
                         <img 
                            key={num}
                            src={`/images/productImages/tarnishImages/tarnish0${num}.png`}
-                           alt={`Tarnish Grey ${num}`}
+                           alt={`HUX Smart Ring Tarnish Grey variant - Aerospace-grade titanium with matte finish, view ${num}`}
                            className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
                               idx === tarnishImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
                            }`}
@@ -811,9 +916,19 @@ export const Home = () => {
       </section>
 
       {/* 4.5 NEW: CHARGING DOCK SECTION */}
-      <section className="py-24 bg-neutral-900 text-white relative overflow-hidden mobile-corner-cut">
+      <section className="py-24 bg-neutral-900 text-white relative overflow-hidden mobile-corner-cut" aria-labelledby="charging-heading">
         {/* Background glow effects */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-hux-turquoise/20 rounded-full blur-[120px]"></div>
+        
+        {/* Circular Sound Wave Animation */}
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+          <div className="relative">
+            <div className="absolute w-32 h-32 border-2 border-hux-turquoise/30 rounded-full animate-ping" style={{animationDuration: '2s'}}></div>
+            <div className="absolute w-48 h-48 border border-hux-turquoise/20 rounded-full animate-ping" style={{animationDelay: '0.5s', animationDuration: '2.5s'}}></div>
+            <div className="absolute w-64 h-64 border border-hux-turquoise/15 rounded-full animate-ping" style={{animationDelay: '1s', animationDuration: '3s'}}></div>
+            <div className="absolute w-80 h-80 border border-hux-turquoise/10 rounded-full animate-ping" style={{animationDelay: '1.5s', animationDuration: '3.5s'}}></div>
+          </div>
+        </div>
 
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
           
@@ -828,15 +943,15 @@ export const Home = () => {
                 style={{ transform: `translateX(-${dockImageIndex * 100}%)` }}
               >
                 {[
-                  '/images/dock/dock001.png',
-                  '/images/dock/dock002.png', 
-                  '/images/dock/dock003.png',
-                  '/images/dock/dock004.png'
+                  '/images/dock/NewDock01.png',
+                  '/images/dock/haptic-Feature.png', 
+                  '/images/dock/smart-touch.png',
+                  '/images/dock/SOS-feature.png'
                 ].map((src, idx) => (
                   <img 
                     key={idx}
                     src={src}
-                    alt={`HUX Charging Dock ${idx + 1}`}
+                    alt={`HUX Smart Ring ${['charging dock with magnetic alignment', 'haptic vibration motor for discrete alerts', 'smart touch controls for device interaction', 'SOS emergency response system'][idx]} feature`}
                     className="w-full flex-shrink-0 rounded-3xl shadow-2xl border border-white/10 brightness-75 contrast-125"
                   />
                 ))}
@@ -858,71 +973,286 @@ export const Home = () => {
             </div>
           </div>
 
-          {/* Content */}
-          <div className="space-y-8">
-             <div className="space-y-4">
-               <h2 className="text-sm font-bold text-hux-turquoise uppercase tracking-widest">Power - Charging Dock</h2>
-               <h3 className="text-3xl md:text-4xl font-display font-bold">Infinite Power. <br/>Zero Friction.</h3>
-               <p className="text-neutral-400 text-lg leading-relaxed">
-                 A charging experience as seamless as the ring itself. The magnetic dock aligns perfectly every time, providing a full week of power in just 45 minutes.
-               </p>
-             </div>
+          {/* Dynamic Content based on image */}
+          <div className="space-y-8 relative overflow-hidden">
+            <div 
+              className="transition-transform duration-1000 ease-in-out"
+              style={{ transform: `translateX(${dockImageIndex * 100}%)` }}
+            >
+              <div className="flex" style={{ transform: `translateX(-${dockImageIndex * 100}%)` }}>
+             {dockImageIndex === 1 ? (
+               // Haptic Vibration Content
+               <div className="space-y-8">
+                 <div className="space-y-4">
+                   <h2 className="text-sm font-bold text-hux-turquoise uppercase tracking-widest">Haptic Vibration Motor</h2>
+                   <h3 className="text-3xl md:text-4xl font-display font-bold">Subtle Awareness.<br/>Absolute Control.</h3>
+                   <p className="text-neutral-400 text-lg leading-relaxed">
+                     A tactile intelligence layer engineered into the ring itself. The precision haptic motor delivers discreet, on-finger alerts that keep you informed—without screens, sounds, or distractions.
+                   </p>
+                 </div>
 
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Feature 1 */}
-                <div className="flex gap-4">
-                   <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-hux-turquoise">
-                      <Magnet size={24} />
+                 <div className="space-y-6">
+                   <h4 className="text-xl font-bold text-white mb-4">Intelligent Vibration Alerts</h4>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                         <Phone size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Call Alerts</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                         <Smartphone size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Message & App Notifications</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                         <Heart size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Health Warnings</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                         <Sparkles size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Sedentary Reminders</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                         <Activity size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Meditation & Water Intake</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                         <Bell size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Events & Calendar Alerts</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                         <Moon size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Silent Alarm</h5>
+                       </div>
+                     </div>
                    </div>
-                   <div>
-                      <h4 className="font-bold text-white mb-1">Magnetic Alignment</h4>
-                      <p className="text-sm text-neutral-400">Precision magnets snap into place.</p>
+                 </div>
+               </div>
+             ) : dockImageIndex === 2 ? (
+               // Smart Touch Feature Content
+               <div className="space-y-8">
+                 <div className="space-y-4">
+                   <h2 className="text-sm font-bold text-hux-turquoise uppercase tracking-widest">Smart Touch Feature</h2>
+                   <h3 className="text-3xl md:text-4xl font-display font-bold">Intelligent Control.<br/>Seamless Connection.</h3>
+                   <p className="text-neutral-400 text-lg leading-relaxed">
+                     Transform your ring into a universal remote. The precision touch strip responds to taps, swipes, and gestures, giving you seamless control over your digital ecosystem.
+                   </p>
+                 </div>
+
+                 <div className="space-y-6">
+                   <h4 className="text-xl font-bold text-white mb-4">Smart Touch Controls</h4>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                         <Smartphone size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Music & Media Control</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                         <ScanFace size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Camera Remote Shutter</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                         <Play size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Presentation Control</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                         <Building2 size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Smart Home Integration</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                         <Phone size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Call Management</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                         <Move size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Gesture Recognition</h5>
+                       </div>
+                     </div>
                    </div>
-                </div>
-                {/* Feature 2 */}
-                <div className="flex gap-4">
-                   <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-hux-turquoise">
-                      <Cable size={24} />
+                 </div>
+               </div>
+             ) : dockImageIndex === 3 ? (
+               // SOS Emergency Gesture Content
+               <div className="space-y-8">
+                 <div className="space-y-4">
+                   <h2 className="text-sm font-bold text-red-400 uppercase tracking-widest">SOS Emergency Gesture</h2>
+                   <h3 className="text-3xl md:text-4xl font-display font-bold">Instant Protection.<br/>When It Matters Most.</h3>
+                   <p className="text-neutral-400 text-lg leading-relaxed">
+                     A simple gesture that could save your life. Triple-tap your ring to instantly alert emergency contacts with your precise location and vital information.
+                   </p>
+                 </div>
+
+                 <div className="space-y-6">
+                   <h4 className="text-xl font-bold text-white mb-4">Emergency Response Features</h4>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-400 flex-shrink-0 mt-1">
+                         <Phone size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Automatic Emergency Calling</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-400 flex-shrink-0 mt-1">
+                         <Smartphone size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">SMS Alert to Contacts</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-400 flex-shrink-0 mt-1">
+                         <Activity size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Real-time Location Sharing</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-400 flex-shrink-0 mt-1">
+                         <Heart size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Vital Signs Transmission</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-400 flex-shrink-0 mt-1">
+                         <Bell size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">Silent Activation Mode</h5>
+                       </div>
+                     </div>
+                     <div className="flex gap-3 items-start">
+                       <div className="w-8 h-8 rounded-lg bg-red-500/20 border border-red-500/30 flex items-center justify-center text-red-400 flex-shrink-0 mt-1">
+                         <ShieldAlert size={16} />
+                       </div>
+                       <div>
+                         <h5 className="font-semibold text-white text-sm">24/7 Emergency Monitoring</h5>
+                       </div>
+                     </div>
                    </div>
-                   <div>
-                      <h4 className="font-bold text-white mb-1">USB-C Fast Charge</h4>
-                      <p className="text-sm text-neutral-400">Universal standard. Rapid delivery.</p>
-                   </div>
-                </div>
-                 {/* Feature 3 */}
-                <div className="flex gap-4">
-                   <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-hux-turquoise">
-                      <Box size={24} />
-                   </div>
-                   <div>
-                      <h4 className="font-bold text-white mb-1">Compact Design</h4>
-                      <p className="text-sm text-neutral-400">Fits in your coin pocket.</p>
-                   </div>
-                </div>
-                 {/* Feature 4 */}
-                <div className="flex gap-4">
-                   <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-hux-turquoise">
-                      <Sparkles size={24} />
-                   </div>
-                   <div>
-                      <h4 className="font-bold text-white mb-1">Matte Finish</h4>
-                      <p className="text-sm text-neutral-400">Premium touch. Fingerprint resistant.</p>
-                   </div>
-                </div>
-             </div>
+                 </div>
+               </div>
+             ) : (
+               // Original Charging Dock Content
+               <div className="space-y-8">
+                 <div className="space-y-4">
+                   <h2 className="text-sm font-bold text-hux-turquoise uppercase tracking-widest">Power - Charging Dock</h2>
+                   <h3 className="text-3xl md:text-4xl font-display font-bold">Infinite Power. <br/>Zero Friction.</h3>
+                   <p className="text-neutral-400 text-lg leading-relaxed">
+                     A charging experience as seamless as the ring itself. The magnetic dock aligns perfectly every time, providing a full week of power in just 45 minutes.
+                   </p>
+                 </div>
+
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* Feature 1 */}
+                    <div className="flex gap-4">
+                       <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-hux-turquoise">
+                          <Magnet size={24} />
+                       </div>
+                       <div>
+                          <h4 className="font-bold text-white mb-1">Magnetic Alignment</h4>
+                          <p className="text-sm text-neutral-400">Precision magnets snap into place.</p>
+                       </div>
+                    </div>
+                    {/* Feature 2 */}
+                    <div className="flex gap-4">
+                       <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-hux-turquoise">
+                          <Cable size={24} />
+                       </div>
+                       <div>
+                          <h4 className="font-bold text-white mb-1">USB-C Fast Charge</h4>
+                          <p className="text-sm text-neutral-400">Universal standard. Rapid delivery.</p>
+                       </div>
+                    </div>
+                     {/* Feature 3 */}
+                    <div className="flex gap-4">
+                       <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-hux-turquoise">
+                          <Box size={24} />
+                       </div>
+                       <div>
+                          <h4 className="font-bold text-white mb-1">Compact Design</h4>
+                          <p className="text-sm text-neutral-400">Fits in your coin pocket.</p>
+                       </div>
+                    </div>
+                     {/* Feature 4 */}
+                    <div className="flex gap-4">
+                       <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-hux-turquoise">
+                          <Sparkles size={24} />
+                       </div>
+                       <div>
+                          <h4 className="font-bold text-white mb-1">Matte Finish</h4>
+                          <p className="text-sm text-neutral-400">Premium touch. Fingerprint resistant.</p>
+                       </div>
+                    </div>
+                 </div>
+               </div>
+             )}
+              </div>
+            </div>
           </div>
 
         </div>
       </section>
 
       {/* 5. SMART ECOSYSTEM ACCORDION */}
-      <section id="ecosystem" className="py-24 bg-white mobile-corner-cut">
+      <section id="ecosystem" className="py-24 bg-white mobile-corner-cut" aria-labelledby="ecosystem-heading">
          <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col lg:flex-row gap-16 items-center">
                
                {/* Left: Text Accordion */}
                <div className="w-full lg:w-1/2 space-y-2">
-                  <h2 className="text-4xl md:text-5xl font-display font-bold text-hux-dark mb-12">Total Body<br/>Intelligence</h2>
+                  <h2 id="ecosystem-heading" className="text-4xl md:text-5xl font-display font-bold text-hux-dark mb-12">Total Body<br/>Intelligence</h2>
                   {ecosystemItems.map((item, idx) => (
                     <div 
                       key={idx}
@@ -1043,11 +1373,11 @@ export const Home = () => {
       </section>
 
       {/* 8. NEW: PRODUCT SPECIFICATIONS */}
-      <section id="specs" className="py-24 bg-neutral-50 relative overflow-hidden border-t border-neutral-100 mobile-corner-cut">
+      <section id="specs" className="py-24 bg-neutral-50 relative overflow-hidden border-t border-neutral-100 mobile-corner-cut" aria-labelledby="specs-heading">
          <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16 space-y-4">
                <h2 className="text-sm font-bold text-hux-turquoise uppercase tracking-widest">HUX Product Specifications</h2>
-               <h3 className="text-4xl md:text-5xl font-display font-bold text-hux-dark">Engineered Precision.</h3>
+               <h3 id="specs-heading" className="text-4xl md:text-5xl font-display font-bold text-hux-dark">Engineered Precision.</h3>
                <p className="text-xl text-neutral-500">Designed for Everyday Brilliance.</p>
             </div>
 
@@ -1088,7 +1418,7 @@ export const Home = () => {
                   <div className="relative flex items-center justify-center">
                       <img 
                         src="/images/ring-animation.gif" 
-                        alt="HUX Smart Ring Animation"
+                        alt="HUX Smart Ring 360-degree product animation showing premium titanium construction and sensor placement"
                         className="w-80 h-80 object-contain"
                       />
                   </div>
@@ -1247,12 +1577,12 @@ export const Home = () => {
       </section>
 
       {/* CTA FOOTER */}
-      <section className="py-32 bg-hux-dark text-center relative overflow-hidden mobile-corner-cut">
+      <section className="py-32 bg-hux-dark text-center relative overflow-hidden mobile-corner-cut" aria-labelledby="cta-heading">
          <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: 'url(/images/banners/evolve.png)'}}></div>
          <div className="absolute inset-0 bg-black/60"></div>
          
          <div className="relative z-10 max-w-2xl mx-auto px-6">
-             <h2 className="text-5xl md:text-7xl font-display font-bold text-white mb-8">Ready to evolve?</h2>
+             <h2 id="cta-heading" className="text-5xl md:text-7xl font-display font-bold text-white mb-8">Ready to evolve?</h2>
              <p className="text-xl text-neutral-400 mb-12">Join the HUX ecosystem today and experience the future of personal health.</p>
              <Button variant="primary" className="mx-auto px-12 py-4 text-lg" onClick={() => scrollToSection('collection')}>Order Your HUX Ring</Button>
          </div>
@@ -1260,8 +1590,10 @@ export const Home = () => {
 
 
 
+      </main>
+      
       {/* COMPREHENSIVE FOOTER */}
-      <footer className="bg-gradient-to-br from-neutral-50 via-stone-50 to-neutral-100 text-neutral-800 py-20 relative overflow-hidden mobile-corner-cut">
+      <footer className="bg-gradient-to-br from-neutral-50 via-stone-50 to-neutral-100 text-neutral-800 py-20 relative overflow-hidden mobile-corner-cut" role="contentinfo">
         {/* Elegant background elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-hux-turquoise/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-hux-gold/10 rounded-full blur-2xl"></div>
@@ -1270,7 +1602,7 @@ export const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 mb-20">
             <div className="lg:col-span-2 space-y-8">
               <div className="space-y-6">
-                <img src="/images/logo.png" alt="HUX" className="h-14 w-auto filter drop-shadow-sm" />
+                <img src="/images/logo.png" alt="HUX Smart Ring Logo - Intelligence Worn" className="h-14 w-auto filter drop-shadow-sm" />
                 <div className="space-y-3">
                   <p className="text-2xl font-light text-hux-turquoise font-display italic tracking-wide">Intelligence Worn.</p>
                   <p className="text-base text-neutral-700 leading-relaxed max-w-md font-light">
