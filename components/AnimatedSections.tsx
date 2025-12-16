@@ -55,7 +55,7 @@ const AnimatedSections: React.FC<AnimatedSectionsProps> = ({
   };
 
   return (
-    <div className={`relative h-screen w-full overflow-hidden bg-black text-white font-sans ${className}`}>
+    <div className={`relative h-[80vh] w-full overflow-hidden bg-black text-white font-sans ${className}`}>
       
       {/* Slides */}
       {sections.map((section, index) => (

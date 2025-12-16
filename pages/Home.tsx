@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronRight, ChevronLeft, Plus, Play, Moon, Activity, Zap, Star, ArrowRight, Heart, Brain, Box, Rotate3d, Move, Fingerprint, ShieldAlert, Wind, Bell, TrendingUp, Cpu, Battery, Wifi, Droplets, PackageOpen, Ruler, Palette, CheckCircle, ShoppingBag, Smartphone, Magnet, Cable, Sparkles, ScanFace } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Plus, Play, Moon, Activity, Zap, Star, ArrowRight, Heart, Brain, Box, Rotate3d, Move, Fingerprint, ShieldAlert, Wind, Bell, TrendingUp, Cpu, Battery, Wifi, Droplets, PackageOpen, Ruler, Palette, CheckCircle, ShoppingBag, Smartphone, Magnet, Cable, Sparkles, ScanFace, Instagram, Facebook, Twitter, Youtube, Linkedin, Building2, Users, Headphones, FileText, Shield, HelpCircle, BookOpen, Package, Phone } from 'lucide-react';
 import { Button } from '../components/Button';
 import { useShop } from '../context/ShopContext';
 import { HUX_PRODUCT } from '../constants';
@@ -9,6 +9,7 @@ import AnimatedSections from '../components/AnimatedSections';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ARTryOn } from '../components/ARTryOn';
 import { PreLaunchBanner } from '../components/PreLaunchBanner';
+import { GoldCoatingCard } from '../components/ui/gold-coating-card';
 
 const ExpandableSpecsItem = ({ title, items }: { title: string, items: string[] }) => {
   const [expanded, setExpanded] = useState(false);
@@ -661,30 +662,34 @@ export const Home = () => {
          </div>
 
          <div className="space-y-32">
-            {/* Tarnish Grey - Text Left, Images Right */}
+            {/* Sterling Gold - Text Left, Images Right */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                {/* Text Content */}
                <div className="space-y-6 lg:pr-12">
-                  <div className="inline-block px-4 py-1.5 bg-neutral-100 rounded-full">
-                     <span className="text-xs font-bold text-neutral-600 uppercase tracking-wider">Titanium Alloy</span>
+                  <div className="inline-block px-4 py-1.5 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-full border border-yellow-300">
+                     <span className="text-xs font-bold text-yellow-700 uppercase tracking-wider">Premium 18K Gold</span>
                   </div>
-                  <h4 className="text-3xl md:text-4xl font-display font-bold text-hux-dark">Tarnish Grey</h4>
+                  <h4 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">Sterling Gold</h4>
+                  
+                  {/* Gold Coating Highlight Card */}
+                  <GoldCoatingCard />
+
                   <p className="text-base md:text-lg text-neutral-600 leading-relaxed">
-                     Engineered for those who value subtlety. The Tarnish Grey finish blends seamlessly with your style, 
-                     offering premium durability with a matte, industrial aesthetic.
+                     A statement of refined elegance. The Sterling Gold variant combines luxury with cutting-edge technology, 
+                     perfect for those who appreciate timeless sophistication.
                   </p>
                   <div className="flex items-baseline gap-3 pt-4">
-                     <span className="text-3xl font-bold text-hux-turquoise">₹12,999</span>
+                     <span className="text-3xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">₹12,999</span>
                      <span className="text-lg text-neutral-400 line-through">₹22,999</span>
                   </div>
                   <div className="flex gap-4 pt-6">
-                     <Button onClick={() => { addToCart(HUX_PRODUCT, 'Tarnish Grey', 8); navigate('/bag'); }} className="bg-hux-turquoise text-white hover:bg-hux-turquoiseLight px-8 py-3 rounded-xl font-bold">
+                     <Button onClick={() => { addToCart(HUX_PRODUCT, 'Sterling Gold', 8); navigate('/bag'); }} className="bg-gradient-to-r from-yellow-600 to-amber-600 text-white hover:from-yellow-700 hover:to-amber-700 px-8 py-3 rounded-xl font-bold shadow-lg shadow-yellow-600/25">
                         Quick Add
                      </Button>
                      <Button 
                         variant="outline" 
-                        onClick={() => { setArColor('Tarnish Grey'); setIsAROpen(true); }}
-                        className="flex items-center gap-2"
+                        onClick={() => { setArColor('Sterling Gold'); setIsAROpen(true); }}
+                        className="flex items-center gap-2 border-yellow-600 text-yellow-600 hover:bg-yellow-50"
                      >
                         <ScanFace size={18} /> Virtual Try-On
                      </Button>
@@ -693,49 +698,6 @@ export const Home = () => {
 
                {/* Image Grid */}
                <div className="grid grid-cols-2 gap-4">
-                  <div className="col-span-2 aspect-[4/3] rounded-2xl overflow-hidden shadow-xl cursor-pointer relative" onClick={() => setTarnishImageIndex((tarnishImageIndex + 1) % 3)}>
-                     {[1, 2, 3].map((num, idx) => (
-                        <img 
-                           key={num}
-                           src={`/images/productImages/tarnishImages/tarnish0${num}.png`}
-                           alt={`Tarnish Grey ${num}`}
-                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
-                              idx === tarnishImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
-                           }`}
-                        />
-                     ))}
-                  </div>
-                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => setTarnishImageIndex((tarnishImageIndex + 1) % 3)}>
-                     {[1, 2, 3].map((num, idx) => (
-                        <img 
-                           key={num}
-                           src={`/images/productImages/tarnishImages/tarnish0${num}.png`}
-                           alt={`Tarnish Grey ${num}`}
-                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
-                              idx === ((tarnishImageIndex + 1) % 3) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
-                           }`}
-                        />
-                     ))}
-                  </div>
-                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => setTarnishImageIndex((tarnishImageIndex + 1) % 3)}>
-                     {[1, 2, 3].map((num, idx) => (
-                        <img 
-                           key={num}
-                           src={`/images/productImages/tarnishImages/tarnish0${num}.png`}
-                           alt={`Tarnish Grey ${num}`}
-                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
-                              idx === ((tarnishImageIndex + 2) % 3) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
-                           }`}
-                        />
-                     ))}
-                  </div>
-               </div>
-            </div>
-
-            {/* Sterling Gold - Images Left, Text Right */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-               {/* Image Grid */}
-               <div className="grid grid-cols-2 gap-4 order-2 lg:order-1">
                   <div className="col-span-2 aspect-[4/3] rounded-2xl overflow-hidden shadow-xl cursor-pointer relative" onClick={() => setGoldImageIndex((goldImageIndex + 1) % 3)}>
                      {[1, 2, 3].map((num, idx) => (
                         <img 
@@ -773,28 +735,71 @@ export const Home = () => {
                      ))}
                   </div>
                </div>
+            </div>
+
+            {/* Tarnish Grey - Images Left, Text Right */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+               {/* Image Grid */}
+               <div className="grid grid-cols-2 gap-4 order-2 lg:order-1">
+                  <div className="col-span-2 aspect-[4/3] rounded-2xl overflow-hidden shadow-xl cursor-pointer relative" onClick={() => setTarnishImageIndex((tarnishImageIndex + 1) % 3)}>
+                     {[1, 2, 3].map((num, idx) => (
+                        <img 
+                           key={num}
+                           src={`/images/productImages/tarnishImages/tarnish0${num}.png`}
+                           alt={`Tarnish Grey ${num}`}
+                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
+                              idx === tarnishImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
+                           }`}
+                        />
+                     ))}
+                  </div>
+                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => setTarnishImageIndex((tarnishImageIndex + 1) % 3)}>
+                     {[1, 2, 3].map((num, idx) => (
+                        <img 
+                           key={num}
+                           src={`/images/productImages/tarnishImages/tarnish0${num}.png`}
+                           alt={`Tarnish Grey ${num}`}
+                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
+                              idx === ((tarnishImageIndex + 1) % 3) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
+                           }`}
+                        />
+                     ))}
+                  </div>
+                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => setTarnishImageIndex((tarnishImageIndex + 1) % 3)}>
+                     {[1, 2, 3].map((num, idx) => (
+                        <img 
+                           key={num}
+                           src={`/images/productImages/tarnishImages/tarnish0${num}.png`}
+                           alt={`Tarnish Grey ${num}`}
+                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
+                              idx === ((tarnishImageIndex + 2) % 3) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
+                           }`}
+                        />
+                     ))}
+                  </div>
+               </div>
 
                {/* Text Content */}
                <div className="space-y-6 lg:pl-12 order-1 lg:order-2">
-                  <div className="inline-block px-4 py-1.5 bg-yellow-50 rounded-full">
-                     <span className="text-xs font-bold text-yellow-700 uppercase tracking-wider">Premium Finish</span>
+                  <div className="inline-block px-4 py-1.5 bg-neutral-100 rounded-full">
+                     <span className="text-xs font-bold text-neutral-600 uppercase tracking-wider">Titanium Alloy</span>
                   </div>
-                  <h4 className="text-3xl md:text-4xl font-display font-bold text-hux-dark">Sterling Gold</h4>
+                  <h4 className="text-3xl md:text-4xl font-display font-bold text-hux-dark">Tarnish Grey</h4>
                   <p className="text-base md:text-lg text-neutral-600 leading-relaxed">
-                     A statement of refined elegance. The Sterling Gold variant combines luxury with cutting-edge technology, 
-                     perfect for those who appreciate timeless sophistication.
+                     Engineered for those who value subtlety. The Tarnish Grey finish blends seamlessly with your style, 
+                     offering premium durability with a matte, industrial aesthetic.
                   </p>
                   <div className="flex items-baseline gap-3 pt-4">
                      <span className="text-3xl font-bold text-hux-turquoise">₹12,999</span>
                      <span className="text-lg text-neutral-400 line-through">₹22,999</span>
                   </div>
                   <div className="flex gap-4 pt-6">
-                     <Button onClick={() => { addToCart(HUX_PRODUCT, 'Sterling Gold', 8); navigate('/bag'); }} className="bg-hux-turquoise text-white hover:bg-hux-turquoiseLight px-8 py-3 rounded-xl font-bold">
+                     <Button onClick={() => { addToCart(HUX_PRODUCT, 'Tarnish Grey', 8); navigate('/bag'); }} className="bg-hux-turquoise text-white hover:bg-hux-turquoiseLight px-8 py-3 rounded-xl font-bold">
                         Quick Add
                      </Button>
                      <Button 
                         variant="outline" 
-                        onClick={() => { setArColor('Sterling Gold'); setIsAROpen(true); }}
+                        onClick={() => { setArColor('Tarnish Grey'); setIsAROpen(true); }}
                         className="flex items-center gap-2"
                      >
                         <ScanFace size={18} /> Virtual Try-On
@@ -1054,12 +1059,16 @@ export const Home = () => {
                     <p className="text-neutral-500 font-light">HUX-NEXus Smart Ring</p>
                   </div>
                    <ExpandableSpecsItem 
-                     title="Features" 
-                     items={["Heart Rate", "SpO₂", "Temperature", "Sleep", "Stress", "Activity", "Recovery", "VO₂ Max", "Strain"]} 
+                     title="Sensors" 
+                     items={["HR", "SpO₂", "Body Temp.", "G-sensor"]} 
                    />
                    <div className="group hover:-translate-x-2 transition-transform duration-300">
-                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors">Material</h4>
-                    <p className="text-neutral-500 font-light">Titanium Alloy with Liquid Glass Coating</p>
+                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors">Outer Ring Material</h4>
+                    <p className="text-neutral-500 font-light">Stainless Steel</p>
+                  </div>
+                   <div className="group hover:-translate-x-2 transition-transform duration-300">
+                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors">Inner Ring Material</h4>
+                    <p className="text-neutral-500 font-light">Stainless Steel</p>
                   </div>
                    <div className="group hover:-translate-x-2 transition-transform duration-300">
                     <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors">Sizes</h4>
@@ -1088,12 +1097,16 @@ export const Home = () => {
                {/* RIGHT COLUMN */}
                <div className="space-y-10 text-center lg:text-left">
                   <div className="group hover:translate-x-2 transition-transform duration-300">
-                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors flex items-center justify-center lg:justify-start gap-2">Battery <Battery size={16} className="text-neutral-400"/></h4>
-                    <p className="text-neutral-500 font-light">Rechargeable 25 mAh LiPo — Up to 7 Days</p>
+                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors flex items-center justify-center lg:justify-start gap-2">CPU <Cpu size={16} className="text-neutral-400"/></h4>
+                    <p className="text-neutral-500 font-light">Ultra Low Power Bluetooth Chip</p>
                   </div>
                    <div className="group hover:translate-x-2 transition-transform duration-300">
-                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors flex items-center justify-center lg:justify-start gap-2">Connectivity <Wifi size={16} className="text-neutral-400"/></h4>
-                    <p className="text-neutral-500 font-light">Bluetooth 5.2, Low Energy</p>
+                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors flex items-center justify-center lg:justify-start gap-2">Vibration Alert <Bell size={16} className="text-neutral-400"/></h4>
+                    <p className="text-neutral-500 font-light">Lower consumption & high precision motor</p>
+                  </div>
+                   <div className="group hover:translate-x-2 transition-transform duration-300">
+                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors flex items-center justify-center lg:justify-start gap-2">Battery <Battery size={16} className="text-neutral-400"/></h4>
+                    <p className="text-neutral-500 font-light">Rechargeable 25 mAh LiPo — Up to 7 Days</p>
                   </div>
                    <div className="group hover:translate-x-2 transition-transform duration-300">
                     <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors flex items-center justify-center lg:justify-start gap-2">Certifications <ShieldAlert size={16} className="text-neutral-400"/></h4>
@@ -1105,7 +1118,7 @@ export const Home = () => {
                   </div>
                    <div className="group hover:translate-x-2 transition-transform duration-300">
                     <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors flex items-center justify-center lg:justify-start gap-2">Water Resistance <Droplets size={16} className="text-neutral-400"/></h4>
-                    <p className="text-neutral-500 font-light">Yes — Up to 50m</p>
+                    <p className="text-neutral-500 font-light">5ATM — Up to 50m</p>
                   </div>
                </div>
             </div>
@@ -1245,118 +1258,103 @@ export const Home = () => {
          </div>
       </section>
 
+
+
       {/* COMPREHENSIVE FOOTER */}
-      <footer className="bg-hux-dark text-white py-16 relative overflow-hidden mobile-corner-cut">
-        {/* Background decorative elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-hux-turquoise/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-hux-turquoise/5 rounded-full blur-2xl"></div>
+      <footer className="bg-gradient-to-br from-neutral-50 via-stone-50 to-neutral-100 text-neutral-800 py-20 relative overflow-hidden mobile-corner-cut">
+        {/* Elegant background elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-hux-turquoise/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-hux-gold/10 rounded-full blur-2xl"></div>
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
-            
-            {/* Brand Section */}
-            <div className="lg:col-span-2 space-y-6">
-              <div className="space-y-4">
-                <img src="/images/logo.png" alt="HUX" className="h-12 w-auto" />
-                <p className="text-lg font-light text-neutral-300">Intelligence Worn.</p>
-                <p className="text-sm text-neutral-400 leading-relaxed max-w-md">
-                  The convergence of luxury and biometric technology. Experience the future of wellness with precision health monitoring that disappears into your lifestyle.
-                </p>
-              </div>
-            </div>
-
-            {/* Our Company */}
-            <div className="space-y-4">
-              <h4 className="text-lg font-bold text-white mb-6">Our Company</h4>
-              <ul className="space-y-3">
-                <li><a href="/about" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">About Us</a></li>
-                <li><a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">Leadership</a></li>
-                <li><a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">Medical Advisory Board</a></li>
-                <li><a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">Careers</a></li>
-                <li><a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">Newsroom</a></li>
-              </ul>
-            </div>
-
-            {/* Support */}
-            <div className="space-y-4">
-              <h4 className="text-lg font-bold text-white mb-6">Support</h4>
-              <ul className="space-y-3">
-                <li><a href="/track" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">Help Center</a></li>
-                <li><a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">Sizing</a></li>
-                <li><a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">Recycling Program</a></li>
-                <li><a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">Flexible Spending</a></li>
-                <li><a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">Heart Rate Monitoring</a></li>
-                <li><a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">My Account</a></li>
-                <li><a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">HUX on the Web</a></li>
-                <li><a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">Contact</a></li>
-              </ul>
-            </div>
-
-            {/* Partner With Us */}
-            <div className="space-y-4">
-              <h4 className="text-lg font-bold text-white mb-6">Partner With Us</h4>
-              <ul className="space-y-3">
-                <li><a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">For Organizations</a></li>
-                <li><a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">Partnerships</a></li>
-                <li><a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm">Developers</a></li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Connect Section */}
-          <div className="border-t border-neutral-700 pt-12 mb-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              
-              {/* Social Media */}
-              <div>
-                <h4 className="text-lg font-bold text-white mb-6">Connect</h4>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-3">
-                    <a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm block">The Pulse Blog</a>
-                    <a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm block">Facebook</a>
-                    <a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm block">Instagram</a>
-                    <a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm block">Pinterest</a>
-                  </div>
-                  <div className="space-y-3">
-                    <a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm block">TikTok</a>
-                    <a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm block">X (Twitter)</a>
-                    <a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm block">YouTube</a>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 mb-20">
+            <div className="lg:col-span-2 space-y-8">
+              <div className="space-y-6">
+                <img src="/images/logo.png" alt="HUX" className="h-14 w-auto filter drop-shadow-sm" />
+                <div className="space-y-3">
+                  <p className="text-2xl font-light text-hux-turquoise font-display italic tracking-wide">Intelligence Worn.</p>
+                  <p className="text-base text-neutral-700 leading-relaxed max-w-md font-light">
+                    The convergence of luxury and biometric technology. Experience the future of wellness with precision health monitoring that disappears into your lifestyle.
+                  </p>
                 </div>
-              </div>
-
-              {/* Legal Links */}
-              <div>
-                <h4 className="text-lg font-bold text-white mb-6">Legal</h4>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-3">
-                    <a href="/terms-and-conditions" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm block">Terms & Conditions</a>
-                    <a href="/privacy-policy" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm block">Privacy Policy</a>
-                    <a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm block">Accessibility</a>
-                  </div>
-                  <div className="space-y-3">
-                    <a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm block">FCC Compliance</a>
-                    <a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm block">IP Notice</a>
-                    <a href="#" className="text-neutral-400 hover:text-hux-turquoise transition-colors text-sm block">Security Center</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Copyright */}
-          <div className="border-t border-neutral-700 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-xs text-neutral-500 text-center md:text-left">
-                © 2025 Viveon Gizit Pvt Ltd. All rights reserved. HUX are trademark of Viveon Gizit Pvt Ltd and may not be used without permission.
-              </p>
-              <div className="flex items-center gap-6">
-                <span className="text-xs text-neutral-500">Made in India</span>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 pt-4">
                   <div className="w-2 h-2 bg-hux-turquoise rounded-full animate-pulse"></div>
-                  <span className="text-xs text-neutral-500">Engineered for Tomorrow</span>
+                  <span className="text-xs text-neutral-500 font-medium uppercase tracking-widest">Engineered for Tomorrow</span>
                 </div>
+              </div>
+            </div>
+            <div className="space-y-6">
+              <h4 className="text-lg font-bold text-neutral-900 mb-8 font-display tracking-wide border-b border-hux-turquoise/20 pb-2">Our Company</h4>
+              <ul className="space-y-4">
+                <li><a href="/about" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Building2 size={16} />About Us</a></li>
+                <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Users size={16} />Leadership</a></li>
+                <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Users size={16} />Careers</a></li>
+                <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><FileText size={16} />Press Kit</a></li>
+                <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><FileText size={16} />Newsroom</a></li>
+              </ul>
+            </div>
+            <div className="space-y-6">
+              <h4 className="text-lg font-bold text-neutral-900 mb-8 font-display tracking-wide border-b border-hux-turquoise/20 pb-2">Support</h4>
+              <ul className="space-y-4">
+                <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><HelpCircle size={16} />Help Center</a></li>
+                <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Ruler size={16} />Sizing Guide</a></li>
+                <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><BookOpen size={16} />User Guide</a></li>
+                <li><a href="/track" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Package size={16} />Track Order</a></li>
+                <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Shield size={16} />Warranty & Returns</a></li>
+                <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Phone size={16} />Contact</a></li>
+              </ul>
+            </div>
+            <div className="space-y-6">
+              <h4 className="text-lg font-bold text-neutral-900 mb-8 font-display tracking-wide border-b border-hux-turquoise/20 pb-2">Partner With Us</h4>
+              <ul className="space-y-4">
+                <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Building2 size={16} />For Organizations</a></li>
+                <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Users size={16} />Partnerships</a></li>
+                <li><a href="/influencers" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><TrendingUp size={16} />For Influencers</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gradient-to-r from-transparent via-hux-turquoise/30 to-transparent pt-16 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div>
+                <h4 className="text-lg font-bold text-neutral-900 mb-8 font-display tracking-wide border-b border-hux-turquoise/20 pb-2">Connect</h4>
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Instagram size={16} />Instagram</a>
+                    <a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Facebook size={16} />Facebook</a>
+                    <a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Twitter size={16} />X (Twitter)</a>
+                  </div>
+                  <div className="space-y-4">
+                    <a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Youtube size={16} />TikTok</a>
+                    <a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Youtube size={16} />YouTube</a>
+                    <a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Linkedin size={16} />LinkedIn</a>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h4 className="text-lg font-bold text-neutral-900 mb-8 font-display tracking-wide border-b border-hux-turquoise/20 pb-2">Legal</h4>
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <a href="/terms-and-conditions" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><FileText size={16} />Terms & Conditions</a>
+                    <a href="/privacy-policy" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Shield size={16} />Privacy Policy</a>
+                    <a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Users size={16} />Accessibility</a>
+                  </div>
+                  <div className="space-y-4">
+                    <a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Shield size={16} />Security Center</a>
+                    <a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><CheckCircle size={16} />Compliance</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-hux-turquoise/20 pt-12">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+              <p className="text-xs text-neutral-600 text-center md:text-left font-light leading-relaxed">
+                &copy; 2025 Viveon Gizit Pvt Ltd. All rights reserved. HUX are trademark of Viveon Gizit Pvt Ltd and may not be used without permission.
+              </p>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-hux-turquoise rounded-full animate-pulse shadow-sm"></div>
+                <span className="text-xs text-neutral-700 font-medium uppercase tracking-wider">Premium Quality</span>
               </div>
             </div>
           </div>
