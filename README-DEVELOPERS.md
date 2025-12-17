@@ -4,21 +4,42 @@
 
 ### Tech Stack
 - **Frontend:** React 18 + TypeScript + Vite
-- **Styling:** TailwindCSS + Custom CSS
-- **Routing:** React Router DOM v6
-- **State:** React Context API
-- **Database:** Supabase (PostgreSQL)
-- **Payments:** Razorpay
-- **AI:** Google Gemini API
-- **3D/AR:** Three.js + MediaPipe
-- **Animations:** GSAP + Framer Motion
+- **Styling:** TailwindCSS + Custom CSS + Advanced Animations
+- **Routing:** React Router DOM v6 with lazy loading
+- **State:** React Context API + localStorage persistence
+- **Database:** Supabase (PostgreSQL) with RLS
+- **Payments:** Razorpay with UPI/Card/COD support
+- **AI:** Google Gemini API for customer support
+- **3D/AR:** Three.js + MediaPipe for virtual try-on
+- **Animations:** GSAP + Framer Motion + CSS transforms
+- **PWA:** Service Worker + Web Manifest
 
 ### File Structure
 ```
 src/
 ├── components/           # Reusable UI components
+│   ├── ui/              # Advanced UI components
+│   │   ├── feature-section-with-hover-effects.tsx
+│   │   ├── gold-coating-card.tsx
+│   │   ├── influencer-steps-with-effects.tsx
+│   │   └── orbiting-health-features.tsx
+│   ├── AnimatedSections.tsx
+│   ├── ARTryOn.tsx
+│   ├── Button.tsx
+│   ├── CartDrawer.tsx
+│   ├── ConciergeAI.tsx
+│   ├── Layout.tsx
+│   ├── MasonryGrid.tsx
+│   ├── PreLaunchBanner.tsx
+│   └── PreLaunchBooking.tsx
 ├── context/             # Global state management
 ├── pages/               # Route components
+│   ├── Home.tsx         # Enhanced with 15+ sections
+│   ├── PreLaunch.tsx    # Pre-launch campaign
+│   ├── Influencers.tsx  # Influencer program
+│   ├── InfluencerSignup.tsx
+│   ├── Vision.tsx
+│   └── ...
 ├── services/            # External API integrations
 ├── lib/                 # Utility libraries
 ├── types.ts             # TypeScript definitions
@@ -27,10 +48,85 @@ src/
 
 public/
 ├── images/              # Static assets
-└── index.html           # Entry point
+│   ├── svgPlainRings/   # Ring illustrations
+│   └── dock/            # Feature images
+├── icons/               # PWA icons
+├── manifest.json        # PWA manifest
+├── sw.js               # Service worker
+├── robots.txt          # SEO
+├── sitemap.xml         # SEO
+└── index.html          # Entry point
 ```
 
 ## 🧩 Core Components
+
+### New Advanced UI Components
+
+#### 1. Orbiting Health Features (`components/ui/orbiting-health-features.tsx`)
+```typescript
+// Animated health feature display with orbital motion
+interface HealthFeatureConfig {
+  id: string;
+  orbitRadius: number;
+  size: number;
+  speed: number;
+  iconType: HealthFeatureType;
+  phaseShift: number;
+  glowColor: 'turquoise' | 'gold';
+  label: string;
+}
+
+// Features orbit around central ring with different speeds
+const healthFeaturesConfig: HealthFeatureConfig[] = [
+  { id: 'heart', orbitRadius: 120, speed: 1, iconType: 'heart' },
+  { id: 'battery', orbitRadius: 200, speed: -0.6, iconType: 'battery' }
+];
+```
+
+#### 2. Pre-Launch Banner (`components/PreLaunchBanner.tsx`)
+```typescript
+// Full-screen modal with video background
+export const PreLaunchBanner: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  
+  return (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9999]">
+      <video autoPlay muted loop playsInline>
+        <source src="/images/banners/sensors.mp4" type="video/mp4" />
+      </video>
+      {/* Offer content and CTA */}
+    </div>
+  );
+};
+```
+
+#### 3. Pre-Launch Booking (`components/PreLaunchBooking.tsx`)
+```typescript
+// Complete booking form with validation
+interface BookingFormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  ringSize: string;
+  color: string;
+}
+
+// Handles pre-launch product creation and cart integration
+const handleSubmit = async (e: React.FormEvent) => {
+  const prelaunchProduct = {
+    id: 'prelaunch-hux-ring',
+    name: 'HUX Smart Ring - Pre-Launch',
+    price: 2000, // Booking amount
+    mrp: 17999
+  };
+  
+  addToCart(prelaunchProduct, formData.color, parseInt(formData.ringSize));
+  navigate('/checkout');
+};
+```
+
+## 🧩 Enhanced Core Components
 
 ### 1. Layout System (`components/Layout.tsx`)
 ```typescript
@@ -54,11 +150,30 @@ export const Footer = () => {
 ```typescript
 interface ShopContextType {
   cart: CartItem[];
-  addToCart: (color: ProductColor, size: RingSize) => void;
+  addToCart: (product: Product, color: ProductColor, size: RingSize, quantity?: number) => void;
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
+  clearCart: () => void;
+  total: number;
   placeRazorpayOrder: () => Promise<void>;
   verifyPayment: (details: PaymentDetails) => Promise<boolean>;
+  // Pre-launch features
+  isPreLaunch: boolean;
+  prelaunchBooking?: PrelaunchBooking;
+  // Influencer tracking
+  referralCode?: string;
+  influencerData?: InfluencerData;
+}
+
+interface PrelaunchBooking {
+  fullName: string;
+  email: string;
+  phone: string;
+  ringSize: string;
+  color: string;
+  bookingDate: string;
+  bookingAmount: number;
+  remainingAmount: number;
 }
 ```
 
@@ -87,21 +202,56 @@ interface ButtonProps {
 
 ## 📄 Page Components
 
-### 1. Home Page (`pages/Home.tsx`)
-**Sections:**
-- Hero carousel (GSAP animations)
-- 360° product view (CSS 3D transforms)
-- Expandable capability cards
-- Product collection grid
-- Charging dock carousel
-- Smart ecosystem accordion
-- Video integration
-- Expanding gallery
-- Product specifications
-- Unboxing experience
-- Sizing guide
-- Customer reviews (Masonry grid)
-- CTA footer
+### 1. Enhanced Home Page (`pages/Home.tsx`)
+**New Features:**
+- Pre-launch banner integration
+- Enhanced product galleries with auto-rotation
+- Interactive charging dock section with 4 feature modes
+- Orbiting health features component
+- Gold coating highlight card
+- Advanced testimonials with Indian customer focus
+
+### 2. Pre-Launch Page (`pages/PreLaunch.tsx`)
+**Complete pre-launch campaign system:**
+- Countdown timer with real-time updates
+- Interactive booking process visualization
+- Comparison table (HUX vs competitors)
+- FAQ section with 7 common questions
+- Trust indicators and certifications
+- Transparent payment terms
+- Legal compliance footer
+
+### 3. Influencer Program (`pages/Influencers.tsx`)
+**8% commission program:**
+- Interactive step-by-step process
+- Creator guidelines modal
+- Rewards breakdown modal
+- Professional signup flow
+- Terms and conditions integration
+
+### 4. Influencer Signup (`pages/InfluencerSignup.tsx`)
+**Comprehensive registration:**
+- Multi-step form with validation
+- Social media profile integration
+- Address and payment information
+- Terms agreement with legal links
+- Professional styling with glassmorphism
+
+### 5. Original Home Page (`pages/Home.tsx`)
+**Enhanced Sections:**
+- Hero carousel (GSAP animations with 3 rotating sections)
+- 360° product view (Interactive CSS 3D transforms)
+- Expandable capability cards (6 feature cards with hover effects)
+- Product collection grid (Sterling Gold & Tarnish Grey with auto-rotating images)
+- Charging dock carousel (4 feature images with dynamic content)
+- Smart ecosystem accordion (3-tab interactive system)
+- Video integration (5ATM waterproof background video)
+- Expanding gallery (4-panel interactive gallery)
+- Product specifications (Animated with expandable items)
+- Unboxing experience (3-item showcase)
+- Precision sizing guide (4-step process with icons)
+- Customer reviews (Masonry grid with 10 Indian testimonials)
+- CTA footer with sticky add-to-cart bar
 
 **Key Features:**
 ```typescript
@@ -190,6 +340,47 @@ colors: {
 ```
 
 ## 🔌 Backend & External Integrations
+
+### Database Schema Updates
+
+#### Pre-Launch Products Table
+```sql
+-- Pre-launch product setup
+INSERT INTO products (name, price_inr, description)
+SELECT 'HUX Smart Ring - Pre-Launch', 2000, 'Pre-launch booking for HUX Smart Ring. Pay ₹2,000 now, ₹8,000 at shipping.'
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE name = 'HUX Smart Ring - Pre-Launch');
+```
+
+#### Influencer Management Tables
+```sql
+-- Influencers table
+CREATE TABLE influencers (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  email TEXT UNIQUE NOT NULL,
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL,
+  company_name TEXT,
+  social_profiles JSONB,
+  address JSONB,
+  paypal_email TEXT,
+  commission_rate DECIMAL DEFAULT 0.08,
+  referral_code TEXT UNIQUE,
+  status TEXT DEFAULT 'pending',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Referral tracking
+CREATE TABLE referrals (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  influencer_id UUID REFERENCES influencers(id),
+  order_id UUID REFERENCES orders(id),
+  commission_amount INTEGER,
+  status TEXT DEFAULT 'pending',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+```
+
+## 🔌 Enhanced Backend & External Integrations
 
 ### 1. Supabase Database Setup
 
@@ -704,7 +895,84 @@ const handLandmarker = await HandLandmarker.createFromOptions(vision, {
 });
 ```
 
-## 🎭 Animation Systems
+## 🎭 Enhanced Animation Systems
+
+### 1. Advanced CSS Animations
+```css
+/* Glassmorphism with enhanced effects */
+.glass-morphism {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Tech border effects */
+.tech-border {
+  border: 1px solid;
+  border-image: linear-gradient(45deg, #02b3d9, #d4af37) 1;
+}
+
+/* Neon glow animations */
+.neon-glow {
+  box-shadow: 
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor,
+    0 0 20px currentColor;
+  animation: neon-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes neon-pulse {
+  from { box-shadow: 0 0 5px currentColor; }
+  to { box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }
+}
+
+/* Floating ring animation */
+.floating-ring {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+/* Particle effects */
+.particle {
+  animation: particle-float 5s linear infinite;
+}
+
+@keyframes particle-float {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+```
+
+### 2. Interactive Orbital Animation
+```typescript
+// Orbiting health features with physics
+const OrbitingFeature = ({ config, angle }: OrbitingFeatureProps) => {
+  const x = Math.cos(angle) * config.orbitRadius;
+  const y = Math.sin(angle) * config.orbitRadius;
+  
+  return (
+    <div
+      style={{
+        transform: `translate(calc(${x}px - 50%), calc(${y}px - 50%))`,
+        transition: 'all 0.3s ease-out'
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+    >
+      {/* Feature content with hover effects */}
+    </div>
+  );
+};
+```
+
+## 🎭 Original Animation Systems
 
 ### 1. GSAP Hero Carousel (`components/AnimatedSections.tsx`)
 ```typescript
@@ -870,7 +1138,101 @@ npm run preview  # Preview build locally
 - Bundle analyzer
 - Core Web Vitals monitoring
 
-## 🚀 Optimization Techniques
+## 🚀 Enhanced Optimization Techniques
+
+### 1. PWA Implementation
+```javascript
+// Service Worker (public/sw.js)
+const CACHE_NAME = 'hux-smart-ring-v1';
+const urlsToCache = [
+  '/',
+  '/images/logo.png',
+  '/images/heroSection/hero-01.png',
+  '/manifest.json'
+];
+
+// Install and cache critical resources
+self.addEventListener('install', function(event) {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(function(cache) {
+        return cache.addAll(urlsToCache);
+      })
+  );
+});
+
+// Serve from cache with network fallback
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        return response || fetch(event.request);
+      })
+  );
+});
+```
+
+### 2. Web Manifest (public/manifest.json)
+```json
+{
+  "name": "HUX Smart Ring - Premium Health Monitoring",
+  "short_name": "HUX Ring",
+  "description": "Experience the future of health monitoring",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fdfbf6",
+  "theme_color": "#02b3d9",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Shop HUX Ring",
+      "url": "/#collection",
+      "icons": [{ "src": "/icons/shortcut-shop.png", "sizes": "96x96" }]
+    }
+  ]
+}
+```
+
+### 3. SEO Enhancements
+```typescript
+// Dynamic meta tag management
+const SEOMetaManager = () => {
+  const location = useLocation();
+  
+  useEffect(() => {
+    const updateMetaTags = () => {
+      const path = location.pathname;
+      let title = 'HUX Smart Ring - Premium Health Monitoring';
+      let description = 'Experience the future of health monitoring';
+      
+      switch (path) {
+        case '/prelaunch':
+          title = 'Pre-Launch Offer - HUX Smart Ring | Save ₹7,999';
+          description = 'Limited time pre-launch offer. Book HUX Smart Ring for ₹2,000 and save ₹7,999 instantly.';
+          break;
+        case '/influencers':
+          title = 'Influencer Program - HUX Smart Ring | Earn 8% Commission';
+          description = 'Join the HUX influencer program and earn 8% commission on every sale.';
+          break;
+      }
+      
+      document.title = title;
+      // Update meta tags
+    };
+    
+    updateMetaTags();
+  }, [location.pathname]);
+};
+```
+
+## 🚀 Original Optimization Techniques
 
 ### 1. Code Splitting
 ```typescript
