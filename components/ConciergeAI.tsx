@@ -99,7 +99,7 @@ export const ConciergeAI = () => {
       {/* Floating Button */}
       <button 
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-8 right-8 z-40 bg-white border border-hux-gold/30 p-4 rounded-full shadow-xl hover:shadow-2xl hover:scale-110 transition-all group ${isOpen ? 'hidden' : 'flex'} items-center justify-center`}
+        className={`fixed bottom-24 right-8 z-50 bg-white border border-hux-gold/30 p-4 rounded-full shadow-xl hover:shadow-2xl hover:scale-110 transition-all group ${isOpen ? 'hidden' : 'flex'} items-center justify-center`}
       >
         <GoldRingIcon size={28} />
         <span className="absolute right-full mr-4 bg-hux-dark text-white text-xs font-bold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">
@@ -109,7 +109,7 @@ export const ConciergeAI = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-8 right-8 z-50 w-full max-w-[360px] h-[550px] glass rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-slideUp ring-1 ring-white/50">
+        <div className="fixed bottom-24 right-8 z-50 w-full max-w-[360px] h-[550px] glass rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-slideUp ring-1 ring-white/50">
           {/* Header */}
           <div className="p-4 border-b border-white/50 flex justify-between items-center bg-white/40">
             <div className="flex items-center gap-3">

@@ -34,7 +34,7 @@ export const REVIEWS_DATA: Review[] = [
     rating: 5,
     text: "The turquoise app interface is stunning, and the ring itself disappears on my finger. Sleep tracking is spot on.",
     verified: true,
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80"
+    avatar: "/images/logo.png"
   },
   {
     id: 'r2',
@@ -42,7 +42,7 @@ export const REVIEWS_DATA: Review[] = [
     rating: 5,
     text: "Switched from Apple Watch. I don't miss the notifications, but I love the data. The battery life is actually 7 days.",
     verified: true,
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80"
+    avatar: "/images/logo.png"
   },
   {
     id: 'r3',
@@ -50,7 +50,7 @@ export const REVIEWS_DATA: Review[] = [
     rating: 4,
     text: "Elegant design. The gold accent looks premium. Integration with HealthKit works perfectly.",
     verified: true,
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80"
+    avatar: "/images/logo.png"
   }
 ];
 

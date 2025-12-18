@@ -78,7 +78,7 @@ const Vision = () => {
         {/* Hero Background Image */}
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=1920&h=1080&fit=crop&crop=center" 
+            src="/images/banners/evolve.png" 
             alt="Futuristic Smart Ring" 
             className="w-full h-full object-cover opacity-20"
           />
@@ -135,7 +135,7 @@ const Vision = () => {
               <div className="relative">
                 <div className="w-60 h-60 md:w-80 md:h-80 mx-auto relative group">
                   <img 
-                    src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=400&fit=crop&crop=center" 
+                    src="/images/features/smart.png" 
                     alt="Smart Ring Technology" 
                     className="w-full h-full object-cover rounded-full opacity-80 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-105"
                   />
@@ -190,7 +190,7 @@ const Vision = () => {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div className="relative">
                   <img 
-                    src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&crop=center" 
+                    src="/images/dock/dock001.png" 
                     alt="Neural Processing" 
                     className="w-full h-80 object-cover rounded-2xl"
                   />
@@ -229,7 +229,7 @@ const Vision = () => {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div className="relative">
                   <img 
-                    src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop&crop=center" 
+                    src="/images/features/HRV.png" 
                     alt="Biometric Sensors" 
                     className="w-full h-80 object-cover rounded-2xl"
                   />
@@ -268,7 +268,7 @@ const Vision = () => {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div className="relative">
                   <img 
-                    src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop&crop=center" 
+                    src="/images/productImages/goldImages/gold01.png" 
                     alt="Gesture Control" 
                     className="w-full h-80 object-cover rounded-2xl"
                   />
@@ -307,7 +307,7 @@ const Vision = () => {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div className="relative">
                   <img 
-                    src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=600&h=400&fit=crop&crop=center" 
+                    src="/images/dock/dock002.png" 
                     alt="Emergency SOS" 
                     className="w-full h-80 object-cover rounded-2xl"
                   />
@@ -388,7 +388,7 @@ const Vision = () => {
               <div className="relative order-2 lg:order-1">
                 <div className="w-60 h-60 md:w-80 md:h-80 mx-auto relative group">
                   <img 
-                    src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&h=400&fit=crop&crop=center" 
+                    src="/images/features/Yoga.png" 
                     alt="Luxury Gold Ring" 
                     className="w-full h-full object-cover rounded-full opacity-90 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-105"
                   />
@@ -893,7 +893,7 @@ const Vision = () => {
               <div className="relative">
                 <div className="w-60 h-60 md:w-80 md:h-80 mx-auto relative group">
                   <img 
-                    src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop&crop=center" 
+                    src="/images/Grid-Spec/sensors.gif" 
                     alt="Connected Future Technology" 
                     className="w-full h-full object-cover rounded-full opacity-80 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-105"
                   />

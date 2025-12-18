@@ -91,9 +91,9 @@ export const Home = () => {
   // --- ECOSYSTEM ACCORDION STATE ---
   const [activeTab, setActiveTab] = useState(0);
   const ecosystemItems = [
-    { title: "Sleep", desc: "Understand your sleep cycles with clinical precision.", icon: Moon, image: "https://images.unsplash.com/photo-1541781777631-faaf53273e86?q=80&w=1000&auto=format&fit=crop" },
-    { title: "Activity", desc: "Track movement, steps, and caloric burn effortlessly.", icon: Activity, image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1000&auto=format&fit=crop" },
-    { title: "Recovery", desc: "Know exactly when to push and when to rest.", icon: Zap, image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1000&auto=format&fit=crop" }
+    { title: "Sleep", desc: "Understand your sleep cycles with clinical precision.", icon: Moon, image: "/images/features/sleep.jpg" },
+    { title: "Activity", desc: "Track movement, steps, and caloric burn effortlessly.", icon: Activity, image: "/images/features/Intense.png" },
+    { title: "Recovery", desc: "Know exactly when to push and when to rest.", icon: Zap, image: "/images/features/Yoga.png" }
   ];
 
   // --- GALLERY STATE ---
@@ -141,7 +141,7 @@ export const Home = () => {
       icon: Fingerprint, 
       border: "border-cyan-400",
       videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-man-working-on-a-holographic-screen-32724-large.mp4",
-      imageUrl: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop"
+      imageUrl: "/images/features/Gesture.png"
     },
     { 
       title: "SOS Alert", 
@@ -149,7 +149,7 @@ export const Home = () => {
       icon: ShieldAlert, 
       border: "border-red-500",
       videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-man-dialing-emergency-number-on-smartphone-4262-large.mp4",
-      imageUrl: "https://images.unsplash.com/photo-1555421689-d68471e189f2?q=80&w=800&auto=format&fit=crop"
+      imageUrl: "/images/features/SOS.png"
     },
     { 
       title: "Heart & HRV", 
@@ -157,7 +157,7 @@ export const Home = () => {
       icon: Heart, 
       border: "border-rose-400",
       videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-silhouette-of-a-person-running-during-sunset-1711-large.mp4",
-      imageUrl: "https://images.unsplash.com/photo-1552674605-469555f96752?q=80&w=800&auto=format&fit=crop"
+      imageUrl: "/images/features/Intense.png"
     },
     { 
       title: "Stress Detection", 
@@ -165,7 +165,7 @@ export const Home = () => {
       icon: Activity, 
       border: "border-orange-400",
       videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-girl-practicing-meditation-at-home-44670-large.mp4",
-      imageUrl: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800&auto=format&fit=crop"
+      imageUrl: "/images/features/Yoga.png"
     },
     { 
       title: "AI Insights", 
@@ -173,7 +173,7 @@ export const Home = () => {
       icon: Brain, 
       border: "border-violet-500",
       videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-motherboard-circuit-texture-loop-3221-large.mp4",
-      imageUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop"
+      imageUrl: "/images/features/smart.png"
     },
     { 
       title: "Mindful Balance", 
@@ -181,7 +181,7 @@ export const Home = () => {
       icon: Wind, 
       border: "border-emerald-400",
       videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-woman-practicing-yoga-pose-on-the-beach-4061-large.mp4",
-      imageUrl: "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?q=80&w=800&auto=format&fit=crop"
+      imageUrl: "/images/features/HRV.png"
     },
     { 
       title: "Vibration Alerts", 
@@ -189,7 +189,7 @@ export const Home = () => {
       icon: Bell, 
       border: "border-amber-400",
       videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-woman-sleeping-in-bed-4258-large.mp4",
-      imageUrl: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=800&auto=format&fit=crop"
+      imageUrl: "/images/features/sleep.jpg"
     },
     { 
       title: "Smart Touch Control", 
@@ -197,7 +197,7 @@ export const Home = () => {
       icon: Smartphone, 
       border: "border-hux-turquoise",
       videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-woman-typing-on-a-smartphone-4261-large.mp4",
-      imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop"
+      imageUrl: "/images/features/smart.png"
     },
   ];
 
@@ -206,70 +206,70 @@ export const Home = () => {
       name: 'Arjun Reddy',
       role: 'Tech Lead, Bengaluru',
       feedback: "Survives the chaos of Bengaluru traffic and intense coding sprints. The sleep data helps me optimize my recovery after late-night deployments.",
-      image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=800&q=80",
+      image: "/images/dock/coupleRings001.png",
       avatar: "https://randomuser.me/api/portraits/men/32.jpg"
     },
     {
       name: 'Lakshmi Iyer',
       role: 'Carnatic Vocalist, Chennai',
       feedback: "During the Margazhi season, my stress levels peak. HUX helps me monitor my HRV and stay calm before concerts. It looks elegant with my Kanjeevarams.",
-      image: "https://images.unsplash.com/photo-1621786040886-2a79247eb108?auto=format&fit=crop&w=800&q=80",
+      image: "/images/features/Yoga.png",
       avatar: "https://randomuser.me/api/portraits/women/44.jpg"
     },
     {
       name: 'Vihaan Rao',
       role: 'Entrepreneur, Hyderabad',
       feedback: "Perfect for the boardrooms of Hitech City. The Sterling Gold finish is a conversation starter during networking events.",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80",
+      image: "/images/dock/dock001.png",
       avatar: "https://randomuser.me/api/portraits/men/54.jpg"
     },
     {
       name: 'Dr. Anjali Menon',
       role: 'Wellness Consultant, Kochi',
       feedback: "I advocate for a blend of modern data and traditional wellness. HUX tracks my vitals without emitting constant EMF radiation like watches.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+      image: "/images/features/HRV.png",
       avatar: "https://randomuser.me/api/portraits/women/33.jpg"
     },
     {
       name: 'Karthik Naidu',
       role: 'Marine Engineer, Vizag',
       feedback: "The waterproof rating is legit. I swim at Rushikonda beach every morning and track my laps. Titanium holds up against the salt air.",
-      image: "https://images.unsplash.com/photo-1543781299-a467f339487c?auto=format&fit=crop&w=800&q=80",
+      image: "/images/dock/dock002.png",
       avatar: "https://randomuser.me/api/portraits/men/46.jpg"
     },
     {
       name: 'Zara Mistry',
       role: 'Fashion Stylist, Mumbai',
       feedback: "Finally, wearable tech that doesn't clash with couture. I wear the Lunar Rose ring to every gala and shoot.",
-      image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80",
+      image: "/images/productImages/goldImages/gold01.png",
       avatar: "https://randomuser.me/api/portraits/women/68.jpg"
     },
     {
       name: 'Rohan Malhotra',
       role: 'Marathoner, Delhi',
       feedback: "Tracks my winter runs near India Gate accurately. The SpO2 data helped me acclimatize for my Ladak trip.",
-      image: "https://images.unsplash.com/photo-1552674605-469555f96752?auto=format&fit=crop&w=800&q=80",
+      image: "/images/features/Intense.png",
       avatar: "https://randomuser.me/api/portraits/men/22.jpg"
     },
     {
       name: 'Nithin Gowda',
       role: 'Coffee Planter, Coorg',
       feedback: "Rugged enough for the plantation, smart enough for my health. The battery life lasts through my week-long treks.",
-      image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
+      image: "/images/dock/dock003.png",
       avatar: "https://randomuser.me/api/portraits/men/11.jpg"
     },
     {
       name: 'Meera Reddy',
       role: 'Architect, Telangana',
       feedback: "Minimalist design fits my aesthetic. I sketch for hours, and unlike a watch, the ring never gets in the way of my wrist movement.",
-      image: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=800&q=80",
+      image: "/images/productImages/tarnishImages/tarnish01.png",
       avatar: "https://randomuser.me/api/portraits/women/89.jpg"
     },
     {
       name: 'Siddharth Pillai',
       role: 'Chef, Kerala',
       feedback: "Kitchens are hot and frantic. HUX monitors my stress and stands up to constant hand washing. Essential gear.",
-      image: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80",
+      image: "/images/dock/dock004.png",
       avatar: "https://randomuser.me/api/portraits/men/78.jpg"
     }
   ];
@@ -280,28 +280,28 @@ export const Home = () => {
       title: "Measure", 
       desc: "Take a thread, wrap it around your forefinger, mark the ends, measure the distance, and determine your size using a ruler.", 
       icon: Ruler,
-      img: "https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?q=80&w=800&auto=format&fit=crop" 
+      img: "/images/dock/dock001.png" 
     },
     { 
       step: "02", 
       title: "Try a Sizing Kit", 
       desc: "Order a free HUX sizing kit to find your exact fit before you buy your smart ring.", 
       icon: PackageOpen,
-      img: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=800&auto=format&fit=crop"
+      img: "/images/dock/dock002.png"
     },
     { 
       step: "03", 
       title: "Choose Color", 
       desc: "Select your favorite color from our exclusive smart ring collection.", 
       icon: Palette,
-      img: "https://images.unsplash.com/photo-1615655406736-b37c4fabf923?q=80&w=800&auto=format&fit=crop"
+      img: "/images/productImages/goldImages/gold01.png"
     },
     { 
       step: "04", 
       title: "Place Your Order", 
       desc: "Confirm your exact size and color, then place your order to get your HUX Smart Ring delivered.", 
       icon: ShoppingBag,
-      img: "https://images.unsplash.com/photo-1556742102-803310306c4b?q=80&w=800&auto=format&fit=crop"
+      img: "/images/dock/coupleRings001.png"
     }
   ];
 
@@ -504,7 +504,7 @@ export const Home = () => {
           <div className="relative group">
             <div className="absolute inset-0 bg-hux-turquoise/20 blur-3xl opacity-30 group-hover:opacity-50 transition-opacity"></div>
             <img 
-               src="https://images.unsplash.com/photo-1585338107529-13afc5f02586?q=80&w=1000&auto=format&fit=crop" 
+               src="/images/banners/evolve.png" 
                alt="HUX Charging Dock" 
                className="relative w-full rounded-3xl shadow-2xl border border-white/10 z-10 brightness-75 contrast-125"
             />
@@ -646,22 +646,22 @@ export const Home = () => {
                 { 
                   title: "Design", 
                   desc: "Minimal. Futuristic. HUX",
-                  img: "https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?auto=format&fit=crop&q=80&w=1000"
+                  img: "/images/productImages/goldImages/gold01.png"
                 },
                 { 
                   title: "Precision Sensors", 
                   desc: "Nano-grade accuracy in every measurement",
-                  img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000"
+                  img: "/images/features/smart.png"
                 },
                 { 
                   title: "Wellness AI", 
                   desc: "New insights. More clarity",
-                  img: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1000"
+                  img: "/images/features/smart.png"
                 },
                 { 
                   title: "Privacy", 
                   desc: "Your data. Always yours.",
-                  img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=1000"
+                  img: "/images/features/HRV.png"
                 }
               ].map((item, idx) => (
                   <div 
@@ -810,17 +810,17 @@ export const Home = () => {
                 { 
                   name: "HUX Smart Ring", 
                   desc: "Your ultimate health companion that tracks you 24/7 — seamlessly, stylishly, and smartly.",
-                  img: "https://images.unsplash.com/photo-1622434641406-a158123450f9?auto=format&fit=crop&q=80&w=600"
+                  img: "/images/dock/UserManual.png"
                 },
                 { 
                   name: "Charging Case", 
                   desc: "Compact and durable magnetic cradle for fast and safe charging.",
-                  img: "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&q=80&w=600"
+                  img: "/images/banners/evolve.png"
                 },
                 { 
                   name: "User Manual", 
                   desc: "Step-by-step guide to help you set up and experience HUX with ease.",
-                  img: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=600"
+                  img: "/images/dock/UserManual.png"
                 }
               ].map((item, idx) => (
                 <div key={idx} className="group flex flex-col items-center text-center">
