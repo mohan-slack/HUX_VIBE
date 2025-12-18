@@ -1,5 +1,6 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Navbar, Footer } from './components/Layout';
 import { Home } from './pages/Home';
 import { ShopProvider } from './context/ShopContext';
@@ -186,6 +187,7 @@ function App() {
           </Suspense>
           <ConciergeAI />
           <Footer />
+          <SpeedInsights />
         </div>
       </Router>
     </ShopProvider>

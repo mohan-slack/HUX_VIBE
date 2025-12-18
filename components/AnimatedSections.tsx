@@ -71,6 +71,8 @@ const AnimatedSections: React.FC<AnimatedSectionsProps> = ({
               src={section.img} 
               alt={section.subtitle}
               className="w-full h-full object-cover"
+              loading={index === 0 ? "eager" : "lazy"}
+              fetchpriority={index === 0 ? "high" : "low"}
               onError={(e) => handleImageError(e, section.img)}
             />
             
@@ -109,6 +111,7 @@ const AnimatedSections: React.FC<AnimatedSectionsProps> = ({
                 src={section.img}
                 alt={`Slide ${i + 1}`}
                 className="w-full h-full object-cover"
+                loading="lazy"
                 onError={(e) => handleImageError(e, section.img)}
               />
               <div

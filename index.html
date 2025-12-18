@@ -312,26 +312,25 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     
-    <!-- Performance optimizations -->
+    <!-- Critical Performance optimizations -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://images.unsplash.com">
     <link rel="dns-prefetch" href="https://checkout.razorpay.com">
-    <link rel="dns-prefetch" href="https://api.razorpay.com">
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="https://esm.sh">
     
     <!-- Preload critical resources -->
-    <link rel="preload" href="/images/heroSection/hero-01.png" as="image" type="image/png">
-    <link rel="preload" href="/images/logo.png" as="image" type="image/png">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap" as="style">
+    <link rel="preload" href="/images/heroSection/hero-01.png" as="image" type="image/png" fetchpriority="high">
+    <link rel="preload" href="/images/logo.png" as="image" type="image/png" fetchpriority="high">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/index.css" as="style">
+    <link rel="modulepreload" href="/index.tsx">
     
-    <!-- Resource hints for better loading -->
+    <!-- Lazy load non-critical images -->
     <link rel="prefetch" href="/images/productImages/goldImages/gold01.png">
     <link rel="prefetch" href="/images/productImages/tarnishImages/tarnish01.png">
     
     <!-- Fonts with display=swap for performance -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet"></noscript>
     <script>
       tailwind.config = {
         theme: {
@@ -389,6 +388,7 @@
         margin: 0;
         padding: 0;
         line-height: 1.6;
+        font-display: swap;
       }
       
       /* Prevent layout shift */
@@ -397,18 +397,29 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        contain: layout style paint;
       }
       
-      /* Loading state */
+      /* Optimize rendering */
+      img {
+        content-visibility: auto;
+        contain-intrinsic-size: 300px 200px;
+      }
+      
+      /* Reduce paint complexity */
+      * {
+        will-change: auto;
+      }
+      
+      /* Loading state - optimized */
       .loading-skeleton {
-        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-        background-size: 200% 100%;
-        animation: loading 1.5s infinite;
+        background: #f0f0f0;
+        animation: pulse 1.5s ease-in-out infinite;
       }
       
-      @keyframes loading {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
       }
       
       /* Glassmorphism Utilities */

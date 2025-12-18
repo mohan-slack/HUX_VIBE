@@ -802,6 +802,7 @@ export const Home = () => {
                            key={num}
                            src={`/images/productImages/goldImages/gold0${num}.png`}
                            alt={`HUX Smart Ring Sterling Gold variant - Premium 18K gold coating with titanium core, view ${num}`}
+                           loading="lazy"
                            className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
                               idx === goldImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
                            }`}
@@ -845,6 +846,7 @@ export const Home = () => {
                            key={num}
                            src={`/images/productImages/tarnishImages/tarnish0${num}.png`}
                            alt={`HUX Smart Ring Tarnish Grey variant - Aerospace-grade titanium with matte finish, view ${num}`}
+                           loading="lazy"
                            className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
                               idx === tarnishImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
                            }`}
@@ -1289,7 +1291,7 @@ export const Home = () => {
       {/* 6. VIDEO INTEGRATION */}
       <section className="relative h-[80vh] w-full overflow-hidden flex items-center justify-center">
          <video 
-           autoPlay muted loop playsInline 
+           autoPlay muted loop playsInline preload="metadata"
            className="absolute inset-0 w-full h-full object-cover"
          >
            <source src="/images/5ATM Water Proof.mp4" type="video/mp4" />
@@ -1413,6 +1415,7 @@ export const Home = () => {
                         src="/images/ring-animation.gif" 
                         alt="HUX Smart Ring 360-degree product animation showing premium titanium construction and sensor placement"
                         className="w-80 h-80 object-contain"
+                        loading="lazy"
                       />
                   </div>
                </div>
@@ -1547,6 +1550,7 @@ export const Home = () => {
                     src={review.image}
                     alt={review.name}
                     className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute bottom-0 left-0 p-6 text-white w-full">
@@ -1556,6 +1560,7 @@ export const Home = () => {
                         src={review.avatar}
                         className="w-10 h-10 rounded-full border-2 border-white/80"
                         alt={review.name}
+                        loading="lazy"
                       />
                       <div>
                         <span className="block font-bold text-sm">{review.name}</span>
