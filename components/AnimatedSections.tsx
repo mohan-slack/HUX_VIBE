@@ -73,6 +73,10 @@ const AnimatedSections: React.FC<AnimatedSectionsProps> = ({
               className="w-full h-full object-cover"
               loading={index === 0 ? "eager" : "lazy"}
               fetchpriority={index === 0 ? "high" : "low"}
+              decoding="async"
+              sizes="100vw"
+              width={1920}
+              height={1080}
               onError={(e) => handleImageError(e, section.img)}
             />
             

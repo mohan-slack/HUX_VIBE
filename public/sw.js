@@ -4,7 +4,7 @@ const urlsToCache = [
   '/images/logo.png',
   '/images/heroSection/hero-01.png',
   '/images/heroSection/hero-02.png',
-  '/images/heroSection/hero-03.png',
+  '/images/heroSection/hero-0043.png',
   '/images/productImages/goldImages/gold01.png',
   '/images/productImages/tarnishImages/tarnish01.png',
   '/images/features/sleep.jpg',

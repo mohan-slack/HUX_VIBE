@@ -81,7 +81,7 @@ export const Home = () => {
     {
       text: "DESIGN DISAPPEARS.",
       subtitle: "Aerospace Titanium",
-      img: "/images/heroSection/hero-03.png"
+      img: "/images/heroSection/hero-0043.png"
     }
   ];
 

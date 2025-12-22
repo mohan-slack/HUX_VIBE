@@ -88,6 +88,8 @@ export const Home = () => {
   const navigate = useNavigate();
   const [isAROpen, setIsAROpen] = useState(false);
   const [arColor, setArColor] = useState('Sterling Gold');
+  const videoSectionRef = useRef<HTMLDivElement | null>(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   
   // SEO optimization
   useEffect(() => {
@@ -141,6 +143,28 @@ export const Home = () => {
     };
   }, []);
 
+  // Defer loading of the large background video until the section is near viewport to reduce LCP.
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) {
+      setShouldLoadVideo(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '400px 0px' }
+    );
+    if (videoSectionRef.current) {
+      observer.observe(videoSectionRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
   // --- HASH SCROLL LOGIC ---
   useEffect(() => {
     // Check for both direct hash and state passed from navigation
@@ -190,7 +214,7 @@ export const Home = () => {
     {
       text: "DESIGN DISAPPEARS.",
       subtitle: "Aerospace Titanium",
-      img: "/images/heroSection/hero-03.png"
+      img: "/images/heroSection/hero-0043.png"
     }
   ];
 
@@ -1289,12 +1313,20 @@ export const Home = () => {
       </section>
 
       {/* 6. VIDEO INTEGRATION */}
-      <section className="relative h-[80vh] w-full overflow-hidden flex items-center justify-center">
+      <section
+        ref={videoSectionRef}
+        className="relative h-[80vh] w-full overflow-hidden flex items-center justify-center"
+      >
          <video 
-           autoPlay muted loop playsInline preload="metadata"
+           autoPlay={shouldLoadVideo}
+           muted
+           loop
+           playsInline
+           preload="none"
+           poster="/images/heroSection/hero-0043.png"
            className="absolute inset-0 w-full h-full object-cover"
          >
-           <source src="/images/5ATM Water Proof.mp4" type="video/mp4" />
+           {shouldLoadVideo && <source src="/images/5ATM Water Proof.mp4" type="video/mp4" />}
          </video>
          <div className="absolute inset-0 bg-hux-turquoise/80 mix-blend-multiply"></div>
          <div className="absolute inset-0 bg-black/30"></div>
