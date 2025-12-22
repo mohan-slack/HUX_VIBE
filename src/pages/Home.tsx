@@ -20,7 +20,7 @@ const ExpandableSpecsItem = ({ title, items }: { title: string, items: string[] 
        </p>
        <button
          onClick={() => setExpanded(!expanded)}
-         className="mt-2 text-[10px] font-bold text-hux-turquoise uppercase tracking-widest hover:text-hux-turquoiseDark transition-colors flex items-center gap-1 border-b border-transparent hover:border-hux-turquoise"
+         className="mt-2 text-[10px] font-bold text-hux-turquoise uppercase tracking-widest hover:text-hux-turquoiseDark transition-colors flex items-center gap-1 border-b border-transparent hover:border-hux-gold"
        >
          {expanded ? 'Show Less' : 'Show More'}
        </button>
@@ -91,9 +91,10 @@ export const Home = () => {
   // --- ECOSYSTEM ACCORDION STATE ---
   const [activeTab, setActiveTab] = useState(0);
   const ecosystemItems = [
-    { title: "Sleep", desc: "Understand your sleep cycles with clinical precision.", icon: Moon, image: "/images/features/sleep.jpg" },
-    { title: "Activity", desc: "Track movement, steps, and caloric burn effortlessly.", icon: Activity, image: "/images/features/Intense.png" },
-    { title: "Recovery", desc: "Know exactly when to push and when to rest.", icon: Zap, image: "/images/features/Yoga.png" }
+    { title: "Sleep", desc: "Understand your sleep cycles with clinical precision.", icon: Moon, image: "/images/gallery/APP/SleepAPP.png" },
+    { title: "Activity", desc: "Track movement, steps, and caloric burn effortlessly.", icon: Activity, image: "/images/gallery/APP/ActivityAPP.png" },
+    { title: "Recovery", desc: "Know exactly when to push and when to rest.", icon: Zap, image: "/images/gallery/APP/RecoveryAPP.png" },
+    { title: "Features", desc: "Explore all advanced features and capabilities of your HUX smart ring.", icon: Brain, image: "/images/gallery/APP/FeaturesAPP.png" }
   ];
 
   // --- GALLERY STATE ---
@@ -195,7 +196,7 @@ export const Home = () => {
       title: "Smart Touch Control", 
       desc: "Control music, take photos, and present slides remotely.", 
       icon: Smartphone, 
-      border: "border-hux-turquoise",
+      border: "border-hux-gold",
       videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-woman-typing-on-a-smartphone-4261-large.mp4",
       imageUrl: "/images/features/smart.png"
     },
@@ -206,15 +207,15 @@ export const Home = () => {
       name: 'Arjun Reddy',
       role: 'Tech Lead, Bengaluru',
       feedback: "Survives the chaos of Bengaluru traffic and intense coding sprints. The sleep data helps me optimize my recovery after late-night deployments.",
-      image: "/images/dock/coupleRings001.png",
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+      image: "/images/testimonials/tech.png",
+      avatar: "/images/testimonials/tech.png"
     },
     {
       name: 'Lakshmi Iyer',
       role: 'Carnatic Vocalist, Chennai',
       feedback: "During the Margazhi season, my stress levels peak. HUX helps me monitor my HRV and stay calm before concerts. It looks elegant with my Kanjeevarams.",
-      image: "/images/features/Yoga.png",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+      image: "/images/testimonials/singer.png",
+      avatar: "/images/testimonials/singer.png"
     },
     {
       name: 'Vihaan Rao',
@@ -227,15 +228,15 @@ export const Home = () => {
       name: 'Dr. Anjali Menon',
       role: 'Wellness Consultant, Kochi',
       feedback: "I advocate for a blend of modern data and traditional wellness. HUX tracks my vitals without emitting constant EMF radiation like watches.",
-      image: "/images/features/HRV.png",
-      avatar: "https://randomuser.me/api/portraits/women/33.jpg"
+      image: "/images/testimonials/doctor.png",
+      avatar: "/images/testimonials/doctor.png"
     },
     {
       name: 'Karthik Naidu',
       role: 'Marine Engineer, Vizag',
       feedback: "The waterproof rating is legit. I swim at Rushikonda beach every morning and track my laps. Titanium holds up against the salt air.",
-      image: "/images/dock/dock002.png",
-      avatar: "https://randomuser.me/api/portraits/men/46.jpg"
+      image: "/images/testimonials/swimming.png",
+      avatar: "/images/testimonials/swimming.png"
     },
     {
       name: 'Zara Mistry',
@@ -248,15 +249,15 @@ export const Home = () => {
       name: 'Rohan Malhotra',
       role: 'Marathoner, Delhi',
       feedback: "Tracks my winter runs near India Gate accurately. The SpO2 data helped me acclimatize for my Ladak trip.",
-      image: "/images/features/Intense.png",
-      avatar: "https://randomuser.me/api/portraits/men/22.jpg"
+      image: "/images/testimonials/Marathoner.png",
+      avatar: "/images/testimonials/Marathoner.png"
     },
     {
       name: 'Nithin Gowda',
       role: 'Coffee Planter, Coorg',
       feedback: "Rugged enough for the plantation, smart enough for my health. The battery life lasts through my week-long treks.",
-      image: "/images/dock/dock003.png",
-      avatar: "https://randomuser.me/api/portraits/men/11.jpg"
+      image: "/images/testimonials/nitin-gowda.jpg",
+      avatar: "/images/testimonials/nitin-gowda.jpg"
     },
     {
       name: 'Meera Reddy',
@@ -269,8 +270,8 @@ export const Home = () => {
       name: 'Siddharth Pillai',
       role: 'Chef, Kerala',
       feedback: "Kitchens are hot and frantic. HUX monitors my stress and stands up to constant hand washing. Essential gear.",
-      image: "/images/dock/dock004.png",
-      avatar: "https://randomuser.me/api/portraits/men/78.jpg"
+      image: "/images/testimonials/chef.png",
+      avatar: "/images/testimonials/chef.png"
     }
   ];
 
@@ -401,7 +402,7 @@ export const Home = () => {
                 tabIndex={0}
                 role="article"
                 aria-label={`${feature.title}. ${feature.desc}`}
-                className={`group relative aspect-square cursor-pointer perspective-1000 transition-all duration-500 ${i % 2 === 1 ? 'lg:translate-y-16' : ''} outline-none rounded-full focus:ring-4 focus:ring-hux-turquoise focus:ring-offset-4 focus:ring-offset-hux-dark`}
+                className={`group relative aspect-square cursor-pointer perspective-1000 transition-all duration-500 ${i % 2 === 1 ? 'lg:translate-y-16' : ''} outline-none rounded-full focus:ring-4 focus:ring-hux-gold focus:ring-offset-4 focus:ring-offset-hux-dark`}
               >
                  {/* The 'O' Element - Circular Container that Morphs */}
                  <div className={`absolute inset-0 rounded-full group-hover:rounded-[2.5rem] group-focus:rounded-[2.5rem] border-[2px] border-white/10 ${feature.border} group-hover:border-[1px] group-focus:border-[1px] bg-black overflow-hidden flex flex-col items-center justify-center text-center z-10 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] shadow-2xl group-hover:shadow-[0_0_80px_rgba(2,179,217,0.3)] group-focus:shadow-[0_0_80px_rgba(2,179,217,0.3)] transform group-hover:scale-[1.15] group-focus:scale-[1.15] group-hover:z-50 group-focus:z-50`}>
@@ -433,7 +434,7 @@ export const Home = () => {
                     <div className="relative z-10 p-6 flex flex-col items-center w-full transition-transform duration-700 group-hover:-translate-y-2 group-focus:-translate-y-2">
                       
                       {/* Icon Container - Spins and Colors on Hover */}
-                      <div className={`mb-4 p-4 rounded-full bg-white/5 backdrop-blur-md text-white border border-white/10 group-hover:bg-hux-turquoise group-focus:bg-hux-turquoise group-hover:text-white group-focus:text-white group-hover:border-hux-turquoise group-focus:border-hux-turquoise transition-all duration-500 shadow-lg group-hover:scale-110 group-focus:scale-110 group-hover:animate-bounce group-focus:animate-bounce`}>
+                      <div className={`mb-4 p-4 rounded-full bg-white/5 backdrop-blur-md text-white border border-white/10 group-hover:bg-hux-turquoise group-focus:bg-hux-turquoise group-hover:text-white group-focus:text-white group-hover:border-hux-gold group-focus:border-hux-gold transition-all duration-500 shadow-lg group-hover:scale-110 group-focus:scale-110 group-hover:animate-bounce group-focus:animate-bounce`}>
                          <feature.icon size={32} strokeWidth={1.5} aria-hidden="true" />
                       </div>
                       
@@ -585,7 +586,7 @@ export const Home = () => {
                     <div 
                       key={idx}
                       onClick={() => setActiveTab(idx)}
-                      className={`cursor-pointer border-l-4 pl-6 py-6 transition-all duration-300 ${activeTab === idx ? 'border-hux-turquoise bg-neutral-50' : 'border-neutral-200 hover:border-neutral-300'}`}
+                      className={`cursor-pointer border-l-4 pl-6 py-6 transition-all duration-300 ${activeTab === idx ? 'border-hux-gold bg-neutral-50' : 'border-neutral-200 hover:border-neutral-300'}`}
                     >
                        <h3 className={`text-2xl font-bold mb-2 flex items-center gap-3 ${activeTab === idx ? 'text-hux-dark' : 'text-neutral-400'}`}>
                          <item.icon size={24} className={activeTab === idx ? 'text-hux-turquoise' : 'text-neutral-300'} />
@@ -736,13 +737,13 @@ export const Home = () => {
 
                {/* CENTER - ANIMATION */}
                <div className="relative h-[450px] flex items-center justify-center">
-                  <div className="absolute inset-0 bg-gradient-to-b from-hux-turquoise/5 to-transparent rounded-full blur-3xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-b from-hux-gold/5 to-transparent rounded-full blur-3xl"></div>
                   
                   {/* Schematic Ring Visual */}
                   <div className="relative flex items-center justify-center">
                       {/* Outer Orbit */}
                       <div className="absolute w-[340px] h-[340px] border border-neutral-200/50 rounded-full animate-[spin_30s_linear_infinite]"></div>
-                      <div className="absolute w-[340px] h-[340px] border-t border-b border-hux-turquoise/20 rounded-full animate-[spin_20s_linear_infinite_reverse]"></div>
+                      <div className="absolute w-[340px] h-[340px] border-t border-b border-hux-gold/20 rounded-full animate-[spin_20s_linear_infinite_reverse]"></div>
                       
                       {/* Main Ring Chassis */}
                       <div className="w-64 h-64 rounded-full border-[16px] border-white shadow-[0_10px_40px_rgba(0,0,0,0.1),inset_0_0_40px_rgba(0,0,0,0.05)] relative bg-neutral-50 flex items-center justify-center z-10">
@@ -882,7 +883,7 @@ export const Home = () => {
          </div>
       </section>
 
-      {/* 11. REVIEWS MASONRY GRID */}
+      {/* 11. REVIEWS GRID */}
       <section className="py-24 bg-white overflow-hidden">
          <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
@@ -890,32 +891,65 @@ export const Home = () => {
                <h3 className="text-4xl font-display font-bold text-hux-dark mt-2">What People Are Saying</h3>
             </div>
             
-            <MasonryGrid columns={columns} gap={6}>
-              {huxTestimonials.map((review, idx) => (
-                <div key={idx} className="relative rounded-3xl overflow-hidden group transition-all duration-300 hover:shadow-2xl border border-neutral-100">
-                  <img
-                    src={review.image}
-                    alt={review.name}
-                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  <div className="absolute bottom-0 left-0 p-6 text-white w-full">
-                    <p className="text-lg font-medium leading-snug mb-4 italic text-neutral-100">"{review.feedback}"</p>
-                    <div className="flex items-center gap-3">
-                      <img
-                        src={review.avatar}
-                        className="w-10 h-10 rounded-full border-2 border-white/80"
-                        alt={review.name}
-                      />
-                      <div>
-                        <span className="block font-bold text-sm">{review.name}</span>
-                        <span className="block text-xs text-hux-turquoise font-medium uppercase tracking-wide">{review.role}</span>
+            {/* Desktop: Masonry Grid */}
+            <div className="hidden md:block">
+              <MasonryGrid columns={columns} gap={6}>
+                {huxTestimonials.map((review, idx) => (
+                  <div key={idx} className="relative rounded-3xl overflow-hidden group transition-all duration-300 hover:shadow-2xl border border-neutral-100">
+                    <img
+                      src={review.image}
+                      alt={review.name}
+                      className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute bottom-0 left-0 p-6 text-white w-full">
+                      <p className="text-lg font-medium leading-snug mb-4 italic text-neutral-100">"{review.feedback}"</p>
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={review.avatar}
+                          className="w-10 h-10 rounded-full border-2 border-white/80"
+                          alt={review.name}
+                        />
+                        <div>
+                          <span className="block font-bold text-sm">{review.name}</span>
+                          <span className="block text-xs text-hux-turquoise font-medium uppercase tracking-wide">{review.role}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </MasonryGrid>
+                ))}
+              </MasonryGrid>
+            </div>
+
+            {/* Mobile: Horizontal Scroll Grid */}
+            <div className="md:hidden">
+              <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-4" style={{scrollSnapType: 'x mandatory'}}>
+                {huxTestimonials.map((review, idx) => (
+                  <div key={idx} className="relative rounded-2xl overflow-hidden flex-shrink-0 w-72 h-80 border border-neutral-100 shadow-sm" style={{scrollSnapAlign: 'start'}}>
+                    <img
+                      src={review.image}
+                      alt={review.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                    <div className="absolute bottom-0 left-0 p-4 text-white w-full">
+                      <p className="text-sm font-medium leading-snug mb-3 italic text-neutral-100 line-clamp-3">"{review.feedback}"</p>
+                      <div className="flex items-center gap-2">
+                        <img
+                          src={review.avatar}
+                          className="w-8 h-8 rounded-full border-2 border-white/80"
+                          alt={review.name}
+                        />
+                        <div>
+                          <span className="block font-bold text-xs">{review.name}</span>
+                          <span className="block text-[10px] text-hux-turquoise font-medium uppercase tracking-wide">{review.role}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
          </div>
       </section>
 
@@ -939,7 +973,7 @@ export const Home = () => {
          </div>
          <div className="flex items-center gap-4 w-full lg:w-auto justify-between lg:justify-start">
             <span className="font-bold text-hux-dark text-lg">₹12,999</span>
-            <Button variant="primary" onClick={() => scrollToSection('collection')} className="shadow-lg shadow-hux-turquoise/20 px-8 py-2.5 text-sm">
+            <Button variant="primary" onClick={() => scrollToSection('collection')} className="shadow-lg shadow-hux-gold/20 px-8 py-2.5 text-sm">
               Add to Cart
             </Button>
          </div>

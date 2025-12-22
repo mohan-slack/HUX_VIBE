@@ -61,6 +61,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ARTryOn } from '../components/ARTryOn';
 import { PreLaunchBanner } from '../components/PreLaunchBanner';
 import { GoldCoatingCard } from '../components/ui/gold-coating-card';
+import { EpoxyFreeCard } from '../components/ui/epoxy-free-card';
 
 const ExpandableSpecsItem = ({ title, items }: { title: string, items: string[] }) => {
   const [expanded, setExpanded] = useState(false);
@@ -74,7 +75,7 @@ const ExpandableSpecsItem = ({ title, items }: { title: string, items: string[] 
        </p>
        <button
          onClick={() => setExpanded(!expanded)}
-         className="mt-2 text-[10px] font-bold text-hux-turquoise uppercase tracking-widest hover:text-hux-turquoiseDark transition-colors flex items-center gap-1 border-b border-transparent hover:border-hux-turquoise"
+         className="mt-2 text-[10px] font-bold text-hux-turquoise uppercase tracking-widest hover:text-hux-turquoiseDark transition-colors flex items-center gap-1 border-b border-transparent hover:border-hux-gold"
        >
          {expanded ? 'Show Less' : 'Show More'}
        </button>
@@ -224,9 +225,10 @@ export const Home = () => {
   // --- ECOSYSTEM ACCORDION STATE ---
   const [activeTab, setActiveTab] = useState(0);
   const ecosystemItems = [
-    { title: "Sleep", desc: "Understand your sleep cycles with clinical precision.", icon: Moon, image: "/images/features/sleep.jpg" },
-    { title: "Activity", desc: "Track movement, steps, and caloric burn effortlessly.", icon: Activity, image: "/images/features/Intense.png" },
-    { title: "Recovery", desc: "Know exactly when to push and when to rest.", icon: Zap, image: "/images/features/Yoga.png" }
+    { title: "Sleep", desc: "Understand your sleep cycles with clinical precision.", icon: Moon, image: "/images/gallery/APP/SleepAPP.png" },
+    { title: "Activity", desc: "Track movement, steps, and caloric burn effortlessly.", icon: Activity, image: "/images/gallery/APP/ActivityAPP.png" },
+    { title: "Recovery", desc: "Know exactly when to push and when to rest.", icon: Zap, image: "/images/gallery/APP/RecoveryAPP.png" },
+    { title: "Features", desc: "Explore all advanced features and capabilities of your HUX smart ring.", icon: Brain, image: "/images/gallery/APP/FeaturesAPP.png" }
   ];
 
   // --- GALLERY STATE ---
@@ -353,7 +355,7 @@ export const Home = () => {
       title: "Smart Touch Control", 
       desc: "Control music, take photos, and present slides remotely.", 
       icon: Smartphone, 
-      border: "border-hux-turquoise",
+      border: "border-hux-gold",
       videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-woman-typing-on-a-smartphone-4261-large.mp4",
       imageUrl: "/images/features/smart.png"
     },
@@ -364,29 +366,29 @@ export const Home = () => {
       name: 'Arjun Reddy',
       role: 'Tech Lead, Bengaluru',
       feedback: "Survives long workdays and late nights. The sleep insights help me recover better without changing my routine.",
-      image: "/images/testimonials/arjunReddy-test.png",
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+      image: "/images/testimonials/tech.png",
+      avatar: "/images/testimonials/tech.png"
     },
     {
       name: 'Karthik Naidu',
       role: 'Marine Engineer, Vizag',
       feedback: "The waterproofing is real. I swim regularly and the ring tracks everything without worry.",
-      image: "/images/testimonials/karthikNaidu.png",
-      avatar: "https://randomuser.me/api/portraits/men/46.jpg"
+      image: "/images/testimonials/swimming.png",
+      avatar: "/images/testimonials/swimming.png"
     },
     {
       name: 'Nithin Gowda',
       role: 'Coffee Planter, Coorg',
       feedback: "Rugged enough for outdoor work and smart enough for health tracking. Battery lasts through the week.",
       image: "/images/testimonials/nitin-gowda.jpg",
-      avatar: "https://randomuser.me/api/portraits/men/11.jpg"
+      avatar: "/images/testimonials/nitin-gowda.jpg"
     },
     {
       name: 'Lakshmi Iyer',
       role: 'Carnatic Vocalist, Chennai',
       feedback: "During high-stress periods, HUX helps me stay aware and calm. It blends perfectly with my lifestyle.",
-      image: "/images/features/Yoga.png",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+      image: "/images/testimonials/singer.png",
+      avatar: "/images/testimonials/singer.png"
     },
     {
       name: 'Vihaan Rao',
@@ -406,22 +408,22 @@ export const Home = () => {
       name: 'Rohan Malhotra',
       role: 'Marathoner, Delhi',
       feedback: "Accurate tracking during my runs. The health data helped me prepare better for high-altitude travel.",
-      image: "/images/features/Intense.png",
-      avatar: "https://randomuser.me/api/portraits/men/22.jpg"
+      image: "/images/testimonials/Marathoner.png",
+      avatar: "/images/testimonials/Marathoner.png"
     },
     {
       name: 'Dr. Anjali Menon',
       role: 'Wellness Consultant, Kochi',
       feedback: "A thoughtful balance of modern technology and wellness. No screens, no distractions.",
-      image: "/images/features/HRV.png",
-      avatar: "https://randomuser.me/api/portraits/women/33.jpg"
+      image: "/images/testimonials/doctor.png",
+      avatar: "/images/testimonials/doctor.png"
     },
     {
       name: 'Siddharth Pillai',
       role: 'Chef, Kerala',
       feedback: "Handles constant movement and frequent hand washing. Reliable and practical for everyday work.",
-      image: "/images/dock/dock004.png",
-      avatar: "https://randomuser.me/api/portraits/men/78.jpg"
+      image: "/images/testimonials/chef.png",
+      avatar: "/images/testimonials/chef.png"
     }
   ];
 
@@ -562,7 +564,7 @@ export const Home = () => {
               title: "Get the best sleep",
               subtitle: "of your life",
               description: "Advanced sleep tracking with detailed analysis of your sleep stages, quality, and recovery patterns.",
-              image: "/images/features/sleep.jpg",
+              image: "/images/features/NewSleepCard.png",
               icon: Moon
             },
             {
@@ -571,7 +573,7 @@ export const Home = () => {
               title: "Don't just live longer,",
               subtitle: "live healthier",
               description: "Little changes add up. Focus on the health metrics that impact how you feel each day, so you feel better long term.",
-              image: "/images/features/Yoga.png",
+              image: "/images/features/WellnessNewCard.png",
               icon: Heart
             },
             {
@@ -580,7 +582,7 @@ export const Home = () => {
               title: "Bring your fitness goals",
               subtitle: "into focus",
               description: "Track your workouts, monitor your progress, and achieve your fitness goals with precision data and insights.",
-              image: "/images/features/Intense.png",
+              image: "/images/features/NEWCardActivity.png",
               icon: Activity
             },
             {
@@ -679,7 +681,7 @@ export const Home = () => {
                 title: "Get the best sleep",
                 subtitle: "of your life",
                 description: "Advanced sleep tracking with detailed analysis of your sleep stages, quality, and recovery patterns.",
-                image: "/images/features/sleep.jpg",
+                image: "/images/features/NewSleepCard.png",
                 icon: Moon
               },
               {
@@ -688,7 +690,7 @@ export const Home = () => {
                 title: "Don't just live longer,",
                 subtitle: "live healthier",
                 description: "Little changes add up. Focus on the health metrics that impact how you feel each day.",
-                image: "/images/features/Yoga.png",
+                image: "/images/features/WellnessNewCard.png",
                 icon: Heart
               },
               {
@@ -697,7 +699,7 @@ export const Home = () => {
                 title: "Bring your fitness goals",
                 subtitle: "into focus",
                 description: "Track your workouts, monitor your progress, and achieve your fitness goals with precision data.",
-                image: "/images/features/Intense.png",
+                image: "/images/features/NEWCardActivity.png",
                 icon: Activity
               },
               {
@@ -909,6 +911,9 @@ export const Home = () => {
                      <span className="text-xs font-bold text-neutral-600 uppercase tracking-wider">Titanium Alloy</span>
                   </div>
                   <h4 className="text-3xl md:text-4xl font-display font-bold text-hux-dark">Tarnish Grey</h4>
+                  
+                  {/* Epoxy-Free Highlight Card */}
+                  <EpoxyFreeCard />
                   <p className="text-base md:text-lg text-neutral-600 leading-relaxed">
                      Engineered for those who value subtlety. The Tarnish Grey finish blends seamlessly with your style, 
                      offering premium durability with a matte, industrial aesthetic.
@@ -942,14 +947,14 @@ export const Home = () => {
         {/* Circular Sound Wave Animation */}
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
           <div className="relative">
-            <div className="absolute w-32 h-32 border-2 border-hux-turquoise/30 rounded-full animate-ping" style={{animationDuration: '2s'}}></div>
-            <div className="absolute w-48 h-48 border border-hux-turquoise/20 rounded-full animate-ping" style={{animationDelay: '0.5s', animationDuration: '2.5s'}}></div>
-            <div className="absolute w-64 h-64 border border-hux-turquoise/15 rounded-full animate-ping" style={{animationDelay: '1s', animationDuration: '3s'}}></div>
-            <div className="absolute w-80 h-80 border border-hux-turquoise/10 rounded-full animate-ping" style={{animationDelay: '1.5s', animationDuration: '3.5s'}}></div>
+            <div className="absolute w-32 h-32 border-2 border-hux-gold/30 rounded-full animate-ping" style={{animationDuration: '2s'}}></div>
+            <div className="absolute w-48 h-48 border border-hux-gold/20 rounded-full animate-ping" style={{animationDelay: '0.5s', animationDuration: '2.5s'}}></div>
+            <div className="absolute w-64 h-64 border border-hux-gold/15 rounded-full animate-ping" style={{animationDelay: '1s', animationDuration: '3s'}}></div>
+            <div className="absolute w-80 h-80 border border-hux-gold/10 rounded-full animate-ping" style={{animationDelay: '1.5s', animationDuration: '3.5s'}}></div>
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
           
           {/* Visual - Sliding Dock Images */}
           <div className="relative group overflow-hidden rounded-3xl">
@@ -1014,7 +1019,7 @@ export const Home = () => {
                    <h4 className="text-xl font-bold text-white mb-4">Intelligent Vibration Alerts</h4>
                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                      <div className="flex gap-3 items-start">
-                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-gold/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
                          <Phone size={16} />
                        </div>
                        <div>
@@ -1022,7 +1027,7 @@ export const Home = () => {
                        </div>
                      </div>
                      <div className="flex gap-3 items-start">
-                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-gold/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
                          <Smartphone size={16} />
                        </div>
                        <div>
@@ -1030,7 +1035,7 @@ export const Home = () => {
                        </div>
                      </div>
                      <div className="flex gap-3 items-start">
-                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-gold/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
                          <Heart size={16} />
                        </div>
                        <div>
@@ -1038,7 +1043,7 @@ export const Home = () => {
                        </div>
                      </div>
                      <div className="flex gap-3 items-start">
-                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-gold/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
                          <Sparkles size={16} />
                        </div>
                        <div>
@@ -1046,7 +1051,7 @@ export const Home = () => {
                        </div>
                      </div>
                      <div className="flex gap-3 items-start">
-                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-gold/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
                          <Activity size={16} />
                        </div>
                        <div>
@@ -1054,7 +1059,7 @@ export const Home = () => {
                        </div>
                      </div>
                      <div className="flex gap-3 items-start">
-                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-gold/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
                          <Bell size={16} />
                        </div>
                        <div>
@@ -1062,7 +1067,7 @@ export const Home = () => {
                        </div>
                      </div>
                      <div className="flex gap-3 items-start">
-                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-gold/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
                          <Moon size={16} />
                        </div>
                        <div>
@@ -1087,7 +1092,7 @@ export const Home = () => {
                    <h4 className="text-xl font-bold text-white mb-4">Smart Touch Controls</h4>
                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                      <div className="flex gap-3 items-start">
-                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-gold/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
                          <Smartphone size={16} />
                        </div>
                        <div>
@@ -1095,7 +1100,7 @@ export const Home = () => {
                        </div>
                      </div>
                      <div className="flex gap-3 items-start">
-                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-gold/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
                          <ScanFace size={16} />
                        </div>
                        <div>
@@ -1103,7 +1108,7 @@ export const Home = () => {
                        </div>
                      </div>
                      <div className="flex gap-3 items-start">
-                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-gold/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
                          <Play size={16} />
                        </div>
                        <div>
@@ -1111,7 +1116,7 @@ export const Home = () => {
                        </div>
                      </div>
                      <div className="flex gap-3 items-start">
-                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-gold/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
                          <Building2 size={16} />
                        </div>
                        <div>
@@ -1119,7 +1124,7 @@ export const Home = () => {
                        </div>
                      </div>
                      <div className="flex gap-3 items-start">
-                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-gold/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
                          <Phone size={16} />
                        </div>
                        <div>
@@ -1127,7 +1132,7 @@ export const Home = () => {
                        </div>
                      </div>
                      <div className="flex gap-3 items-start">
-                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-turquoise/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
+                       <div className="w-8 h-8 rounded-lg bg-hux-turquoise/20 border border-hux-gold/30 flex items-center justify-center text-hux-turquoise flex-shrink-0 mt-1">
                          <Move size={16} />
                        </div>
                        <div>
@@ -1276,7 +1281,7 @@ export const Home = () => {
                     <div 
                       key={idx}
                       onClick={() => setActiveTab(idx)}
-                      className={`cursor-pointer border-l-4 pl-6 py-6 transition-all duration-300 ${activeTab === idx ? 'border-hux-turquoise bg-neutral-50' : 'border-neutral-200 hover:border-neutral-300'}`}
+                      className={`cursor-pointer border-l-4 pl-6 py-6 transition-all duration-300 ${activeTab === idx ? 'border-hux-gold bg-neutral-50' : 'border-neutral-200 hover:border-neutral-300'}`}
                     >
                        <h3 className={`text-2xl font-bold mb-2 flex items-center gap-3 ${activeTab === idx ? 'text-hux-dark' : 'text-neutral-400'}`}>
                          <item.icon size={24} className={activeTab === idx ? 'text-hux-turquoise' : 'text-neutral-300'} />
@@ -1439,7 +1444,7 @@ export const Home = () => {
 
                {/* CENTER - ANIMATION */}
                <div className="relative h-[450px] flex items-center justify-center">
-                  <div className="absolute inset-0 bg-gradient-to-b from-hux-turquoise/5 to-transparent rounded-full blur-3xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-b from-hux-gold/5 to-transparent rounded-full blur-3xl"></div>
                   
                   {/* Ring Animation GIF */}
                   <div className="relative flex items-center justify-center">
@@ -1567,7 +1572,7 @@ export const Home = () => {
          </div>
       </section>
 
-      {/* 11. REVIEWS MASONRY GRID */}
+      {/* 11. REVIEWS GRID */}
       <section className="py-24 bg-white overflow-hidden mobile-corner-cut-subtle">
          <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
@@ -1575,34 +1580,69 @@ export const Home = () => {
                <h3 className="text-4xl font-display font-bold text-hux-dark mt-2">What People Are Saying</h3>
             </div>
             
-            <MasonryGrid columns={columns} gap={6}>
-              {huxTestimonials.map((review, idx) => (
-                <div key={idx} className="relative rounded-3xl overflow-hidden group transition-all duration-300 hover:shadow-2xl border border-neutral-100">
-                  <img
-                    src={review.image}
-                    alt={review.name}
-                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  <div className="absolute bottom-0 left-0 p-6 text-white w-full">
-                    <p className="text-lg font-medium leading-snug mb-4 italic text-neutral-100">"{review.feedback}"</p>
-                    <div className="flex items-center gap-3">
-                      <img
-                        src={review.avatar}
-                        className="w-10 h-10 rounded-full border-2 border-white/80"
-                        alt={review.name}
-                        loading="lazy"
-                      />
-                      <div>
-                        <span className="block font-bold text-sm">{review.name}</span>
-                        <span className="block text-xs text-hux-turquoise font-medium uppercase tracking-wide">{review.role}</span>
+            {/* Desktop: Masonry Grid */}
+            <div className="hidden md:block">
+              <MasonryGrid columns={columns} gap={6}>
+                {huxTestimonials.map((review, idx) => (
+                  <div key={idx} className="relative rounded-3xl overflow-hidden group transition-all duration-300 hover:shadow-2xl border border-neutral-100">
+                    <img
+                      src={review.image}
+                      alt={review.name}
+                      className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute bottom-0 left-0 p-6 text-white w-full">
+                      <p className="text-lg font-medium leading-snug mb-4 italic text-neutral-100">"{review.feedback}"</p>
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={review.avatar}
+                          className="w-10 h-10 rounded-full border-2 border-white/80"
+                          alt={review.name}
+                          loading="lazy"
+                        />
+                        <div>
+                          <span className="block font-bold text-sm">{review.name}</span>
+                          <span className="block text-xs text-hux-turquoise font-medium uppercase tracking-wide">{review.role}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </MasonryGrid>
+                ))}
+              </MasonryGrid>
+            </div>
+
+            {/* Mobile: Horizontal Scroll Grid */}
+            <div className="md:hidden">
+              <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-4" style={{scrollSnapType: 'x mandatory'}}>
+                {huxTestimonials.map((review, idx) => (
+                  <div key={idx} className="relative rounded-2xl overflow-hidden flex-shrink-0 w-72 h-80 border border-neutral-100 shadow-sm" style={{scrollSnapAlign: 'start'}}>
+                    <img
+                      src={review.image}
+                      alt={review.name}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                    <div className="absolute bottom-0 left-0 p-4 text-white w-full">
+                      <p className="text-sm font-medium leading-snug mb-3 italic text-neutral-100 line-clamp-3">"{review.feedback}"</p>
+                      <div className="flex items-center gap-2">
+                        <img
+                          src={review.avatar}
+                          className="w-8 h-8 rounded-full border-2 border-white/80"
+                          alt={review.name}
+                          loading="lazy"
+                        />
+                        <div>
+                          <span className="block font-bold text-xs">{review.name}</span>
+                          <span className="block text-[10px] text-hux-turquoise font-medium uppercase tracking-wide">{review.role}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
          </div>
       </section>
 
@@ -1626,7 +1666,7 @@ export const Home = () => {
       <footer className="bg-gradient-to-br from-neutral-50 via-stone-50 to-neutral-100 text-neutral-800 py-20 relative overflow-hidden mobile-corner-cut" role="contentinfo">
         {/* Elegant background elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-hux-turquoise/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-hux-gold/10 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-hux-turquoise/10 rounded-full blur-2xl"></div>
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 mb-20">
@@ -1646,7 +1686,7 @@ export const Home = () => {
               </div>
             </div>
             <div className="space-y-6">
-              <h4 className="text-lg font-bold text-neutral-900 mb-8 font-display tracking-wide border-b border-hux-turquoise/20 pb-2">Our Company</h4>
+              <h4 className="text-lg font-bold text-neutral-900 mb-8 font-display tracking-wide border-b border-hux-gold/20 pb-2">Our Company</h4>
               <ul className="space-y-4">
                 <li><a href="/about" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Building2 size={16} />About Us</a></li>
                 <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Users size={16} />Leadership</a></li>
@@ -1656,7 +1696,7 @@ export const Home = () => {
               </ul>
             </div>
             <div className="space-y-6">
-              <h4 className="text-lg font-bold text-neutral-900 mb-8 font-display tracking-wide border-b border-hux-turquoise/20 pb-2">Support</h4>
+              <h4 className="text-lg font-bold text-neutral-900 mb-8 font-display tracking-wide border-b border-hux-gold/20 pb-2">Support</h4>
               <ul className="space-y-4">
                 <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><HelpCircle size={16} />Help Center</a></li>
                 <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Ruler size={16} />Sizing Guide</a></li>
@@ -1667,7 +1707,7 @@ export const Home = () => {
               </ul>
             </div>
             <div className="space-y-6">
-              <h4 className="text-lg font-bold text-neutral-900 mb-8 font-display tracking-wide border-b border-hux-turquoise/20 pb-2">Partner With Us</h4>
+              <h4 className="text-lg font-bold text-neutral-900 mb-8 font-display tracking-wide border-b border-hux-gold/20 pb-2">Partner With Us</h4>
               <ul className="space-y-4">
                 <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Building2 size={16} />For Organizations</a></li>
                 <li><a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Users size={16} />Partnerships</a></li>
@@ -1675,10 +1715,10 @@ export const Home = () => {
               </ul>
             </div>
           </div>
-          <div className="border-t border-gradient-to-r from-transparent via-hux-turquoise/30 to-transparent pt-16 mb-16">
+          <div className="border-t border-gradient-to-r from-transparent via-hux-gold/30 to-transparent pt-16 mb-16">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div>
-                <h4 className="text-lg font-bold text-neutral-900 mb-8 font-display tracking-wide border-b border-hux-turquoise/20 pb-2">Connect</h4>
+                <h4 className="text-lg font-bold text-neutral-900 mb-8 font-display tracking-wide border-b border-hux-gold/20 pb-2">Connect</h4>
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-4">
                     <a href="#" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><Instagram size={16} />Instagram</a>
@@ -1693,7 +1733,7 @@ export const Home = () => {
                 </div>
               </div>
               <div>
-                <h4 className="text-lg font-bold text-neutral-900 mb-8 font-display tracking-wide border-b border-hux-turquoise/20 pb-2">Legal</h4>
+                <h4 className="text-lg font-bold text-neutral-900 mb-8 font-display tracking-wide border-b border-hux-gold/20 pb-2">Legal</h4>
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-4">
                     <a href="/terms-and-conditions" className="text-neutral-700 hover:text-hux-turquoise transition-all duration-300 text-sm font-medium hover:translate-x-1 flex items-center gap-3"><FileText size={16} />Terms & Conditions</a>
@@ -1709,7 +1749,7 @@ export const Home = () => {
             </div>
           </div>
 
-          <div className="border-t border-hux-turquoise/20 pt-12">
+          <div className="border-t border-hux-gold/20 pt-12">
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
               <p className="text-xs text-neutral-600 text-center md:text-left font-light leading-relaxed">
                 &copy; 2025 Viveon Gizit Pvt Ltd. All rights reserved. HUX are trademark of Viveon Gizit Pvt Ltd and may not be used without permission.
@@ -1732,7 +1772,7 @@ export const Home = () => {
            </div>
            <div className="flex items-center gap-2 flex-shrink-0">
               <span className="font-bold text-hux-dark text-xs md:text-base">₹12,999</span>
-              <Button variant="primary" onClick={() => scrollToSection('collection')} className="shadow-lg shadow-hux-turquoise/20 px-2 py-1.5 text-[10px] md:text-xs whitespace-nowrap">
+              <Button variant="primary" onClick={() => scrollToSection('collection')} className="shadow-lg shadow-hux-gold/20 px-2 py-1.5 text-[10px] md:text-xs whitespace-nowrap">
                 Add to Cart
               </Button>
            </div>
