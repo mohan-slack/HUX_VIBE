@@ -1,32 +1,47 @@
-import { GoogleGenAI } from "@google/genai";
 import { FAQ_KNOWLEDGE_BASE } from '../constants';
 
-const apiKey = process.env.GEMINI_API_KEY;
-if (!apiKey || apiKey === 'PLACEHOLDER_API_KEY') {
-  console.warn('AI service not configured');
-}
-const ai = apiKey && apiKey !== 'PLACEHOLDER_API_KEY' ? new GoogleGenAI({ apiKey }) : null;
+// OpenAI ChatGPT configuration
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+const model = import.meta.env.VITE_OPENAI_MODEL || 'gpt-4o-mini';
 
 export const generateResponse = async (userMessage: string, history: {role: string, parts: {text: string}[]}[]): Promise<string> => {
   try {
-    if (!ai) {
+    if (!apiKey) {
       return "AI assistant is temporarily unavailable. Please contact support for assistance.";
     }
-    const chat = ai.chats.create({
-      model: "gemini-2.5-flash",
-      config: {
-        systemInstruction: FAQ_KNOWLEDGE_BASE,
+
+    const messages = [
+      { role: 'system', content: FAQ_KNOWLEDGE_BASE },
+      ...history.map(h => ({
+        role: h.role === 'model' ? 'assistant' : h.role,
+        content: h.parts.map(p => p.text).join('\n')
+      })),
+      { role: 'user', content: userMessage }
+    ];
+
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
       },
-      history: history.map(h => ({
-        role: h.role,
-        parts: h.parts
-      }))
+      body: JSON.stringify({
+        model,
+        messages,
+        temperature: 0.6
+      })
     });
 
-    const result = await chat.sendMessage({ message: userMessage });
-    return result.text || "";
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('OpenAI API Error:', errorText);
+      return "I’m having trouble connecting right now. Please try again shortly.";
+    }
+
+    const data = await response.json();
+    return data?.choices?.[0]?.message?.content?.trim() || "I’m here to help, but I couldn’t generate a response.";
   } catch (error) {
-    console.error("Gemini API Error:", error);
-    return "I am having trouble connecting to the HUX network. Please try again in a moment.";
+    console.error("OpenAI API Error:", error);
+    return "I’m having trouble connecting to the HUX network. Please try again in a moment.";
   }
 };

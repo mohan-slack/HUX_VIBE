@@ -6,7 +6,7 @@ export const getSecureConfig = () => {
   const config = {
     supabaseUrl: import.meta.env.VITE_SUPABASE_URL,
     supabaseAnonKey: import.meta.env.VITE_SUPABASE_ANON_KEY,
-    geminiApiKey: import.meta.env.GEMINI_API_KEY,
+    openAiApiKey: import.meta.env.VITE_OPENAI_API_KEY,
   };
 
   // Validate required environment variables
