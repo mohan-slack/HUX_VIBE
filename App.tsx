@@ -1,10 +1,9 @@
-import React, { useEffect, Suspense, lazy } from 'react';
+import React, { useEffect, Suspense, lazy, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Navbar, Footer } from './components/Layout';
 import { Home } from './pages/Home';
 import { ShopProvider } from './context/ShopContext';
-import { ConciergeAI } from './components/ConciergeAI';
 
 // Lazy load components for better performance
 const YourBag = lazy(() => import('./pages/YourBag').then(module => ({ default: module.YourBag })));
@@ -21,6 +20,7 @@ const Vision = lazy(() => import('./pages/Vision'));
 const Influencers = lazy(() => import('./pages/Influencers').then(module => ({ default: module.Influencers })));
 const InfluencerSignup = lazy(() => import('./pages/InfluencerSignup').then(module => ({ default: module.InfluencerSignup })));
 const InfluencerTerms = lazy(() => import('./pages/InfluencerTerms').then(module => ({ default: module.InfluencerTerms })));
+const ConciergeAILazy = lazy(() => import('./components/ConciergeAI').then(module => ({ default: module.ConciergeAI })));
 
 // Loading component
 const PageLoader = () => (
@@ -119,6 +119,8 @@ function ScrollToTop() {
 }
 
 function App() {
+  const [showConcierge, setShowConcierge] = useState(false);
+
   // Performance optimization: preload critical resources
   useEffect(() => {
     // Preload critical images
@@ -157,6 +159,19 @@ function App() {
       
       observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'] });
     }
+
+    // Defer loading ConciergeAI until the main thread is idle to avoid impacting FCP.
+    const idleHandle = (window as any).requestIdleCallback
+      ? (window as any).requestIdleCallback(() => setShowConcierge(true))
+      : setTimeout(() => setShowConcierge(true), 1500);
+
+    return () => {
+      if ((window as any).cancelIdleCallback && typeof idleHandle === 'number') {
+        (window as any).cancelIdleCallback(idleHandle);
+      } else {
+        clearTimeout(idleHandle as number);
+      }
+    };
   }, []);
   
   return (
@@ -185,7 +200,11 @@ function App() {
               <Route path="/influencer-terms" element={<InfluencerTerms />} />
             </Routes>
           </Suspense>
-          <ConciergeAI />
+          {showConcierge && (
+            <Suspense fallback={null}>
+              <ConciergeAILazy />
+            </Suspense>
+          )}
           <Footer />
           <SpeedInsights />
         </div>
