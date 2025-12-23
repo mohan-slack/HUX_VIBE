@@ -499,10 +499,22 @@
       window.addEventListener('load', function() {
         navigator.serviceWorker.register('/sw.js')
           .then(function(registration) {
-            console.log('SW registered: ', registration);
+            // Update available
+            registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing;
+              if (newWorker) {
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    // New content available, refresh page
+                    window.location.reload();
+                  }
+                });
+              }
+            });
           })
           .catch(function(registrationError) {
-            console.log('SW registration failed: ', registrationError);
+            // Service Worker registration failed, continue without it
+            console.warn('SW registration failed, continuing without offline support');
           });
       });
     }
