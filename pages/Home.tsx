@@ -221,6 +221,15 @@ export const Home = () => {
 
   // --- RING CARD EXPANSION STATE ---
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState('Sterling Gold');
+
+  // Auto-switch colors every 6 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSelectedColor(prev => prev === 'Sterling Gold' ? 'Tarnish Grey' : 'Sterling Gold');
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
 
   // --- ECOSYSTEM ACCORDION STATE ---
   const [activeTab, setActiveTab] = useState(0);
@@ -805,261 +814,248 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* 4. RING COLLECTION GRID - TRANSPARENT GLASS CARDS */}
+      {/* 4. RING COLLECTION - UNIFIED WITH COLOR SELECTOR */}
       <section id="collection" className="py-24 max-w-7xl mx-auto px-6 mobile-corner-cut-subtle" aria-labelledby="collection-heading">
          <div className="text-center mb-20 space-y-4">
             <h2 className="text-sm font-bold text-hux-turquoise uppercase tracking-widest">The Collection</h2>
             <h3 id="collection-heading" className="text-3xl md:text-4xl font-display font-bold text-hux-dark">Design That Disappears</h3>
          </div>
 
-         <div className="space-y-32">
-            {/* Sterling Gold - Text Left, Images Right */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-               {/* Text Content */}
-               <div className="space-y-6 lg:pr-12">
-                  <div className="inline-block px-4 py-1.5 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-full border border-yellow-300">
-                     <span className="text-xs font-bold text-yellow-700 uppercase tracking-wider">Elegant Gold Finish</span>
-                  </div>
-                  <h4 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">Sterling Gold</h4>
-                  
-                  {/* Gold Coating Highlight Card */}
-                  <div className="w-full rounded-xl border-2 border-yellow-300 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50 shadow-lg p-6">
-                    {/* Header with dropdown */}
-                    <div className="flex items-center justify-between mb-4 cursor-pointer" onClick={() => setExpandedCard(expandedCard === 'gold-coating' ? null : 'gold-coating')}>
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-gradient-to-r from-yellow-600 to-amber-600 rounded-xl flex items-center justify-center shadow-lg">
-                          <Sparkles className="text-white" size={22} />
-                        </div>
-                        <div>
-                          <h3 className="text-xl font-bold text-yellow-800">Pure 18K Gold Coating ✨</h3>
-                          <p className="text-sm text-yellow-700">India's First Innovation</p>
-                        </div>
-                      </div>
-                      <ChevronDown size={20} className={`text-yellow-600 transition-transform duration-300 ${expandedCard === 'gold-coating' ? 'rotate-180' : ''}`} />
-                    </div>
-
-                    {/* Expandable content */}
-                    <div className={`overflow-hidden transition-all duration-300 ${expandedCard === 'gold-coating' ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      {/* Description */}
-                      <p className="text-sm text-yellow-700 mb-4 leading-relaxed">
-                        India's first smart ring with <strong>pure 18-carat gold coating</strong> and revolutionary 
-                        <strong> epoxy-free construction</strong> for both inner ring and outer shell.
-                      </p>
-
-                      {/* Features Grid */}
-                      <div className="grid grid-cols-3 gap-3 mb-4">
-                        <div className="text-center">
-                          <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                            <Shield className="text-red-600" size={16} />
-                          </div>
-                          <span className="text-xs font-bold text-yellow-800">No Epoxy</span>
-                        </div>
-                        <div className="text-center">
-                          <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                            <Star className="text-yellow-600" size={16} />
-                          </div>
-                          <span className="text-xs font-bold text-yellow-800">18K Gold PVD</span>
-                        </div>
-                        <div className="text-center">
-                          <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                            <span className="text-orange-600 font-bold text-sm">🇮🇳</span>
-                          </div>
-                          <span className="text-xs font-bold text-yellow-800">India First</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Bottom highlight */}
-                    <div className="w-full h-1 bg-gradient-to-r from-yellow-400 to-amber-400 rounded-full"></div>
-                  </div>
-
-                  <p className="text-base md:text-lg text-neutral-600 leading-relaxed">
-                     The Sterling Gold variant blends luxury with advanced technology for a truly elevated presence.
-                  </p>
-                  <div className="flex items-baseline gap-3 pt-4">
-                     <span className="text-3xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">₹12,999</span>
-                     <span className="text-lg text-neutral-400 line-through">₹22,999</span>
-                  </div>
-                  <div className="flex gap-4 pt-6">
-                     <Button onClick={() => { addToCart(HUX_PRODUCT, 'Sterling Gold', 8); navigate('/bag'); }} className="bg-gradient-to-r from-yellow-600 to-amber-600 text-white hover:from-yellow-700 hover:to-amber-700 px-8 py-3 rounded-xl font-bold shadow-lg shadow-yellow-600/25">
-                        Quick Add
-                     </Button>
-                     <Button 
-                        variant="outline" 
-                        onClick={() => { setArColor('Sterling Gold'); setIsAROpen(true); }}
-                        className="flex items-center gap-2 border-yellow-600 text-yellow-600 hover:bg-yellow-50"
-                     >
-                        <ScanFace size={18} /> Virtual Try-On
-                     </Button>
-                  </div>
-               </div>
-
-               {/* Image Grid */}
-               <div className="grid grid-cols-2 gap-4">
-                  <div className="col-span-2 aspect-[4/3] rounded-2xl overflow-hidden shadow-xl cursor-pointer relative" onClick={() => openViewer('gold', goldImageIndex)}>
-                     {goldImages.map((src, idx) => (
-                        <img 
-                           key={src}
-                           src={src}
-                           alt={`HUX Smart Ring Sterling Gold variant - Premium 18K gold coating with titanium core, view ${idx + 1}`}
-                           loading="lazy"
-                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
-                              idx === goldImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
-                           }`}
-                        />
-                     ))}
-                  </div>
-                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => openViewer('gold', (goldImageIndex + 1) % goldImages.length)}>
-                     {goldImages.map((src, idx) => (
-                        <img 
-                           key={src}
-                           src={src}
-                           alt={`Sterling Gold ${idx + 1}`}
-                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
-                              idx === ((goldImageIndex + 1) % goldImages.length) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
-                           }`}
-                        />
-                     ))}
-                  </div>
-                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => openViewer('gold', (goldImageIndex + 2) % goldImages.length)}>
-                     {goldImages.map((src, idx) => (
-                        <img 
-                           key={src}
-                           src={src}
-                           alt={`Sterling Gold ${idx + 1}`}
-                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
-                              idx === ((goldImageIndex + 2) % goldImages.length) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
-                           }`}
-                        />
-                     ))}
-                  </div>
-               </div>
+         {/* Color Selector */}
+         <div className="flex justify-center mb-12">
+            <div className="flex gap-3 p-2 bg-white rounded-full shadow-lg border border-neutral-200">
+               <button
+                  onClick={() => setSelectedColor('Sterling Gold')}
+                  className={`w-12 h-6 rounded-full transition-all duration-300 border-2 ${
+                     selectedColor === 'Sterling Gold' 
+                        ? 'border-yellow-500 shadow-lg shadow-yellow-500/30' 
+                        : 'border-neutral-300 hover:border-yellow-400'
+                  } bg-gradient-to-r from-yellow-400 to-amber-500`}
+                  title="Sterling Gold"
+               />
+               <button
+                  onClick={() => setSelectedColor('Tarnish Grey')}
+                  className={`w-12 h-6 rounded-full transition-all duration-300 border-2 ${
+                     selectedColor === 'Tarnish Grey' 
+                        ? 'border-slate-500 shadow-lg shadow-slate-500/30' 
+                        : 'border-neutral-300 hover:border-slate-400'
+                  } bg-gradient-to-r from-slate-400 to-gray-500`}
+                  title="Tarnish Grey"
+               />
             </div>
+         </div>
 
-            {/* Tarnish Grey - Images Left, Text Right */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-               {/* Image Grid */}
-               <div className="grid grid-cols-2 gap-4 order-2 lg:order-1">
-                  <div className="col-span-2 aspect-[4/3] rounded-2xl overflow-hidden shadow-xl cursor-pointer relative" onClick={() => openViewer('tarnish', tarnishImageIndex)}>
-                     {tarnishImages.map((src, idx) => (
-                        <img 
-                           key={src}
-                           src={src}
-                           alt={`HUX Smart Ring Tarnish Grey variant - Aerospace-grade titanium with matte finish, view ${idx + 1}`}
-                           loading="lazy"
-                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
-                              idx === tarnishImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
-                           }`}
-                        />
-                     ))}
-                  </div>
-                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => openViewer('tarnish', (tarnishImageIndex + 1) % tarnishImages.length)}>
-                     {tarnishImages.map((src, idx) => (
-                        <img 
-                           key={src}
-                           src={src}
-                           alt={`Tarnish Grey ${idx + 1}`}
-                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
-                              idx === ((tarnishImageIndex + 1) % tarnishImages.length) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
-                           }`}
-                        />
-                     ))}
-                  </div>
-                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => openViewer('tarnish', (tarnishImageIndex + 2) % tarnishImages.length)}>
-                     {tarnishImages.map((src, idx) => (
-                        <img 
-                           key={src}
-                           src={src}
-                           alt={`Tarnish Grey ${idx + 1}`}
-                           className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${
-                              idx === ((tarnishImageIndex + 2) % tarnishImages.length) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
-                           }`}
-                        />
-                     ))}
-                  </div>
-               </div>
-
-               {/* Text Content */}
-               <div className="space-y-6 lg:pl-12 order-1 lg:order-2">
-                  <div className="inline-block px-4 py-1.5 bg-neutral-100 rounded-full">
-                     <span className="text-xs font-bold text-neutral-600 uppercase tracking-wider">Precision-engineered stainless alloy</span>
-                  </div>
-                  <h4 className="text-3xl md:text-4xl font-display font-bold text-hux-dark">Tarnish Grey</h4>
-                  
-                  {/* Epoxy-Free Highlight Card */}
-                  <div className="w-full rounded-xl border-2 border-slate-400 bg-gradient-to-br from-slate-100 via-gray-100 to-slate-200 shadow-lg p-6">
-                    {/* Header with dropdown */}
-                    <div className="flex items-center justify-between mb-4 cursor-pointer" onClick={() => setExpandedCard(expandedCard === 'epoxy-free' ? null : 'epoxy-free')}>
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-gradient-to-r from-slate-600 to-gray-700 rounded-xl flex items-center justify-center shadow-lg">
-                          <Shield className="text-white" size={22} />
+         {/* Dynamic Content */}
+         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {selectedColor === 'Sterling Gold' ? (
+               <>
+                  <div className="space-y-6 lg:pr-12">
+                     <div className="inline-block px-4 py-1.5 bg-gradient-to-r from-yellow-100 to-amber-100 rounded-full border border-yellow-300">
+                        <span className="text-xs font-bold text-yellow-700 uppercase tracking-wider">Elegant Gold Finish</span>
+                     </div>
+                     <h4 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">Sterling Gold</h4>
+                     
+                     {/* Mobile Images - Show right after title */}
+                     <div className="lg:hidden grid grid-cols-2 gap-4 mb-6">
+                        <div className="col-span-2 aspect-[4/3] rounded-2xl overflow-hidden shadow-xl cursor-pointer relative" onClick={() => openViewer('gold', goldImageIndex)}>
+                           {goldImages.map((src, idx) => (
+                              <img key={src} src={src} alt={`Sterling Gold ${idx + 1}`} className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${idx === goldImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`} />
+                           ))}
                         </div>
-                        <div>
-                          <h3 className="text-xl font-bold bg-gradient-to-r from-slate-700 to-gray-800 bg-clip-text text-transparent">Epoxy-Free Revolution ⚡</h3>
-                          <p className="text-sm text-slate-600">Advanced Construction</p>
+                        <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => openViewer('gold', (goldImageIndex + 1) % goldImages.length)}>
+                           {goldImages.map((src, idx) => (
+                              <img key={src} src={src} alt={`Sterling Gold ${idx + 1}`} className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${idx === ((goldImageIndex + 1) % goldImages.length) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`} />
+                           ))}
                         </div>
-                      </div>
-                      <ChevronDown size={20} className={`text-slate-600 transition-transform duration-300 ${expandedCard === 'epoxy-free' ? 'rotate-180' : ''}`} />
-                    </div>
-
-                    {/* Expandable content */}
-                    <div className={`overflow-hidden transition-all duration-300 ${expandedCard === 'epoxy-free' ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <p className="text-sm text-slate-700 mb-4 leading-relaxed">
-                        The world's most advanced smart ring construction <strong>without compromising on durability or elegance</strong>
-                      </p>
-                      
-                      <div className="grid grid-cols-3 gap-3 mb-4">
-                        <div className="text-center">
-                          <div className="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                            <CheckCircle className="text-emerald-600" size={16} />
-                          </div>
-                          <span className="text-xs font-bold text-slate-800">Longer Lasting</span>
+                        <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => openViewer('gold', (goldImageIndex + 2) % goldImages.length)}>
+                           {goldImages.map((src, idx) => (
+                              <img key={src} src={src} alt={`Sterling Gold ${idx + 1}`} className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${idx === ((goldImageIndex + 2) % goldImages.length) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`} />
+                           ))}
                         </div>
-                        <div className="text-center">
-                          <div className="w-8 h-8 bg-rose-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                            <Heart className="text-rose-600" size={16} />
-                          </div>
-                          <span className="text-xs font-bold text-slate-800">Skin-Friendly</span>
+                     </div>
+                     <div className="w-full rounded-xl border-2 border-yellow-300 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50 shadow-lg p-6">
+                        <div className="flex items-center justify-between mb-4 cursor-pointer" onClick={() => setExpandedCard(expandedCard === 'gold-coating' ? null : 'gold-coating')}>
+                           <div className="flex items-center gap-3">
+                              <div className="w-12 h-12 bg-gradient-to-r from-yellow-600 to-amber-600 rounded-xl flex items-center justify-center shadow-lg">
+                                 <Sparkles className="text-white" size={22} />
+                              </div>
+                              <div>
+                                 <h3 className="text-xl font-bold text-yellow-800">Pure 18K Gold Coating ✨</h3>
+                                 <p className="text-sm text-yellow-700">India's First Innovation</p>
+                              </div>
+                           </div>
+                           <ChevronDown size={20} className={`text-yellow-600 transition-transform duration-300 ${expandedCard === 'gold-coating' ? 'rotate-180' : ''}`} />
                         </div>
-                        <div className="text-center">
-                          <div className="w-8 h-8 bg-sky-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                            <Droplets className="text-sky-600" size={16} />
-                          </div>
-                          <span className="text-xs font-bold text-slate-800">Water Resistant</span>
+                        <div className={`overflow-hidden transition-all duration-300 ${expandedCard === 'gold-coating' ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                           <p className="text-sm text-yellow-700 mb-4 leading-relaxed">
+                              India's first smart ring with <strong>pure 18-carat gold coating</strong> and revolutionary <strong> epoxy-free construction</strong> for both inner ring and outer shell.
+                           </p>
+                           <div className="grid grid-cols-3 gap-3 mb-4">
+                              <div className="text-center">
+                                 <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <Shield className="text-red-600" size={16} />
+                                 </div>
+                                 <span className="text-xs font-bold text-yellow-800">No Epoxy</span>
+                              </div>
+                              <div className="text-center">
+                                 <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <Star className="text-yellow-600" size={16} />
+                                 </div>
+                                 <span className="text-xs font-bold text-yellow-800">18K Gold PVD</span>
+                              </div>
+                              <div className="text-center">
+                                 <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <span className="text-orange-600 font-bold text-sm">🇮🇳</span>
+                                 </div>
+                                 <span className="text-xs font-bold text-yellow-800">India First</span>
+                              </div>
+                           </div>
                         </div>
-                      </div>
-                      
-                      <div className="bg-slate-200/50 rounded-lg p-3 mb-3 border border-slate-300/30">
-                        <h4 className="font-bold text-slate-800 text-sm mb-1">No Epoxy. No Compromise.</h4>
-                        <p className="text-xs text-slate-600 leading-relaxed">
-                          Traditional smart rings use epoxy resins that can degrade over time, trap moisture, and cause skin irritation.
-                        </p>
-                      </div>
-                    </div>
-                    
-                    <div className="w-full h-1 bg-gradient-to-r from-slate-400 to-gray-500 rounded-full shadow-sm"></div>
+                        <div className="w-full h-1 bg-gradient-to-r from-yellow-400 to-amber-400 rounded-full"></div>
+                     </div>
+                     <p className="text-base md:text-lg text-neutral-600 leading-relaxed">
+                        The Sterling Gold variant blends luxury with advanced technology for a truly elevated presence.
+                     </p>
+                     <div className="flex items-baseline gap-3 pt-4">
+                        <span className="text-3xl font-bold bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">₹12,999</span>
+                        <span className="text-lg text-neutral-400 line-through">₹22,999</span>
+                     </div>
+                     <div className="flex gap-4 pt-6">
+                        <Button onClick={() => { addToCart(HUX_PRODUCT, 'Sterling Gold', 8); navigate('/bag'); }} className="bg-gradient-to-r from-yellow-600 to-amber-600 text-white hover:from-yellow-700 hover:to-amber-700 px-8 py-3 rounded-xl font-bold shadow-lg shadow-yellow-600/25">
+                           Quick Add
+                        </Button>
+                        <Button variant="outline" onClick={() => { setArColor('Sterling Gold'); setIsAROpen(true); }} className="flex items-center gap-2 border-yellow-600 text-yellow-600 hover:bg-yellow-50">
+                           <ScanFace size={18} /> Virtual Try-On
+                        </Button>
+                     </div>
                   </div>
-                  <p className="text-base md:text-lg text-neutral-600 leading-relaxed">
-                     The Tarnish Grey finish merges effortlessly with your look, delivering durable strength with a refined, matte industrial feel.
-                  </p>
-                  <div className="flex items-baseline gap-3 pt-4">
-                     <span className="text-3xl font-bold bg-gradient-to-r from-slate-500 via-gray-600 to-slate-700 bg-clip-text text-transparent drop-shadow-lg filter brightness-110">₹12,999</span>
-                     <span className="text-lg text-slate-400 line-through">₹22,999</span>
+                  {/* Desktop Images - Hidden on mobile */}
+                  <div className="hidden lg:grid grid-cols-2 gap-4">
+                     <div className="col-span-2 aspect-[4/3] rounded-2xl overflow-hidden shadow-xl cursor-pointer relative" onClick={() => openViewer('gold', goldImageIndex)}>
+                        {goldImages.map((src, idx) => (
+                           <img key={src} src={src} alt={`Sterling Gold ${idx + 1}`} className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${idx === goldImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`} />
+                        ))}
+                     </div>
+                     <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => openViewer('gold', (goldImageIndex + 1) % goldImages.length)}>
+                        {goldImages.map((src, idx) => (
+                           <img key={src} src={src} alt={`Sterling Gold ${idx + 1}`} className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${idx === ((goldImageIndex + 1) % goldImages.length) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`} />
+                        ))}
+                     </div>
+                     <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => openViewer('gold', (goldImageIndex + 2) % goldImages.length)}>
+                        {goldImages.map((src, idx) => (
+                           <img key={src} src={src} alt={`Sterling Gold ${idx + 1}`} className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${idx === ((goldImageIndex + 2) % goldImages.length) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`} />
+                        ))}
+                     </div>
                   </div>
-                  <div className="flex gap-4 pt-6">
-                     <Button onClick={() => { addToCart(HUX_PRODUCT, 'Tarnish Grey', 8); navigate('/bag'); }} className="bg-gradient-to-r from-slate-500 via-gray-600 to-slate-700 text-white hover:from-slate-400 hover:via-gray-500 hover:to-slate-600 px-8 py-3 rounded-xl font-bold shadow-xl shadow-slate-500/30 hover:shadow-slate-400/40 transition-all duration-300 hover:scale-105">
-                        Quick Add
-                     </Button>
-                     <Button 
-                        variant="outline" 
-                        onClick={() => { setArColor('Tarnish Grey'); setIsAROpen(true); }}
-                        className="flex items-center gap-2 border-slate-600 text-slate-600 hover:bg-slate-50 shadow-sm"
-                     >
-                        <ScanFace size={18} /> Virtual Try-On
-                     </Button>
+               </>
+            ) : (
+               <>
+                  {/* Desktop Images - Hidden on mobile */}
+                  <div className="hidden lg:grid grid-cols-2 gap-4 order-2 lg:order-1">
+                     <div className="col-span-2 aspect-[4/3] rounded-2xl overflow-hidden shadow-xl cursor-pointer relative" onClick={() => openViewer('tarnish', tarnishImageIndex)}>
+                        {tarnishImages.map((src, idx) => (
+                           <img key={src} src={src} alt={`Tarnish Grey ${idx + 1}`} className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${idx === tarnishImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`} />
+                        ))}
+                     </div>
+                     <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => openViewer('tarnish', (tarnishImageIndex + 1) % tarnishImages.length)}>
+                        {tarnishImages.map((src, idx) => (
+                           <img key={src} src={src} alt={`Tarnish Grey ${idx + 1}`} className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${idx === ((tarnishImageIndex + 1) % tarnishImages.length) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`} />
+                        ))}
+                     </div>
+                     <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => openViewer('tarnish', (tarnishImageIndex + 2) % tarnishImages.length)}>
+                        {tarnishImages.map((src, idx) => (
+                           <img key={src} src={src} alt={`Tarnish Grey ${idx + 1}`} className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${idx === ((tarnishImageIndex + 2) % tarnishImages.length) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`} />
+                        ))}
+                     </div>
                   </div>
-               </div>
-            </div>
+                  <div className="space-y-6 lg:pl-12 order-1 lg:order-2">
+                     <div className="inline-block px-4 py-1.5 bg-neutral-100 rounded-full">
+                        <span className="text-xs font-bold text-neutral-600 uppercase tracking-wider">Precision-engineered stainless alloy</span>
+                     </div>
+                     <h4 className="text-3xl md:text-4xl font-display font-bold text-hux-dark">Tarnish Grey</h4>
+                     
+                     {/* Mobile Images - Show right after title */}
+                     <div className="lg:hidden grid grid-cols-2 gap-4 mb-6">
+                        <div className="col-span-2 aspect-[4/3] rounded-2xl overflow-hidden shadow-xl cursor-pointer relative" onClick={() => openViewer('tarnish', tarnishImageIndex)}>
+                           {tarnishImages.map((src, idx) => (
+                              <img key={src} src={src} alt={`Tarnish Grey ${idx + 1}`} className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${idx === tarnishImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`} />
+                           ))}
+                        </div>
+                        <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => openViewer('tarnish', (tarnishImageIndex + 1) % tarnishImages.length)}>
+                           {tarnishImages.map((src, idx) => (
+                              <img key={src} src={src} alt={`Tarnish Grey ${idx + 1}`} className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${idx === ((tarnishImageIndex + 1) % tarnishImages.length) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`} />
+                           ))}
+                        </div>
+                        <div className="aspect-square rounded-2xl overflow-hidden shadow-lg cursor-pointer relative" onClick={() => openViewer('tarnish', (tarnishImageIndex + 2) % tarnishImages.length)}>
+                           {tarnishImages.map((src, idx) => (
+                              <img key={src} src={src} alt={`Tarnish Grey ${idx + 1}`} className={`absolute inset-0 w-full h-full object-cover hover:scale-105 transition-all duration-1000 ${idx === ((tarnishImageIndex + 2) % tarnishImages.length) ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`} />
+                           ))}
+                        </div>
+                     </div>
+                     <div className="w-full rounded-xl border-2 border-slate-400 bg-gradient-to-br from-slate-100 via-gray-100 to-slate-200 shadow-lg p-6">
+                        <div className="flex items-center justify-between mb-4 cursor-pointer" onClick={() => setExpandedCard(expandedCard === 'epoxy-free' ? null : 'epoxy-free')}>
+                           <div className="flex items-center gap-3">
+                              <div className="w-12 h-12 bg-gradient-to-r from-slate-600 to-gray-700 rounded-xl flex items-center justify-center shadow-lg">
+                                 <Shield className="text-white" size={22} />
+                              </div>
+                              <div>
+                                 <h3 className="text-xl font-bold bg-gradient-to-r from-slate-700 to-gray-800 bg-clip-text text-transparent">Epoxy-Free Revolution ⚡</h3>
+                                 <p className="text-sm text-slate-600">Advanced Construction</p>
+                              </div>
+                           </div>
+                           <ChevronDown size={20} className={`text-slate-600 transition-transform duration-300 ${expandedCard === 'epoxy-free' ? 'rotate-180' : ''}`} />
+                        </div>
+                        <div className={`overflow-hidden transition-all duration-300 ${expandedCard === 'epoxy-free' ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                           <p className="text-sm text-slate-700 mb-4 leading-relaxed">
+                              The world's most advanced smart ring construction <strong>without compromising on durability or elegance</strong>
+                           </p>
+                           <div className="grid grid-cols-3 gap-3 mb-4">
+                              <div className="text-center">
+                                 <div className="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <CheckCircle className="text-emerald-600" size={16} />
+                                 </div>
+                                 <span className="text-xs font-bold text-slate-800">Longer Lasting</span>
+                              </div>
+                              <div className="text-center">
+                                 <div className="w-8 h-8 bg-rose-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <Heart className="text-rose-600" size={16} />
+                                 </div>
+                                 <span className="text-xs font-bold text-slate-800">Skin-Friendly</span>
+                              </div>
+                              <div className="text-center">
+                                 <div className="w-8 h-8 bg-sky-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <Droplets className="text-sky-600" size={16} />
+                                 </div>
+                                 <span className="text-xs font-bold text-slate-800">Water Resistant</span>
+                              </div>
+                           </div>
+                           <div className="bg-slate-200/50 rounded-lg p-3 mb-3 border border-slate-300/30">
+                              <h4 className="font-bold text-slate-800 text-sm mb-1">No Epoxy. No Compromise.</h4>
+                              <p className="text-xs text-slate-600 leading-relaxed">
+                                 Traditional smart rings use epoxy resins that can degrade over time, trap moisture, and cause skin irritation.
+                              </p>
+                           </div>
+                        </div>
+                        <div className="w-full h-1 bg-gradient-to-r from-slate-400 to-gray-500 rounded-full shadow-sm"></div>
+                     </div>
+                     <p className="text-base md:text-lg text-neutral-600 leading-relaxed">
+                        The Tarnish Grey finish merges effortlessly with your look, delivering durable strength with a refined, matte industrial feel.
+                     </p>
+                     <div className="flex items-baseline gap-3 pt-4">
+                        <span className="text-3xl font-bold bg-gradient-to-r from-slate-500 via-gray-600 to-slate-700 bg-clip-text text-transparent drop-shadow-lg filter brightness-110">₹12,999</span>
+                        <span className="text-lg text-slate-400 line-through">₹22,999</span>
+                     </div>
+                     <div className="flex gap-4 pt-6">
+                        <Button onClick={() => { addToCart(HUX_PRODUCT, 'Tarnish Grey', 8); navigate('/bag'); }} className="bg-gradient-to-r from-slate-500 via-gray-600 to-slate-700 text-white hover:from-slate-400 hover:via-gray-500 hover:to-slate-600 px-8 py-3 rounded-xl font-bold shadow-xl shadow-slate-500/30 hover:shadow-slate-400/40 transition-all duration-300 hover:scale-105">
+                           Quick Add
+                        </Button>
+                        <Button variant="outline" onClick={() => { setArColor('Tarnish Grey'); setIsAROpen(true); }} className="flex items-center gap-2 border-slate-600 text-slate-600 hover:bg-slate-50 shadow-sm">
+                           <ScanFace size={18} /> Virtual Try-On
+                        </Button>
+                     </div>
+                  </div>
+               </>
+            )}
          </div>
       </section>
 
@@ -1150,16 +1146,16 @@ export const Home = () => {
           </div>
         </div>
 
-        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start relative z-10">
           
           {/* Visual - Sliding Dock Images */}
-          <div className="relative group overflow-hidden rounded-3xl">
+          <div className="relative group overflow-hidden rounded-3xl h-[500px]">
             <div className="absolute inset-0 bg-hux-turquoise/20 blur-3xl opacity-30 group-hover:opacity-50 transition-opacity z-0"></div>
             
             {/* Image Carousel */}
-            <div className="relative">
+            <div className="relative h-full">
               <div 
-                className="flex transition-transform duration-1000 ease-in-out"
+                className="flex transition-transform duration-1000 ease-in-out h-full"
                 style={{ transform: `translateX(-${dockImageIndex * 100}%)` }}
               >
                 {[
@@ -1172,7 +1168,7 @@ export const Home = () => {
                     key={idx}
                     src={src}
                     alt={`HUX Smart Ring ${['charging dock with magnetic alignment', 'haptic vibration motor for discrete alerts', 'smart touch controls for device interaction', 'SOS emergency response system'][idx]} feature`}
-                    className="w-full flex-shrink-0 rounded-3xl shadow-2xl border border-white/10 brightness-75 contrast-125"
+                    className="w-full h-full flex-shrink-0 rounded-3xl shadow-2xl border border-white/10 brightness-75 contrast-125 object-cover"
                   />
                 ))}
               </div>
@@ -1194,7 +1190,7 @@ export const Home = () => {
           </div>
 
           {/* Dynamic Content based on image */}
-          <div className="space-y-8 relative overflow-hidden">
+          <div className="space-y-8 relative overflow-hidden h-[500px] flex flex-col justify-center">
             <div 
               className="transition-transform duration-1000 ease-in-out"
               style={{ transform: `translateX(${dockImageIndex * 100}%)` }}
