@@ -103,10 +103,28 @@ PRE-LAUNCH BOOKING:
 - Regular updates every 10-15 days
 - Limited to 500 units in first batch
 
+SIZING INFORMATION:
+- Recommended finger: Index finger for optimal sensor accuracy and comfort
+- Available sizes: 6, 7, 8, 9, 10, 11, 12, 13
+- Free sizing kit included with every purchase
+- Size confirmation required before production starts
+
+PAGE REDIRECTIONS (Always provide clickable links in markdown format):
+- Ring sizing/measurement questions → [Fit Guide](https://hux.co.in/fit-guide)
+- Pre-launch booking → [Pre-Launch Page](https://hux.co.in/prelaunch)
+- Shopping/buying → [Your Bag](https://hux.co.in/your-bag) or [Checkout](https://hux.co.in/checkout)
+- Product features/specs → [HUX Smart Ring](https://hux.co.in/)
+- Company info/about → [Our Vision](https://hux.co.in/vision)
+- Influencer program → [Influencer Program](https://hux.co.in/influencers)
+- Legal/terms → [Terms & Conditions](https://hux.co.in/terms-and-conditions)
+- Privacy concerns → [Privacy Policy](https://hux.co.in/privacy-policy)
+- Pre-order terms → [Pre-Order Terms](https://hux.co.in/preorder-terms)
+- Order tracking → Contact [support@hux.co.in](mailto:support@hux.co.in) with order details
+
 SUPPORT:
 - Email: support@hux.co.in
 - Company: Viveon Gizit Pvt. Ltd., Electronic City, Bangalore, India
-- Website: Navigate users to /terms-and-conditions, /privacy-policy, /preorder-terms for detailed policies
+- Always provide relevant page links based on user questions
 
 ORDER TRACKING:
 - Users can track orders by providing email address or order ID

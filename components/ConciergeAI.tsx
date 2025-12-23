@@ -3,6 +3,45 @@ import { X, Send } from 'lucide-react';
 import { generateResponse } from '../services/geminiService';
 import { ChatMessage } from '../types';
 
+// Function to convert markdown links to clickable HTML
+const renderMessageWithLinks = (text: string) => {
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = linkRegex.exec(text)) !== null) {
+    // Add text before the link
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    
+    // Add the clickable link
+    const linkText = match[1];
+    const linkUrl = match[2];
+    parts.push(
+      <a 
+        key={match.index}
+        href={linkUrl} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="text-hux-turquoise hover:text-hux-turquoiseLight underline font-medium"
+      >
+        {linkText}
+      </a>
+    );
+    
+    lastIndex = match.index + match[0].length;
+  }
+  
+  // Add remaining text
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+  
+  return parts.length > 1 ? parts : text;
+};
+
 const GoldRingIcon = ({ className, size = 24 }: { className?: string; size?: number }) => (
   <svg 
     width={size} 
@@ -134,7 +173,7 @@ export const ConciergeAI = () => {
                       : 'bg-white text-neutral-700 rounded-bl-none border border-white/60'
                   }`}
                 >
-                  {msg.text}
+                  {msg.role === 'user' ? msg.text : renderMessageWithLinks(msg.text)}
                 </div>
               </div>
             ))}
