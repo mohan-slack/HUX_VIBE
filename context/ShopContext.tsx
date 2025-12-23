@@ -87,20 +87,11 @@ export const ShopProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     
     if (isPreLaunchBooking) {
       console.log("Processing pre-launch booking through edge function...");
-      // Convert pre-launch cart to use regular product ID for edge function
-      const modifiedCart = cart.map(item => ({
-        ...item,
-        product: {
-          ...item.product,
-          id: 1 // Use regular product ID that exists in database
-        }
-      }));
-      
-      // Call edge function with modified cart (same as regular orders)
+      // Pass cart as-is; edge function handles prelaunch product id ('prelaunch-hux-ring')
       const { data, error } = await supabase.functions.invoke('hux-pay', {
         body: { 
           action: 'create_order', 
-          cart: modifiedCart, 
+          cart, 
           address, 
           email 
         }
