@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Button } from './Button';
 import { useShop } from '../context/ShopContext';
 import { useNavigate } from 'react-router-dom';
@@ -29,30 +29,28 @@ export const PreLaunchBooking: React.FC = () => {
   const ringSizes = [6, 7, 8, 9, 10, 11, 12, 13];
   const colors = ['Tarnish Grey', 'Sterling Gold'];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     
     if (name === 'phone') {
-      // Only allow numbers for phone
       const numericValue = value.replace(/\D/g, '').slice(0, 10);
       setFormData(prev => ({ ...prev, [name]: numericValue }));
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
     }
-  };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // Create a pre-launch product for booking
       const prelaunchProduct = {
         id: 'prelaunch-hux-ring',
         name: 'HUX Smart Ring - Pre-Launch',
         tagline: 'Intelligence. Worn.',
         subtitle: 'Pre-Launch Special',
-        price: 2000, // Booking amount
+        price: 2000,
         mrp: 17999,
         description: 'Pre-launch booking for HUX Smart Ring. Pay ₹2,000 now, ₹8,000 at shipping.',
         features: [
@@ -73,7 +71,6 @@ export const PreLaunchBooking: React.FC = () => {
         reviews: []
       };
 
-      // Add to cart with selected options
       addToCart(
         prelaunchProduct,
         formData.color as any,
@@ -81,7 +78,6 @@ export const PreLaunchBooking: React.FC = () => {
         1
       );
 
-      // Store booking info in localStorage for checkout
       localStorage.setItem('prelaunchBooking', JSON.stringify({
         ...formData,
         fullName: `${formData.firstName} ${formData.lastName}`,
@@ -90,7 +86,6 @@ export const PreLaunchBooking: React.FC = () => {
         remainingAmount: 8000
       }));
 
-      // Navigate to checkout
       navigate('/checkout');
       
     } catch (error) {
@@ -101,13 +96,15 @@ export const PreLaunchBooking: React.FC = () => {
     }
   };
 
+  const openModal = useCallback(() => setIsOpen(true), []);
+
   if (!isOpen) {
     return (
       <Button 
         variant="primary" 
         size="large"
-        className="text-xl px-12 py-4 shadow-2xl hover:scale-105 transition-transform"
-        onClick={() => setIsOpen(true)}
+        className="text-lg md:text-xl px-8 md:px-12 py-3 md:py-4 shadow-2xl hover:scale-105 transition-transform"
+        onClick={openModal}
       >
         Book Now for ₹2,000
       </Button>
@@ -116,10 +113,10 @@ export const PreLaunchBooking: React.FC = () => {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl max-w-md w-full p-8 max-h-[90vh] overflow-y-auto">
+      <div className="bg-white rounded-2xl w-full max-w-md p-6 md:p-8 max-h-[90vh] overflow-y-auto">
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold text-hux-dark mb-2">Book Your HUX Ring</h2>
-          <p className="text-hux-dark/70">Secure your spot in the first batch</p>
+          <h2 className="text-xl md:text-2xl font-bold text-hux-dark mb-2">Book Your HUX Ring</h2>
+          <p className="text-hux-dark/70 text-sm md:text-base">Secure your spot in the first batch</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -132,7 +129,7 @@ export const PreLaunchBooking: React.FC = () => {
                 value={formData.firstName}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-hux-turquoise focus:border-transparent text-gray-900 bg-white"
+                className="w-full px-3 py-2 md:px-4 md:py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-hux-turquoise focus:border-transparent text-gray-900 bg-white text-sm md:text-base"
                 placeholder="First name"
               />
             </div>
@@ -144,7 +141,7 @@ export const PreLaunchBooking: React.FC = () => {
                 value={formData.lastName}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-hux-turquoise focus:border-transparent text-gray-900 bg-white"
+                className="w-full px-3 py-2 md:px-4 md:py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-hux-turquoise focus:border-transparent text-gray-900 bg-white text-sm md:text-base"
                 placeholder="Last name"
               />
             </div>
@@ -158,7 +155,7 @@ export const PreLaunchBooking: React.FC = () => {
               value={formData.email}
               onChange={handleInputChange}
               required
-              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-hux-turquoise focus:border-transparent text-gray-900 bg-white"
+              className="w-full px-3 py-2 md:px-4 md:py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-hux-turquoise focus:border-transparent text-gray-900 bg-white text-sm md:text-base"
               placeholder="your@email.com"
             />
           </div>
@@ -172,7 +169,7 @@ export const PreLaunchBooking: React.FC = () => {
               onChange={handleInputChange}
               required
               maxLength={10}
-              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-hux-turquoise focus:border-transparent text-gray-900 bg-white"
+              className="w-full px-3 py-2 md:px-4 md:py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-hux-turquoise focus:border-transparent text-gray-900 bg-white text-sm md:text-base"
               placeholder="9876543210"
             />
           </div>
@@ -184,7 +181,7 @@ export const PreLaunchBooking: React.FC = () => {
               value={formData.ringSize}
               onChange={handleInputChange}
               required
-              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-hux-turquoise focus:border-transparent text-gray-900 bg-white"
+              className="w-full px-3 py-2 md:px-4 md:py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-hux-turquoise focus:border-transparent text-gray-900 bg-white text-sm md:text-base"
             >
               <option value="">Select size (we'll send sizing kit)</option>
               {ringSizes.map(size => (
@@ -199,7 +196,7 @@ export const PreLaunchBooking: React.FC = () => {
               name="color"
               value={formData.color}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-hux-turquoise focus:border-transparent text-gray-900 bg-white"
+              className="w-full px-3 py-2 md:px-4 md:py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-hux-turquoise focus:border-transparent text-gray-900 bg-white text-sm md:text-base"
             >
               {colors.map(color => (
                 <option key={color} value={color}>{color}</option>
@@ -224,6 +221,7 @@ export const PreLaunchBooking: React.FC = () => {
               fullWidth
               onClick={() => setIsOpen(false)}
               disabled={isSubmitting}
+              className="text-sm md:text-base"
             >
               Cancel
             </Button>
@@ -232,6 +230,7 @@ export const PreLaunchBooking: React.FC = () => {
               variant="primary"
               fullWidth
               disabled={isSubmitting}
+              className="text-sm md:text-base"
             >
               {isSubmitting ? 'Processing...' : 'Proceed to Payment'}
             </Button>

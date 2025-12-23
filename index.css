@@ -1,6 +1,11 @@
 /* Import Kim Mochi-like font */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
+:root {
+  --brand: 185 100% 60%;
+  --brand-foreground: 185 100% 70%;
+}
+
 /* Custom font class for Kim Mochi style */
 .font-mochi {
   font-family: 'Quicksand', 'Helvetica Neue', Arial, sans-serif;
@@ -9,14 +14,83 @@
   font-weight: 500;
 }
 
-/* Mobile Corner Cuts for Sections */
-@media (max-width: 768px) {
+/* Performance optimizations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-auto {
+  will-change: auto;
+}
+
+/* Device-specific optimizations */
+@media (max-width: 767px) {
+  /* Mobile optimizations */
   .mobile-corner-cut {
     clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
   }
   
   .mobile-corner-cut-subtle {
     clip-path: polygon(4px 0%, 100% 0%, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0% 100%, 0% 4px);
+  }
+
+  .animate-pulse {
+    animation-duration: 3s;
+  }
+
+  .glass {
+    backdrop-filter: blur(6px) !important;
+  }
+
+  .glow-effect {
+    box-shadow: 0 0 8px rgba(2, 179, 217, 0.2);
+  }
+
+  .glow-effect:hover {
+    box-shadow: 0 0 12px rgba(2, 179, 217, 0.3);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Tablet optimizations */
+  .tablet-corner-cut {
+    clip-path: polygon(12px 0%, 100% 0%, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0% 100%, 0% 12px);
+  }
+
+  .glass {
+    backdrop-filter: blur(8px) !important;
+  }
+
+  .glow-effect {
+    box-shadow: 0 0 15px rgba(2, 179, 217, 0.25);
+  }
+
+  .glow-effect:hover {
+    box-shadow: 0 0 20px rgba(2, 179, 217, 0.35);
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop optimizations */
+  .glass {
+    backdrop-filter: blur(10px) !important;
+  }
+
+  .glow-effect {
+    box-shadow: 0 0 20px rgba(2, 179, 217, 0.3),
+                0 0 40px rgba(2, 179, 217, 0.2),
+                0 0 60px rgba(2, 179, 217, 0.1);
+  }
+
+  .glow-effect:hover {
+    box-shadow: 0 0 30px rgba(2, 179, 217, 0.5),
+                0 0 60px rgba(2, 179, 217, 0.3),
+                0 0 90px rgba(2, 179, 217, 0.2);
   }
 }
 
@@ -126,16 +200,17 @@
   animation: float 3s ease-in-out infinite;
 }
 
-/* Glow Effect */
-.glow-effect {
-  box-shadow: 0 0 20px rgba(2, 179, 217, 0.3),
-              0 0 40px rgba(2, 179, 217, 0.2),
-              0 0 60px rgba(2, 179, 217, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-.glow-effect:hover {
-  box-shadow: 0 0 30px rgba(2, 179, 217, 0.5),
-              0 0 60px rgba(2, 179, 217, 0.3),
-              0 0 90px rgba(2, 179, 217, 0.2);
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse,
+  .animate-spin,
+  .float-animation {
+    animation: none;
+  }
+  
+  .transition-all,
+  .transition-transform,
+  .transition-colors {
+    transition: none;
+  }
 }

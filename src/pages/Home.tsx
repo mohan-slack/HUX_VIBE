@@ -628,7 +628,7 @@ export const Home = () => {
            autoPlay muted loop playsInline 
            className="absolute inset-0 w-full h-full object-cover"
          >
-           <source src="/images/featureVid/5ATM Water Proof.mp4" type="video/mp4" />
+           <source src="/images/banners/sensors.mp4" type="video/mp4" />
          </video>
          <div className="absolute inset-0 bg-hux-turquoise/80 mix-blend-multiply"></div>
          <div className="absolute inset-0 bg-black/30"></div>

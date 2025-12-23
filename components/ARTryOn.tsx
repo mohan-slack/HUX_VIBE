@@ -129,17 +129,6 @@ const ARScene = ({ handData, productColor, onAlignmentChange }: { handData: any,
   return (
     <>
       <ambientLight intensity={0.6} />
-      
-      <directionalLight 
-        position={[5, 10, 5]} 
-        intensity={2} 
-        castShadow 
-        shadow-bias={-0.0001}
-      >
-        <orthographicCamera attach="shadow-camera" args={[-10, 10, -10, 10, 0.1, 50]} />
-      </directionalLight>
-
-      <Environment preset="city" />
 
       <group ref={ringRef} visible={!!handData}>
         <RingModel color={productColor} isAligned={isAligned} />

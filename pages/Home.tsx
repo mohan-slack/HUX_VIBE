@@ -1523,7 +1523,7 @@ export const Home = () => {
            poster="/images/heroSection/hero-0043.png"
            className="absolute inset-0 w-full h-full object-cover"
          >
-           {shouldLoadVideo && <source src="/images/banners/evolve.png" type="video/mp4" />}
+           {shouldLoadVideo && <source src="/images/banners/sensors.mp4" type="video/mp4" />}
          </video>
          <div className="absolute inset-0 bg-hux-turquoise/80 mix-blend-multiply"></div>
          <div className="absolute inset-0 bg-black/30"></div>

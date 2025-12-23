@@ -26,8 +26,9 @@ export default defineConfig(({ mode }) => {
             manualChunks: {
               vendor: ['react', 'react-dom'],
               router: ['react-router-dom'],
-              ui: ['lucide-react', 'framer-motion'],
-              three: ['three', '@react-three/fiber', '@react-three/drei'],
+              ui: ['lucide-react'],
+              animations: ['framer-motion'],
+              three: ['three'],
               supabase: ['@supabase/supabase-js']
             }
           }
@@ -36,11 +37,22 @@ export default defineConfig(({ mode }) => {
         terserOptions: {
           compress: {
             drop_console: true,
-            drop_debugger: true
+            drop_debugger: true,
+            pure_funcs: ['console.log', 'console.info', 'console.debug']
+          },
+          mangle: {
+            safari10: true
           }
         },
         cssCodeSplit: true,
-        sourcemap: false
+        sourcemap: false,
+        target: ['es2015', 'safari11'],
+        assetsInlineLimit: 4096,
+        reportCompressedSize: false
+      },
+      optimizeDeps: {
+        include: ['react', 'react-dom', 'react-router-dom'],
+        exclude: []
       }
     };
 });
