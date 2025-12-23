@@ -27,7 +27,7 @@ export const PreLaunchBooking: React.FC = () => {
   const navigate = useNavigate();
 
   const ringSizes = [6, 7, 8, 9, 10, 11, 12, 13];
-  const colors = ['Tarnish Grey', 'Sterling Gold', 'Lunar Rose'];
+  const colors = ['Tarnish Grey', 'Sterling Gold'];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
