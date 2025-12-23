@@ -1,3 +1,14 @@
+/* Import Kim Mochi-like font */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+/* Custom font class for Kim Mochi style */
+.font-mochi {
+  font-family: 'Quicksand', 'Helvetica Neue', Arial, sans-serif;
+  font-feature-settings: 'kern' 1;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
 /* Mobile Corner Cuts for Sections */
 @media (max-width: 768px) {
   .mobile-corner-cut {
