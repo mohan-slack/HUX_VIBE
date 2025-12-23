@@ -128,7 +128,7 @@ export const ConciergeAI = () => {
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div 
-                  className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
+                  className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm selection:bg-hux-turquoise selection:text-white ${
                     msg.role === 'user' 
                       ? 'bg-gradient-to-r from-hux-turquoise to-hux-turquoiseLight text-white rounded-br-none' 
                       : 'bg-white text-neutral-700 rounded-bl-none border border-white/60'

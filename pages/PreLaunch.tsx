@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../components/Button';
 import { PreLaunchBooking } from '../components/PreLaunchBooking';
 import OrbitingHealthFeatures from '../components/ui/orbiting-health-features';
+import { ParticleTextEffect } from '../components/ui/particle-text-effect';
 
 const PreLaunch: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 30, hours: 12, minutes: 45 });
@@ -80,13 +81,9 @@ const PreLaunch: React.FC = () => {
         <div className="relative max-w-4xl mx-auto">
           <div className="glass mobile-corner-cut p-6 md:p-12 lg:p-16">
           <div className="mb-6">
-            <img src="/images/logo.png" alt="HUX" className="h-16 mx-auto mb-4" />
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-hux-dark mb-6">
-              Intelligence.
-              <span className="block bg-gradient-to-r from-hux-turquoise to-hux-gold bg-clip-text text-transparent">
-                Pre-Launch.
-              </span>
-            </h1>
+            <div className="flex justify-center mb-6">
+              <ParticleTextEffect text="Pre-Launch" className="rounded-lg" />
+            </div>
             <p className="text-lg md:text-xl lg:text-2xl text-neutral-600 mb-8 max-w-3xl mx-auto leading-relaxed">
               Premium Health Tracking. Invisible Intelligence. Available for pre-order now.
             </p>

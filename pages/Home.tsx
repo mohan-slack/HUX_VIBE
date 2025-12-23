@@ -473,74 +473,76 @@ export const Home = () => {
 
       {/* 2. 360 STUDIO SECTION */}
       <section className="py-24 bg-white overflow-hidden relative mobile-corner-cut" aria-labelledby="studio-heading">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-6">
           
-          <div className="order-2 lg:order-1 space-y-8">
-            <h2 id="studio-heading" className="text-4xl md:text-5xl font-display font-bold text-hux-dark leading-tight">
-              360° of <br/>
-              <span className="text-hux-turquoise">Perfection</span>
+          <div className="text-center mb-12">
+            <h2 id="studio-heading" className="text-4xl md:text-5xl font-display font-bold text-hux-dark leading-tight mb-6">
+              360° of <span className="text-hux-turquoise">Perfection</span>
             </h2>
-            <p className="text-lg md:text-xl text-neutral-500 font-light leading-relaxed">
-              Experience the HUX Smart Ring from every angle. Crafted from aerospace-grade titanium, it features a seamless, button-free design that feels as good as it looks.
+            <p className="text-lg text-neutral-500 font-light max-w-2xl mx-auto mb-8">
+              Crafted from premium surgical-grade alloy with seamless, touch-free design.
             </p>
-            <div className="flex gap-4">
-               <div className="flex items-center gap-4 text-sm font-bold text-neutral-400 uppercase tracking-widest">
-                 <Rotate3d className="text-hux-turquoise animate-spin-slow" />
-                 <span>Interactive 3D View</span>
+          </div>
+
+          <div className="flex justify-center mb-8">
+            <div className="relative h-[400px] w-[400px] flex items-center justify-center bg-neutral-50 rounded-[3rem] shadow-inner cursor-grab active:cursor-grabbing"
+                 onMouseDown={handleMouseDown}
+                 onMouseMove={handleMouseMove}
+                 onTouchStart={handleMouseDown}
+                 onTouchMove={handleMouseMove}
+                 ref={rotateRef}
+            >
+               {/* 3D Ring Object - Simulated with CSS */}
+               <div className="relative w-48 h-48 perspective-1000" style={{ perspective: '1000px' }}>
+                  <div className="w-full h-full relative transform-style-3d transition-transform duration-75 ease-out"
+                       style={{ transform: `rotateX(-15deg) rotateY(${rotation}deg)` }}>
+                     
+                     {/* Ring Outer Face */}
+                     <div className="absolute inset-0 rounded-full border-[24px] border-neutral-300 shadow-[0_0_50px_rgba(0,0,0,0.1)]"
+                          style={{ 
+                            borderColor: '#d1d5db', 
+                            background: 'transparent',
+                            transform: 'translateZ(0px)'
+                          }}>
+                     </div>
+                     
+                     {/* Ring Inner Face (Simulation) */}
+                     <div className="absolute inset-0 rounded-full border-[24px] border-neutral-400 scale-[0.98]"
+                          style={{ 
+                            borderColor: '#9ca3af',
+                            transform: 'translateZ(-5px)' 
+                          }}>
+                     </div>
+
+                     {/* Highlights for metallic effect */}
+                     <div className="absolute inset-0 rounded-full border-[24px] border-transparent border-t-white/80 border-b-black/10 blur-sm"></div>
+                     
+                     {/* Sensor bumps on inner ring */}
+                     <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-6 h-3 bg-black/80 rounded-full blur-[1px] transform translate-z-[-10px]"></div>
+                  </div>
                </div>
-               <button 
-                 onClick={() => { setArColor('Sterling Gold'); setIsAROpen(true); }}
-                 className="flex items-center gap-2 text-sm font-bold text-hux-turquoise uppercase tracking-widest hover:text-hux-turquoiseDark transition-colors"
-               >
-                 <ScanFace size={18} />
-                 <span>Virtual Try-On</span>
-               </button>
+
+               {/* Instruction Overlay */}
+               <div className={`absolute bottom-6 left-1/2 -translate-x-1/2 transition-opacity duration-300 ${isDragging ? 'opacity-0' : 'opacity-100'}`}>
+                  <div className="flex items-center gap-2 bg-white/80 backdrop-blur px-3 py-1.5 rounded-full shadow-sm text-xs font-bold text-neutral-500 uppercase tracking-wider pointer-events-none">
+                    <Move size={12} /> Drag to Rotate
+                  </div>
+               </div>
             </div>
           </div>
 
-          <div className="order-1 lg:order-2 relative h-[500px] flex items-center justify-center bg-neutral-50 rounded-[3rem] shadow-inner cursor-grab active:cursor-grabbing"
-               onMouseDown={handleMouseDown}
-               onMouseMove={handleMouseMove}
-               onTouchStart={handleMouseDown}
-               onTouchMove={handleMouseMove}
-               ref={rotateRef}
-          >
-             {/* 3D Ring Object - Simulated with CSS */}
-             <div className="relative w-64 h-64 perspective-1000" style={{ perspective: '1000px' }}>
-                <div className="w-full h-full relative transform-style-3d transition-transform duration-75 ease-out"
-                     style={{ transform: `rotateX(-15deg) rotateY(${rotation}deg)` }}>
-                   
-                   {/* Ring Outer Face */}
-                   <div className="absolute inset-0 rounded-full border-[30px] border-neutral-300 shadow-[0_0_50px_rgba(0,0,0,0.1)]"
-                        style={{ 
-                          borderColor: '#d1d5db', 
-                          background: 'transparent',
-                          transform: 'translateZ(0px)'
-                        }}>
-                   </div>
-                   
-                   {/* Ring Inner Face (Simulation) */}
-                   <div className="absolute inset-0 rounded-full border-[30px] border-neutral-400 scale-[0.98]"
-                        style={{ 
-                          borderColor: '#9ca3af',
-                          transform: 'translateZ(-5px)' 
-                        }}>
-                   </div>
-
-                   {/* Highlights for metallic effect */}
-                   <div className="absolute inset-0 rounded-full border-[30px] border-transparent border-t-white/80 border-b-black/10 blur-sm"></div>
-                   
-                   {/* Sensor bumps on inner ring */}
-                   <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-8 h-4 bg-black/80 rounded-full blur-[1px] transform translate-z-[-10px]"></div>
-                </div>
+          <div className="flex justify-center gap-8">
+             <div className="flex items-center gap-3 text-sm font-bold text-neutral-400 uppercase tracking-widest">
+               <Rotate3d className="text-hux-turquoise animate-spin-slow" size={16} />
+               <span>Interactive 3D View</span>
              </div>
-
-             {/* Instruction Overlay */}
-             <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-300 ${isDragging ? 'opacity-0' : 'opacity-100'}`}>
-                <div className="flex items-center gap-2 bg-white/80 backdrop-blur px-4 py-2 rounded-full shadow-sm text-xs font-bold text-neutral-500 uppercase tracking-wider pointer-events-none">
-                  <Move size={14} /> Drag to Rotate
-                </div>
-             </div>
+             <button 
+               onClick={() => { setArColor('Sterling Gold'); setIsAROpen(true); }}
+               className="flex items-center gap-2 text-sm font-bold text-hux-turquoise uppercase tracking-widest hover:text-hux-turquoiseDark transition-colors"
+             >
+               <ScanFace size={16} />
+               <span>Virtual Try-On</span>
+             </button>
           </div>
 
         </div>
@@ -1331,7 +1333,7 @@ export const Home = () => {
            poster="/images/heroSection/hero-0043.png"
            className="absolute inset-0 w-full h-full object-cover"
          >
-           {shouldLoadVideo && <source src="/images/5ATM Water Proof.mp4" type="video/mp4" />}
+           {shouldLoadVideo && <source src="/images/banners/evolve.png" type="video/mp4" />}
          </video>
          <div className="absolute inset-0 bg-hux-turquoise/80 mix-blend-multiply"></div>
          <div className="absolute inset-0 bg-black/30"></div>
