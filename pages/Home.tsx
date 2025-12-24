@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronRight, ChevronLeft, ChevronDown, Plus, Play, Moon, Activity, Zap, Star, ArrowRight, Heart, Brain, Box, Rotate3d, Move, Fingerprint, ShieldAlert, Wind, Bell, TrendingUp, Cpu, Battery, Wifi, Droplets, PackageOpen, Ruler, Palette, CheckCircle, ShoppingBag, Smartphone, Magnet, Cable, Sparkles, ScanFace, Instagram, Facebook, Twitter, Youtube, Linkedin, Building2, Users, Headphones, FileText, Shield, HelpCircle, BookOpen, Package, Phone } from 'lucide-react';
+import { ChevronRight, ChevronLeft, ChevronDown, Plus, Play, Moon, Activity, Zap, Star, ArrowRight, Heart, Brain, Box, Fingerprint, ShieldAlert, Wind, Bell, TrendingUp, Cpu, Battery, Wifi, Droplets, PackageOpen, Ruler, Palette, CheckCircle, ShoppingBag, Smartphone, Magnet, Cable, Sparkles, ScanFace, Instagram, Facebook, Twitter, Youtube, Linkedin, Building2, Users, Headphones, FileText, Shield, HelpCircle, BookOpen, Package, Phone, Move } from 'lucide-react';
 
 // SEO Meta Tags Component
 const SEOHead = () => {
@@ -62,6 +62,7 @@ import { ARTryOn } from '../components/ARTryOn';
 import { PreLaunchBanner } from '../components/PreLaunchBanner';
 import { GoldCoatingCard } from '../components/ui/gold-coating-card';
 import { EpoxyFreeCard } from '../components/ui/epoxy-free-card';
+import Ring360Showcase from '../components/ui/ring-360-showcase';
 
 const ExpandableSpecsItem = ({ title, items }: { title: string, items: string[] }) => {
   const [expanded, setExpanded] = useState(false);
@@ -210,12 +211,12 @@ export const Home = () => {
     {
       text: "SLEEP MASTERED.",
       subtitle: "Clinical Grade Analysis",
-      img: "/images/heroSection/hero-02.png"
+      img: "/images/heroSection/HERONew01.png"
     },
     {
       text: "DESIGN DISAPPEARS.",
       subtitle: "Aerospace Titanium",
-      img: "/images/heroSection/hero-0043.png"
+      img: "/images/heroSection/HERONew02.png"
     }
   ];
 
@@ -294,26 +295,7 @@ export const Home = () => {
   const currentImages = viewerVariant === 'gold' ? goldImages : tarnishImages;
 
   // --- 360 VIEW STATE ---
-  const [rotation, setRotation] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const rotateRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseDown = (e: React.MouseEvent | React.TouchEvent) => {
-    setIsDragging(true);
-    const clientX = 'touches' in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
-    setStartX(clientX - rotation);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent | React.TouchEvent) => {
-    if (!isDragging) return;
-    const clientX = 'touches' in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
-    setRotation(clientX - startX);
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
+  // Removed - now handled by Ring360Showcase component
 
   // --- MASONRY GRID COLUMNS ---
   const [columns, setColumns] = useState(3);
@@ -493,9 +475,7 @@ export const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-hux-ivory overflow-x-hidden selection:bg-hux-turquoise selection:text-white"
-         onMouseUp={handleMouseUp}
-         onTouchEnd={handleMouseUp}>
+    <div className="min-h-screen bg-hux-ivory overflow-x-hidden selection:bg-hux-turquoise selection:text-white">
       
       <SEOHead />
       <PreLaunchBanner />
@@ -506,87 +486,13 @@ export const Home = () => {
         <AnimatedSections sections={heroSections} />
 
       {/* 2. 360 STUDIO SECTION */}
-      <section className="py-24 bg-white overflow-hidden relative mobile-corner-cut" aria-labelledby="studio-heading">
-        <div className="max-w-7xl mx-auto px-6">
-          
-          <div className="text-center mb-12">
-            <h2 id="studio-heading" className="text-4xl md:text-5xl font-display font-bold text-hux-dark leading-tight mb-6">
-              360° of <span className="text-hux-turquoise">Perfection</span>
-            </h2>
-            <p className="text-lg text-neutral-500 font-light max-w-2xl mx-auto mb-8">
-              Crafted from premium surgical-grade alloy with seamless, touch-free design.
-            </p>
-          </div>
-
-          <div className="flex justify-center mb-8">
-            <div className="relative h-[400px] w-[400px] flex items-center justify-center bg-neutral-50 rounded-[3rem] shadow-inner cursor-grab active:cursor-grabbing"
-                 onMouseDown={handleMouseDown}
-                 onMouseMove={handleMouseMove}
-                 onTouchStart={handleMouseDown}
-                 onTouchMove={handleMouseMove}
-                 ref={rotateRef}
-            >
-               {/* 3D Ring Object - Simulated with CSS */}
-               <div className="relative w-48 h-48 perspective-1000" style={{ perspective: '1000px' }}>
-                  <div className="w-full h-full relative transform-style-3d transition-transform duration-75 ease-out"
-                       style={{ transform: `rotateX(-15deg) rotateY(${rotation}deg)` }}>
-                     
-                     {/* Ring Outer Face */}
-                     <div className="absolute inset-0 rounded-full border-[24px] border-neutral-300 shadow-[0_0_50px_rgba(0,0,0,0.1)]"
-                          style={{ 
-                            borderColor: '#d1d5db', 
-                            background: 'transparent',
-                            transform: 'translateZ(0px)'
-                          }}>
-                     </div>
-                     
-                     {/* Ring Inner Face (Simulation) */}
-                     <div className="absolute inset-0 rounded-full border-[24px] border-neutral-400 scale-[0.98]"
-                          style={{ 
-                            borderColor: '#9ca3af',
-                            transform: 'translateZ(-5px)' 
-                          }}>
-                     </div>
-
-                     {/* Highlights for metallic effect */}
-                     <div className="absolute inset-0 rounded-full border-[24px] border-transparent border-t-white/80 border-b-black/10 blur-sm"></div>
-                     
-                     {/* Sensor bumps on inner ring */}
-                     <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-6 h-3 bg-black/80 rounded-full blur-[1px] transform translate-z-[-10px]"></div>
-                  </div>
-               </div>
-
-               {/* Instruction Overlay */}
-               <div className={`absolute bottom-6 left-1/2 -translate-x-1/2 transition-opacity duration-300 ${isDragging ? 'opacity-0' : 'opacity-100'}`}>
-                  <div className="flex items-center gap-2 bg-white/80 backdrop-blur px-3 py-1.5 rounded-full shadow-sm text-xs font-bold text-neutral-500 uppercase tracking-wider pointer-events-none">
-                    <Move size={12} /> Drag to Rotate
-                  </div>
-               </div>
-            </div>
-          </div>
-
-          <div className="flex justify-center gap-8">
-             <div className="flex items-center gap-3 text-sm font-bold text-neutral-400 uppercase tracking-widest">
-               <Rotate3d className="text-hux-turquoise animate-spin-slow" size={16} />
-               <span>Interactive 3D View</span>
-             </div>
-             <button 
-               onClick={() => { setArColor('Sterling Gold'); setIsAROpen(true); }}
-               className="flex items-center gap-2 text-sm font-bold text-hux-turquoise uppercase tracking-widest hover:text-hux-turquoiseDark transition-colors"
-             >
-               <ScanFace size={16} />
-               <span>Virtual Try-On</span>
-             </button>
-          </div>
-
-        </div>
-      </section>
+      <Ring360Showcase />
 
       {/* 3. FULL-SCREEN EXPANDABLE CAPABILITIES CARDS */}
       <section className="py-16 md:py-24 bg-neutral-100 relative overflow-hidden mobile-corner-cut" aria-labelledby="capabilities-heading">
         <div className="text-center mb-12 md:mb-16 px-6">
           <h2 className="text-sm font-bold text-hux-turquoise uppercase tracking-widest mb-4">Capabilities</h2>
-          <h3 id="capabilities-heading" className="text-3xl md:text-5xl font-display font-bold text-hux-dark mb-4">The Ring of Life.</h3>
+          <h3 id="capabilities-heading" className="text-3xl md:text-4xl font-display font-bold text-hux-dark mb-4">The Ring of Life.</h3>
           <p className="text-lg md:text-xl text-neutral-500 max-w-2xl mx-auto">Click to explore the technology woven into your lifestyle.</p>
         </div>
 
@@ -1468,7 +1374,7 @@ export const Home = () => {
                
                {/* Left: Text Accordion */}
                <div className="w-full lg:w-1/2 space-y-2">
-                  <h2 id="ecosystem-heading" className="text-4xl md:text-5xl font-display font-bold text-hux-dark mb-12">Total Body<br/>Intelligence</h2>
+                  <h2 id="ecosystem-heading" className="text-3xl md:text-4xl font-display font-bold text-hux-dark mb-12">Total Body<br/>Intelligence</h2>
                   {ecosystemItems.map((item, idx) => (
                     <div 
                       key={idx}
@@ -1601,7 +1507,7 @@ export const Home = () => {
          <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16 space-y-4">
                <h2 className="text-sm font-bold text-hux-turquoise uppercase tracking-widest">HUX Product Specifications</h2>
-               <h3 id="specs-heading" className="text-4xl md:text-5xl font-display font-bold text-hux-dark">Engineered Precision.</h3>
+               <h3 id="specs-heading" className="text-3xl md:text-4xl font-display font-bold text-hux-dark">Engineered Precision.</h3>
                <p className="text-xl text-neutral-500">Designed for Everyday Brilliance.</p>
             </div>
 
@@ -1610,27 +1516,37 @@ export const Home = () => {
                <div className="space-y-10 text-center lg:text-right">
                   <div className="group hover:-translate-x-2 transition-transform duration-300">
                     <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors">Name</h4>
-                    <p className="text-neutral-500 font-light">HUX-NEXus Smart Ring</p>
+                    <p className="text-neutral-500 font-light">HUX-Smart Ring</p>
                   </div>
-                   <ExpandableSpecsItem 
-                     title="Sensors" 
-                     items={["HR", "SpO₂", "Body Temp.", "G-sensor"]} 
-                   />
-                   <div className="group hover:-translate-x-2 transition-transform duration-300">
-                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors">Outer Ring Material</h4>
-                    <p className="text-neutral-500 font-light">Stainless Steel</p>
-                  </div>
-                   <div className="group hover:-translate-x-2 transition-transform duration-300">
-                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors">Inner Ring Material</h4>
-                    <p className="text-neutral-500 font-light">Stainless Steel</p>
+                   <div className="group hover:-translate-x-2 transition-transform duration-300 flex flex-col items-center lg:items-end">
+                     <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors">Sensors & Tracking</h4>
+                     <div className="text-neutral-600 font-light leading-relaxed max-w-xs text-center lg:text-right">
+                       <p>• Optical Heart Rate</p>
+                       <p>• HRV (Heart Rate Variability)</p>
+                       <p>• Blood Oxygen (SpO₂)</p>
+                       <p>• Skin Temperature Trends</p>
+                       <p>• Motion & Activity Tracking</p>
+                     </div>
+                   </div>
+                   <div className="group hover:-translate-x-2 transition-transform duration-300 flex flex-col items-center lg:items-end">
+                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors">Materials & Finish</h4>
+                    <div className="text-neutral-600 font-light leading-relaxed max-w-sm text-center lg:text-right">
+                      <p><span className="font-bold text-hux-dark">Outer Ring:</span> Surgical-grade stainless steel</p>
+                      <p><span className="font-bold text-hux-dark">Inner Ring:</span> Skin-friendly stainless steel</p>
+                      <p><span className="font-bold text-hux-dark">Finishes:</span> Tarnish Grey · Sterling Gold</p>
+                    </div>
                   </div>
                    <div className="group hover:-translate-x-2 transition-transform duration-300">
                     <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors">Sizes</h4>
-                    <p className="text-neutral-500 font-light">6, 7, 8, 9, 10, 11, 12, 13</p>
+                    <p className="text-neutral-600 font-light">6, 7, 8, 9, 10, 11, 12, 13</p>
                   </div>
-                  <div className="group hover:-translate-x-2 transition-transform duration-300">
-                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors">Colors</h4>
-                    <p className="text-neutral-500 font-light">Tarnish Grey, Sterling Gold</p>
+                   <div className="group hover:-translate-x-2 transition-transform duration-300 flex flex-col items-center lg:items-end">
+                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors">Designed with Privacy in Mind</h4>
+                    <div className="text-neutral-500 font-light leading-relaxed max-w-xs text-center lg:text-right">
+                      <p>• Secure data handling</p>
+                      <p>• User-controlled access</p>
+                      <p>• Encrypted data transmission</p>
+                    </div>
                   </div>
                </div>
 
@@ -1652,28 +1568,33 @@ export const Home = () => {
                {/* RIGHT COLUMN */}
                <div className="space-y-10 text-center lg:text-left">
                   <div className="group hover:translate-x-2 transition-transform duration-300">
-                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors flex items-center justify-center lg:justify-start gap-2">CPU <Cpu size={16} className="text-neutral-400"/></h4>
-                    <p className="text-neutral-500 font-light">Ultra Low Power Bluetooth Chip</p>
+                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors flex items-center justify-center lg:justify-start gap-2">Performance <Cpu size={16} className="text-neutral-400"/></h4>
+                    <div className="text-neutral-600 font-light leading-relaxed max-w-xs text-center lg:text-left">
+                      <p><span className="font-bold text-hux-dark">Processor:</span> Ultra-low-power Bluetooth chip</p>
+                      <p><span className="font-bold text-hux-dark">Connectivity:</span> Bluetooth Low Energy (BLE)</p>
+                      <p><span className="font-bold text-hux-dark">Battery Life:</span> Up to 7 days</p>
+                      <p><span className="font-bold text-hux-dark">Battery:</span> 25 mAh rechargeable Li-Po</p>
+                      <p><span className="font-bold text-hux-dark">Charging:</span> Magnetic charging via compact charging case</p>
+                    </div>
                   </div>
                    <div className="group hover:translate-x-2 transition-transform duration-300">
                     <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors flex items-center justify-center lg:justify-start gap-2">Vibration Alert <Bell size={16} className="text-neutral-400"/></h4>
-                    <p className="text-neutral-500 font-light">Lower consumption & high precision motor</p>
-                  </div>
-                   <div className="group hover:translate-x-2 transition-transform duration-300">
-                    <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors flex items-center justify-center lg:justify-start gap-2">Battery <Battery size={16} className="text-neutral-400"/></h4>
-                    <p className="text-neutral-500 font-light">Rechargeable 25 mAh LiPo — Up to 7 Days</p>
+                    <p className="text-neutral-600 font-light">Lower consumption & high precision motor</p>
                   </div>
                    <div className="group hover:translate-x-2 transition-transform duration-300">
                     <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors flex items-center justify-center lg:justify-start gap-2">Certifications <ShieldAlert size={16} className="text-neutral-400"/></h4>
-                    <p className="text-neutral-500 font-light">5ATM, CE, RoHS, FCC, REACH, BIS</p>
+                    <p className="text-neutral-600 font-light">5ATM, CE, RoHS, FCC, REACH, BIS</p>
                   </div>
                    <div className="group hover:translate-x-2 transition-transform duration-300">
                     <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors flex items-center justify-center lg:justify-start gap-2">In the Box <Box size={16} className="text-neutral-400"/></h4>
-                    <p className="text-neutral-500 font-light">Ring, USB Cable, Charging Case, Manual</p>
+                    <p className="text-neutral-600 font-light">Ring, USB Cable, Charging Case, Manual</p>
                   </div>
                    <div className="group hover:translate-x-2 transition-transform duration-300">
                     <h4 className="font-bold text-hux-dark font-display text-lg mb-1 group-hover:text-hux-turquoise transition-colors flex items-center justify-center lg:justify-start gap-2">Water Resistance <Droplets size={16} className="text-neutral-400"/></h4>
-                    <p className="text-neutral-500 font-light">5ATM — Up to 50m</p>
+                    <div className="text-neutral-600 font-light leading-relaxed max-w-xs text-center lg:text-left">
+                      <p className="font-semibold">5 ATM water resistance</p>
+                      <p>Safe for swimming, showers, and daily exposure — up to 50 meters.</p>
+                    </div>
                   </div>
                </div>
             </div>
@@ -1685,7 +1606,7 @@ export const Home = () => {
         <div className="max-w-7xl mx-auto px-6">
            <div className="text-center mb-16 space-y-4">
               <h2 className="text-sm font-bold text-hux-turquoise uppercase tracking-widest">Unboxing</h2>
-              <h3 className="text-4xl md:text-5xl font-display font-bold text-hux-dark">The Complete Package</h3>
+              <h3 className="text-3xl md:text-4xl font-display font-bold text-hux-dark">The Complete Package</h3>
            </div>
            
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -1726,7 +1647,7 @@ export const Home = () => {
          <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-24 space-y-4">
                <h2 className="text-sm font-bold text-hux-turquoise uppercase tracking-widest">Fit Guide</h2>
-               <h3 className="text-5xl md:text-6xl font-display font-bold text-hux-dark">Find Your Perfect Fit</h3>
+               <h3 className="text-3xl md:text-4xl font-display font-bold text-hux-dark">Find Your Perfect Fit</h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

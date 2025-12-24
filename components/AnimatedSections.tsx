@@ -85,14 +85,14 @@ const AnimatedSections: React.FC<AnimatedSectionsProps> = ({
           </div>
 
           {/* Text Content */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className={`text-center px-4 max-w-5xl transition-all duration-1000 ease-out transform ${
+          <div className="absolute inset-0 flex items-center justify-start pointer-events-none">
+            <div className={`text-left px-8 md:px-16 max-w-2xl transition-all duration-1000 ease-out transform ${
               index === currentIndex ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
             }`}>
-              <p className="text-hux-turquoise font-bold uppercase tracking-[0.3em] mb-4 text-sm md:text-base drop-shadow-md">
+              <p className="text-hux-turquoise font-bold uppercase tracking-[0.3em] mb-2 text-xs md:text-sm drop-shadow-md">
                 {section.subtitle}
               </p>
-              <h2 className="text-white font-display font-bold text-5xl md:text-8xl lg:text-9xl leading-tight drop-shadow-2xl">
+              <h2 className="text-white font-display font-bold text-2xl md:text-4xl lg:text-5xl leading-tight drop-shadow-2xl">
                 {section.text}
               </h2>
             </div>
