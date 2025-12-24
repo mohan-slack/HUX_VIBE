@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import {
   Battery,
@@ -307,7 +307,7 @@ const RingSwitcher = ({
   const options = Object.values(RING_DATA).map(p => ({ id: p.id, label: p.label }));
 
   return (
-    <div className="flex justify-center mt-12">
+    <div className="flex justify-center">
       <motion.div layout className="flex items-center gap-1 p-1.5 rounded-full bg-white/80 backdrop-blur-2xl border border-hux-turquoise/20 shadow-[0_20px_60px_rgba(0,0,0,0.1)] ring-1 ring-hux-turquoise/5">
         {options.map((opt) => (
           <motion.button
@@ -350,6 +350,14 @@ export default function Ring360Showcase() {
   const currentData = RING_DATA[activeVariant];
   const isGold = activeVariant === 'sterling-gold';
 
+  // Auto-switch between variants every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveVariant(prev => prev === 'sterling-gold' ? 'tarnish-grey' : 'sterling-gold');
+    }, 7000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative w-full bg-hux-ivory text-hux-dark overflow-hidden selection:bg-hux-turquoise selection:text-white py-12 mobile-corner-cut">
       
@@ -360,9 +368,10 @@ export default function Ring360Showcase() {
         <h2 className="text-3xl md:text-4xl font-display font-bold text-hux-dark leading-tight mb-4">
           360° of <span className="text-hux-turquoise">Perfection</span>
         </h2>
-        <p className="text-base text-neutral-500 font-light max-w-xl mx-auto">
+        <p className="text-base text-neutral-500 font-light max-w-xl mx-auto mb-6">
           Crafted from premium surgical-grade alloy with seamless, touch-free design.
         </p>
+        <RingSwitcher activeId={activeVariant} onToggle={setActiveVariant} />
       </div>
 
       <main className="relative z-10 w-full px-6 max-w-7xl mx-auto">
@@ -388,8 +397,6 @@ export default function Ring360Showcase() {
           </motion.div>
         </motion.div>
       </main>
-
-      <RingSwitcher activeId={activeVariant} onToggle={setActiveVariant} />
     </section>
   );
 }
