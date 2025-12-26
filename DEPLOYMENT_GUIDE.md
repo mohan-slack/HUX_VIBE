@@ -74,9 +74,9 @@ All reply to: support@hux.co.in
 ```bash
 # Set environment variables in Vercel Dashboard
 VITE_SUPABASE_URL=https://igbkbvxfuuyvrvlufljg.supabase.co
-VITE_SUPABASE_ANON_KEY=sb_publishable_HOedTuCmc4LhfV3KqDyQ5g_urSv4MB4
-VITE_RAZORPAY_KEY_ID=rzp_test_RpcW9n9baUN2Xy
-VITE_GEMINI_API_KEY=AIzaSyA9zWRFobQINOybegMNNdvOs1U8CNKnL6U
+VITE_SUPABASE_ANON_KEY=<>
+VITE_RAZORPAY_KEY_ID=<>
+VITE_GEMINI_API_KEY=<>
 VITE_OPENAI_API_KEY=sk-proj-...
 VITE_OPENAI_MODEL=gpt-4o-mini
 
