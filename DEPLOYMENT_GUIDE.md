@@ -6,14 +6,14 @@
 cd /Users/mohanreddy/viveon/MainApp/HUX_VIBE
 
 # Razorpay credentials
-supabase secrets set RAZORPAY_KEY_ID=rzp_test_RpcW9n9baUN2Xy
-supabase secrets set RAZORPAY_KEY_SECRET=BF4eJLYEOQr106Sq66tX37M8
+supabase secrets set RAZORPAY_KEY_ID=<>
+supabase secrets set RAZORPAY_KEY_SECRET=<>
 
 # Zoho OAuth credentials (for email via Zoho Mail API)
-supabase secrets set ZOHO_CLIENT_ID=1000.H0KTMG3TDZ4B7OOCCC3O7LXOOZIP8P
-supabase secrets set ZOHO_CLIENT_SECRET=d87455e84392b508257d4f1ac6c9cdd0ac67627673
-supabase secrets set ZOHO_REFRESH_TOKEN=1000.c7e6dec2dbc5e8add5896f0653a89d73.97c50cafb6346ecfa3f757760ba8bb2d
-supabase secrets set ZOHO_ACCOUNT_ID=4709356000000002002
+supabase secrets set ZOHO_CLIENT_ID=<>
+supabase secrets set ZOHO_CLIENT_SECRET=<>
+supabase secrets set ZOHO_REFRESH_TOKEN=<>
+supabase secrets set ZOHO_ACCOUNT_ID=<>
 ```
 
 **Note:** SMTP credentials are no longer used. Emails are sent via Zoho Mail API using OAuth2.
