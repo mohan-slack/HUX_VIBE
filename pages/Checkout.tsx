@@ -112,7 +112,6 @@ export const Checkout = () => {
         order_id: orderData.razorpayOrderId,
         handler: async function (response: any) {
           try {
-            // 4. Verify Payment on Server
             const orderId = await verifyPayment(response);
             navigate(`/success/${orderId}`);
           } catch (err: any) {
@@ -146,7 +145,6 @@ export const Checkout = () => {
 
       const rzp = new (window as any).Razorpay(options);
       rzp.on('payment.failed', function (response: any){
-        console.error('Razorpay payment failed:', response);
         setErrorMessage(response.error?.description || 'Payment failed. Please try again.');
         setLoading(false);
       });

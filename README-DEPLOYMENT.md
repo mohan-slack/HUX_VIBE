@@ -77,13 +77,27 @@ vercel
 VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_ANON_KEY=your-anon-key
 
+# Razorpay (Frontend only - Key ID)
+VITE_RAZORPAY_KEY_ID=rzp_test_your-key-id
+
 # Gemini AI (Optional - for AI features)
 GEMINI_API_KEY=your-gemini-api-key
-
-# Razorpay (Set in Supabase Edge Functions)
-RAZORPAY_KEY_ID=rzp_live_your-key-id
-RAZORPAY_KEY_SECRET=your-secret-key
 ```
+
+#### Supabase Edge Function Secrets
+```bash
+# Set these in Supabase (not in frontend .env)
+supabase secrets set RAZORPAY_KEY_ID=rzp_test_your-key-id
+supabase secrets set RAZORPAY_KEY_SECRET=your-secret-key
+
+# Zoho OAuth for email (Zoho Mail API)
+supabase secrets set ZOHO_CLIENT_ID=your-client-id
+supabase secrets set ZOHO_CLIENT_SECRET=your-client-secret
+supabase secrets set ZOHO_REFRESH_TOKEN=your-refresh-token
+supabase secrets set ZOHO_ACCOUNT_ID=your-account-id
+```
+
+**Note:** Email system uses Zoho Mail API with OAuth2 (not SMTP). See ZOHO_OAUTH_SETUP.md for setup instructions.
 
 #### Setting Environment Variables in Vercel
 1. Go to Vercel Dashboard
@@ -136,47 +150,18 @@ FOR INSERT WITH CHECK (true);
 
 ### 4. Edge Functions (Supabase)
 
-#### Payment Processing (`supabase/functions/hux-pay/index.ts`)
-```typescript
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import Razorpay from "npm:razorpay@2.9.2";
+#### Two Edge Functions Required
 
-const razorpay = new Razorpay({
-  key_id: Deno.env.get('RAZORPAY_KEY_ID')!,
-  key_secret: Deno.env.get('RAZORPAY_KEY_SECRET')!,
-});
+**1. Payment Processing (`hux-pay`)**
+- Creates Razorpay orders
+- Verifies payment signatures
+- Updates order status in database
+- Triggers email notifications
 
-serve(async (req) => {
-  if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders });
-  }
-
-  try {
-    const { productId } = await req.json();
-    
-    // Create Razorpay order
-    const order = await razorpay.orders.create({
-      amount: 1299900, // ₹12,999 in paise
-      currency: 'INR',
-      receipt: `receipt_${Date.now()}`,
-    });
-
-    return new Response(JSON.stringify({
-      orderId: order.id,
-      amount: order.amount,
-      currency: order.currency,
-      key: Deno.env.get('RAZORPAY_KEY_ID')
-    }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
-  } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 400,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
-  }
-});
-```
+**2. Email Service (`send-email`)**
+- Sends emails via Zoho Mail API
+- Uses OAuth2 for authentication
+- Handles order confirmations, VIP signups, payment failures
 
 #### Deploy Edge Functions
 ```bash
@@ -186,9 +171,22 @@ npm install -g supabase
 # Login to Supabase
 supabase login
 
-# Deploy functions
-supabase functions deploy hux-pay --project-ref your-project-ref
+# Deploy both functions
+supabase functions deploy hux-pay --no-verify-jwt
+supabase functions deploy send-email --no-verify-jwt
 ```
+
+**Note:** The `--no-verify-jwt` flag is required for frontend requests.
+
+#### Email Configuration
+Emails are sent from:
+- `orders@hux.co.in` - Order confirmations
+- `vip@hux.co.in` - VIP/Pre-launch signups
+- `payments@hux.co.in` - Payment failures
+
+All emails reply to: `support@hux.co.in`
+
+See `DEPLOYMENT_GUIDE.md` and `ZOHO_OAUTH_SETUP.md` for complete setup instructions.
 
 ## 🔧 Build Configuration
 

@@ -86,6 +86,19 @@ export const PreLaunchBooking: React.FC = () => {
         remainingAmount: 8000
       }));
 
+      // Send VIP email
+      await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/hux-pay`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`
+        },
+        body: JSON.stringify({
+          action: 'vip_signup',
+          email: formData.email
+        })
+      });
+
       navigate('/checkout');
       
     } catch (error) {
